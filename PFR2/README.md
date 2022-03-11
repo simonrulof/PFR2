@@ -10,12 +10,15 @@ Notre projet contient différents dossiers et sous dossier, tel que:
 - `src`: contient les sources
 - - `controleur`: contient les controleurs
 - - `entite`: contient les classes métiers
+- - `vue`: contient les vues (boundary)
 - `lib`: contient les librairies utilisées
+- `bin`: contient les fichiers compilés sortant générés par défaut
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+## Organisation de l'équipe
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
-
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+Chaques tâches dépends d'un membre : 
+- `tache 1`: DESCRIPTION : Personne
+- `tache 2`: DESCRIPTION : Personne
+- `tache 3`: DESCRIPTION : Personne
+- `tache 4`: DESCRIPTION : Personne
+- `tache 5`: DESCRIPTION : Personne
