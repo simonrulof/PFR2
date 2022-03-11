@@ -1,13 +1,16 @@
-## Getting Started
+## Principe du projet
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+Suite de la première partie du PFR, qui consistait en un développement de moteur de recherche en c, avec la possibilité d'effectuer des recherches textes, audios, et images.
+Ici, nous irons plus loin (deuxième partie oblige) en développant différentes requêtes complexes, une interface, un historique et différents modes de recherches (multi-moteur..) le tout en JAVA!!! (ce qui inclus l'intégration de notre précédent code en C dans ce projet JAVA)
 
-## Folder Structure
+## Structure du code
 
-The workspace contains two folders by default, where:
+Notre projet contient différents dossiers et sous dossier, tel que:
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+- `src`: contient les sources
+- - `controleur`: contient les controleurs
+- - `entite`: contient les classes métiers
+- `lib`: contient les librairies utilisées
 
 Meanwhile, the compiled output files will be generated in the `bin` folder by default.
 
