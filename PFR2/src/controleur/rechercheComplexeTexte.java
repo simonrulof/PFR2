@@ -16,7 +16,7 @@ public class rechercheComplexeTexte {
                 return texteCodeC.rechercheMot(motCle);
             }
             else{
-                return texteCodeC.rechecheMotSans(motCle);
+                return texteCodeC.rechercheMotSans(motCle);
             }
         }
         else{
@@ -28,36 +28,61 @@ public class rechercheComplexeTexte {
     //A COMPLETER
     private String rechercheMotCle(String motCle,Boolean polarite,String motCle2,Boolean polarite2) throws IllegalArgumentException{
         if(motCle.matches("[a-zA-Z0-9]+")){
+            String res;
+            String res2;
             if(polarite){
-                return texteCodeC.rechercheMot(motCle);
+                res = texteCodeC.rechercheMot(motCle);
             }
-            else{
-                return texteCodeC.rechecheMotSans(motCle);
+            else if(polarite==false){                
+                res = texteCodeC.rechercheMotSans(motCle);
+            }
+            if(polarite2){                
+                res2 = texteCodeC.rechercheMot(motCle2);
+            }            
+            else if(polarite2==false){                
+                res2 = texteCodeC.rechercheMotSans(motCle2);
             }
         }
         else{
             //contient caractères spéciaux
             throw new IllegalArgumentException("Le mot clé contient un ou plusieurs caractères spéciaux");
-        }        
+        } 
+        return "fdhsls";
     }
 
     //A COMPLETER
     private String rechercheMotCle(String motCle,Boolean polarite,String motCle2,Boolean polarite2,String motCle3,Boolean polarite3) throws IllegalArgumentException{
         if(motCle.matches("[a-zA-Z0-9]+")){
+            String res;
+            String res2;
+            String res3;
             if(polarite){
-                return texteCodeC.rechercheMot(motCle);
+                res = texteCodeC.rechercheMot(motCle);
             }
-            else{
-                return texteCodeC.rechecheMotSans(motCle);
+            else if(polarite==false){                
+                res = texteCodeC.rechercheMotSans(motCle);
+            }
+            if(polarite2){                
+                res2 = texteCodeC.rechercheMot(motCle2);
+            }            
+            else if(polarite2==false){                
+                res2 = texteCodeC.rechercheMotSans(motCle2);
+            }
+            if(polarite3){                
+                res3 = texteCodeC.rechercheMot(motCle3);
+            }            
+            else if(polarite3==false){                
+                res3 = texteCodeC.rechercheMotSans(motCle3);
             }
         }
         else{
             //contient caractères spéciaux
             throw new IllegalArgumentException("Le mot clé contient un ou plusieurs caractères spéciaux");
-        }        
+        } 
+        return "skdlqkd";       
     }
 
-    private String rechercheMotCle(String motCle, int nbOccurrence) throws IllegalArgumentException{
+    private String rechercheMotCle(String motCle, int nbOccurrence, Boolean polarite) throws IllegalArgumentException{
         String resultat = texteCodeC.rechercheMot(motCle);
         HashMap<String, Integer> conversion = new HashMap<>();
         int index = 0;
@@ -89,9 +114,17 @@ public class rechercheComplexeTexte {
             Map.Entry mapEntry;
             while(i.hasNext()){
                 mapEntry = (Map.Entry) i.next();
-                if(((Integer) mapEntry.getValue()).intValue()>nbOccurrence){
-                    conversion.remove(mapEntry.getKey());
+                if(polarite){
+                    if(((Integer) mapEntry.getValue()).intValue()>nbOccurrence){
+                        conversion.remove(mapEntry.getKey());
+                    }
                 }
+                else{
+                    if(((Integer) mapEntry.getValue()).intValue()<nbOccurrence){
+                        conversion.remove(mapEntry.getKey());
+                    }
+                }
+                
             }
         }
         else{

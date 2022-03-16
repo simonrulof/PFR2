@@ -10,7 +10,7 @@ public class texteCodeC {
         return null;
     }
 
-    public static String rechecheMotSans(String motCle) {
+    public static String rechercheMotSans(String motCle) {
         return null;
     }
     
