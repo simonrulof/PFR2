@@ -5,13 +5,51 @@ import java.util.Iterator;
 import java.util.Map;
 
 import codec.texteCodeC;
+import entite.Texte;
 
 public class rechercheComplexeTexte {
     
 
-    private String rechercheMotCle(String motCle) throws IllegalArgumentException{
+    private String rechercheMotCle(String motCle,Boolean polarite) throws IllegalArgumentException{
         if(motCle.matches("[a-zA-Z0-9]+")){
-            return texteCodeC.rechercheMot(motCle);
+            if(polarite){
+                return texteCodeC.rechercheMot(motCle);
+            }
+            else{
+                return texteCodeC.rechecheMotSans(motCle);
+            }
+        }
+        else{
+            //contient caractères spéciaux
+            throw new IllegalArgumentException("Le mot clé contient un ou plusieurs caractères spéciaux");
+        }        
+    }
+
+    //A COMPLETER
+    private String rechercheMotCle(String motCle,Boolean polarite,String motCle2,Boolean polarite2) throws IllegalArgumentException{
+        if(motCle.matches("[a-zA-Z0-9]+")){
+            if(polarite){
+                return texteCodeC.rechercheMot(motCle);
+            }
+            else{
+                return texteCodeC.rechecheMotSans(motCle);
+            }
+        }
+        else{
+            //contient caractères spéciaux
+            throw new IllegalArgumentException("Le mot clé contient un ou plusieurs caractères spéciaux");
+        }        
+    }
+
+    //A COMPLETER
+    private String rechercheMotCle(String motCle,Boolean polarite,String motCle2,Boolean polarite2,String motCle3,Boolean polarite3) throws IllegalArgumentException{
+        if(motCle.matches("[a-zA-Z0-9]+")){
+            if(polarite){
+                return texteCodeC.rechercheMot(motCle);
+            }
+            else{
+                return texteCodeC.rechecheMotSans(motCle);
+            }
         }
         else{
             //contient caractères spéciaux
@@ -63,7 +101,22 @@ public class rechercheComplexeTexte {
         return conversion.toString();
     }
 
-    private String rechercheExemple(String titre){
-        return texteCodeC.rechercheExemple(titre);
+    private String rechercheExemple(Texte f) throws IllegalArgumentException{
+        //verification de la validite du fichier (extension...)
+        String extension = f.getExtension();
+        if(extension==".xml"|| extension ==".txt"){
+            String titre = f.getChemin() + f.getTitre();
+            //verification de la presence du fichier
+            if(true){
+
+            }
+            else{
+                throw new IllegalArgumentException("Le fichier n'est pas présent à l'endroit indiqué");
+            }
+            return texteCodeC.rechercheExemple(titre);
+        }
+        else{
+            throw new IllegalArgumentException("L'extension du fichier à chercher est incorrecte");
+        }        
     }
 }

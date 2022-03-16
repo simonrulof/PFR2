@@ -22,4 +22,16 @@ public class Fichier {
         this.extension = this.titre.substring(indexPoint+1);
     }
 
+    public String getExtension(){
+        return this.extension;
+    }
+
+    public String getTitre(){
+        return this.titre;
+    }
+
+    public String getChemin(){
+        return this.chemin;
+    }
+
 }
