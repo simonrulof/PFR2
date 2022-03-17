@@ -1,10 +1,13 @@
-package entite;
+package modele.entite;
+
+import modele.donnee.TypeFichier;
 
 public class Fichier {
     private String titre;
     private String chemin;
     private String extension;
     private int taille;
+    private TypeFichier type;
 
     public Fichier(String nom, String chemin){
         this.titre = nom;
@@ -34,4 +37,7 @@ public class Fichier {
         return this.chemin;
     }
 
+    public void setType(TypeFichier t){
+        this.type = t;
+    }
 }

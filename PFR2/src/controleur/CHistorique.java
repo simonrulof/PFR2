@@ -1,14 +1,15 @@
-package controlleur;
+package controleur;
 
 import java.util.List;
+import java.util.Map;
 
-import modele.Historique;
-import modele.Recherche;
+import modele.entite.Historique;
+import modele.entite.Recherche;
 
 public class CHistorique {
 	private Historique historique = new Historique();
 
-	public List<Recherche> consulterHistorique()
+	public Map<Recherche, String> consulterHistorique()
 	{
 		return historique.getHistoriqueRecherches();
 	}

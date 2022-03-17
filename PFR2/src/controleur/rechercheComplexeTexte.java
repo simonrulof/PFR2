@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 import codec.texteCodeC;
-import entite.Texte;
+import modele.entite.Texte;
 
 public class rechercheComplexeTexte {
     
