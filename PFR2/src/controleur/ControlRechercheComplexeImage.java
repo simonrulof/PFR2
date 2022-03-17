@@ -1,4 +1,4 @@
 package controleur;
-public class rechercheComplexeImage {
+public class ControlRechercheComplexeImage {
     
 }

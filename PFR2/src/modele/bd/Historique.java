@@ -1,9 +1,11 @@
-package modele.entite;
+package modele.bd;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
+import modele.entite.Recherche;
 
 public class Historique {
 	private Map<String, Recherche> historiqueRecherches = new HashMap<String, Recherche>();

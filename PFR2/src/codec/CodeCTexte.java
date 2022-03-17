@@ -1,7 +1,6 @@
 package codec;
 
-public class TexteCodeC {
-
+public class CodeCTexte {
     public static String rechercheMot(String motCle) {
         return null;
     }
@@ -13,5 +12,4 @@ public class TexteCodeC {
     public static String rechercheMotSans(String motCle) {
         return null;
     }
-    
 }

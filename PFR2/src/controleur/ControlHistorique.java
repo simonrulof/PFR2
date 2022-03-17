@@ -3,10 +3,10 @@ package controleur;
 import java.util.List;
 import java.util.Map;
 
-import modele.entite.Historique;
+import modele.bd.Historique;
 import modele.entite.Recherche;
 
-public class CHistorique {
+public class ControlHistorique {
 	private Historique historique = new Historique();
 
 	public Map<String, Recherche> consulterHistorique()

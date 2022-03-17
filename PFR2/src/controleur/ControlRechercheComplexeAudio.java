@@ -1,4 +1,4 @@
 package controleur;
-public class rechercheComplexeAudio {
+public class ControlRechercheComplexeAudio {
     
 }

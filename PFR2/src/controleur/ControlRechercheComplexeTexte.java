@@ -4,19 +4,19 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import codec.texteCodeC;
+import codec.TexteCodeC;
 import modele.entite.Texte;
 
-public class rechercheComplexeTexte {
+public class ControlRechercheComplexeTexte {
     
 
     private String rechercheMotCle(String motCle,Boolean polarite) throws IllegalArgumentException{
         if(motCle.matches("[a-zA-Z0-9]+")){
             if(polarite){
-                return texteCodeC.rechercheMot(motCle);
+                return TexteCodeC.rechercheMot(motCle);
             }
             else{
-                return texteCodeC.rechercheMotSans(motCle);
+                return TexteCodeC.rechercheMotSans(motCle);
             }
         }
         else{
@@ -33,19 +33,19 @@ public class rechercheComplexeTexte {
             String res2="";
             if(polarite){
                 //on récupère le resultat de la recherche avec le motcle choisi
-                res = texteCodeC.rechercheMot(motCle);
+                res = TexteCodeC.rechercheMot(motCle);
             }
             else if(polarite==false){ 
                 //on récupère le resultat sans le mot cle choisi               
-                res = texteCodeC.rechercheMotSans(motCle);
+                res = TexteCodeC.rechercheMotSans(motCle);
             }
             if(polarite2){  
                 //idem avec le mot clé deux              
-                res2 = texteCodeC.rechercheMot(motCle2);
+                res2 = TexteCodeC.rechercheMot(motCle2);
             }            
             else if(polarite2==false){ 
                 //idem sans le mot cle deux               
-                res2 = texteCodeC.rechercheMotSans(motCle2);
+                res2 = TexteCodeC.rechercheMotSans(motCle2);
             }
             //on crée une hashmap contenant les resultats des requetes
             HashMap<String, Integer> hashMapRes = new HashMap<>();
@@ -93,22 +93,22 @@ public class rechercheComplexeTexte {
             String res2="";
             String res3="";
             if(polarite){
-                res = texteCodeC.rechercheMot(motCle);
+                res = TexteCodeC.rechercheMot(motCle);
             }
             else if(polarite==false){                
-                res = texteCodeC.rechercheMotSans(motCle);
+                res = TexteCodeC.rechercheMotSans(motCle);
             }
             if(polarite2){                
-                res2 = texteCodeC.rechercheMot(motCle2);
+                res2 = TexteCodeC.rechercheMot(motCle2);
             }            
             else if(polarite2==false){                
-                res2 = texteCodeC.rechercheMotSans(motCle2);
+                res2 = TexteCodeC.rechercheMotSans(motCle2);
             }
             if(polarite3){                
-                res3 = texteCodeC.rechercheMot(motCle3);
+                res3 = TexteCodeC.rechercheMot(motCle3);
             }            
             else if(polarite3==false){                
-                res3 = texteCodeC.rechercheMotSans(motCle3);
+                res3 = TexteCodeC.rechercheMotSans(motCle3);
             }
             //on crée une hashmap contenant les resultats des requetes
             HashMap<String, Integer> hashMapRes = new HashMap<>();
@@ -175,7 +175,7 @@ public class rechercheComplexeTexte {
     }
 
     private String rechercheMotCle(String motCle, int nbOccurrence, Boolean polarite) throws IllegalArgumentException{
-        String resultat = texteCodeC.rechercheMot(motCle);
+        String resultat = TexteCodeC.rechercheMot(motCle);
         HashMap<String, Integer> conversion = new HashMap<>();
         if(motCle.matches("[a-zA-Z0-9]+")){
             toHashMap(conversion, resultat);
@@ -217,7 +217,7 @@ public class rechercheComplexeTexte {
             else{
                 throw new IllegalArgumentException("Le fichier n'est pas présent à l'endroit indiqué");
             }
-            return texteCodeC.rechercheExemple(titre);
+            return TexteCodeC.rechercheExemple(titre);
         }
         else{
             throw new IllegalArgumentException("L'extension du fichier à chercher est incorrecte");
