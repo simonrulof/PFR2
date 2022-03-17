@@ -87,10 +87,11 @@ public class rechercheComplexeTexte {
 
     //A COMPLETER
     private String rechercheMotCle(String motCle,Boolean polarite,String motCle2,Boolean polarite2,String motCle3,Boolean polarite3) throws IllegalArgumentException{
+        HashMap<String, Integer> resultat = new HashMap<>();
         if(motCle.matches("[a-zA-Z0-9]+")){
-            String res;
-            String res2;
-            String res3;
+            String res="";
+            String res2="";
+            String res3="";
             if(polarite){
                 res = texteCodeC.rechercheMot(motCle);
             }
@@ -109,12 +110,68 @@ public class rechercheComplexeTexte {
             else if(polarite3==false){                
                 res3 = texteCodeC.rechercheMotSans(motCle3);
             }
+            //on crée une hashmap contenant les resultats des requetes
+            HashMap<String, Integer> hashMapRes = new HashMap<>();
+            HashMap<String, Integer> hashMapRes2 = new HashMap<>();
+            HashMap<String, Integer> hashMapRes3 = new HashMap<>();
+            HashMap<String, Integer> intersection = new HashMap<>();
+            toHashMap(hashMapRes, res);
+            toHashMap(hashMapRes2, res2);
+            toHashMap(hashMapRes3, res3);
+            //on fait une intersection entre les deux premiers résultats
+            boolean hm = false;
+            Iterator iterateur;
+            if(hashMapRes.size()>hashMapRes2.size()){
+                iterateur = hashMapRes.entrySet().iterator();
+            }
+            else{                
+                iterateur = hashMapRes2.entrySet().iterator();
+                hm = true;
+            }
+            Map.Entry mapEntry;
+            while(iterateur.hasNext()){
+                mapEntry = (Map.Entry) iterateur.next();
+                if(hm){
+                    if(hashMapRes2.containsKey(mapEntry.getKey())){
+                        intersection.put((String)mapEntry.getKey(),(Integer)mapEntry.getValue());
+                    }
+                }
+                else{
+                    if(hashMapRes.containsKey(mapEntry.getKey())){
+                        intersection.put((String)mapEntry.getKey(),(Integer)mapEntry.getValue());
+                    }
+                }
+                
+            }
+            //maintenant on effectue une intersection entre la précédente et la dernière hashmap
+            if(hashMapRes3.size()>intersection.size()){
+                iterateur = hashMapRes3.entrySet().iterator();
+                hm=false;
+            }
+            else{                
+                iterateur = intersection.entrySet().iterator();
+                hm = true;
+            }
+            while(iterateur.hasNext()){
+                mapEntry = (Map.Entry) iterateur.next();
+                if(hm){
+                    if(hashMapRes3.containsKey(mapEntry.getKey())){
+                        resultat.put((String)mapEntry.getKey(),(Integer)mapEntry.getValue());
+                    }
+                }
+                else{
+                    if(intersection.containsKey(mapEntry.getKey())){
+                        resultat.put((String)mapEntry.getKey(),(Integer)mapEntry.getValue());
+                    }
+                }
+                
+            }
         }
         else{
             //contient caractères spéciaux
             throw new IllegalArgumentException("Le mot clé contient un ou plusieurs caractères spéciaux");
         } 
-        return "skdlqkd";       
+        return resultat.toString();       
     }
 
     private String rechercheMotCle(String motCle, int nbOccurrence, Boolean polarite) throws IllegalArgumentException{
