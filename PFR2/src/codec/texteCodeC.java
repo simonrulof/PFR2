@@ -1,6 +1,6 @@
 package codec;
 
-public class texteCodeC {
+public class TexteCodeC {
 
     public static String rechercheMot(String motCle) {
         return null;

@@ -8,6 +8,14 @@ import java.util.Map;
 public class Historique {
 	private Map<String, Recherche> historiqueRecherches = new HashMap<String, Recherche>();
 
+	private static class HistoriqueHolder{
+        private final static Historique instance = new Historique();
+    }
+
+    public static Historique getInstance(){
+        return HistoriqueHolder.instance;
+    }
+
 	public void viderHistorique() {
 		historiqueRecherches.clear();
 	}
