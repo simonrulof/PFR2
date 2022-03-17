@@ -4,19 +4,23 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import codec.TexteCodeC;
+import codec.CodeCTexte;
 import modele.entite.Texte;
 
 public class ControlRechercheComplexeTexte {
-    
+    private ControlVerificationFichier cvf;
+
+    public ControlRechercheComplexeTexte(ControlVerificationFichier cvf){
+        this.cvf = cvf;
+    }
 
     private String rechercheMotCle(String motCle,Boolean polarite) throws IllegalArgumentException{
         if(motCle.matches("[a-zA-Z0-9]+")){
             if(polarite){
-                return TexteCodeC.rechercheMot(motCle);
+                return CodeCTexte.rechercheMot(motCle);
             }
             else{
-                return TexteCodeC.rechercheMotSans(motCle);
+                return CodeCTexte.rechercheMotSans(motCle);
             }
         }
         else{
@@ -25,7 +29,6 @@ public class ControlRechercheComplexeTexte {
         }        
     }
 
-    //A COMPLETER
     private String rechercheMotCle(String motCle,Boolean polarite,String motCle2,Boolean polarite2) throws IllegalArgumentException{
         HashMap<String, Integer> resultat = new HashMap<>();
         if(motCle.matches("[a-zA-Z0-9]+")){
@@ -33,19 +36,19 @@ public class ControlRechercheComplexeTexte {
             String res2="";
             if(polarite){
                 //on récupère le resultat de la recherche avec le motcle choisi
-                res = TexteCodeC.rechercheMot(motCle);
+                res = CodeCTexte.rechercheMot(motCle);
             }
             else if(polarite==false){ 
                 //on récupère le resultat sans le mot cle choisi               
-                res = TexteCodeC.rechercheMotSans(motCle);
+                res = CodeCTexte.rechercheMotSans(motCle);
             }
             if(polarite2){  
                 //idem avec le mot clé deux              
-                res2 = TexteCodeC.rechercheMot(motCle2);
+                res2 = CodeCTexte.rechercheMot(motCle2);
             }            
             else if(polarite2==false){ 
                 //idem sans le mot cle deux               
-                res2 = TexteCodeC.rechercheMotSans(motCle2);
+                res2 = CodeCTexte.rechercheMotSans(motCle2);
             }
             //on crée une hashmap contenant les resultats des requetes
             HashMap<String, Integer> hashMapRes = new HashMap<>();
@@ -85,7 +88,6 @@ public class ControlRechercheComplexeTexte {
         return resultat.toString();
     }
 
-    //A COMPLETER
     private String rechercheMotCle(String motCle,Boolean polarite,String motCle2,Boolean polarite2,String motCle3,Boolean polarite3) throws IllegalArgumentException{
         HashMap<String, Integer> resultat = new HashMap<>();
         if(motCle.matches("[a-zA-Z0-9]+")){
@@ -93,22 +95,22 @@ public class ControlRechercheComplexeTexte {
             String res2="";
             String res3="";
             if(polarite){
-                res = TexteCodeC.rechercheMot(motCle);
+                res = CodeCTexte.rechercheMot(motCle);
             }
             else if(polarite==false){                
-                res = TexteCodeC.rechercheMotSans(motCle);
+                res = CodeCTexte.rechercheMotSans(motCle);
             }
             if(polarite2){                
-                res2 = TexteCodeC.rechercheMot(motCle2);
+                res2 = CodeCTexte.rechercheMot(motCle2);
             }            
             else if(polarite2==false){                
-                res2 = TexteCodeC.rechercheMotSans(motCle2);
+                res2 = CodeCTexte.rechercheMotSans(motCle2);
             }
             if(polarite3){                
-                res3 = TexteCodeC.rechercheMot(motCle3);
+                res3 = CodeCTexte.rechercheMot(motCle3);
             }            
             else if(polarite3==false){                
-                res3 = TexteCodeC.rechercheMotSans(motCle3);
+                res3 = CodeCTexte.rechercheMotSans(motCle3);
             }
             //on crée une hashmap contenant les resultats des requetes
             HashMap<String, Integer> hashMapRes = new HashMap<>();
@@ -175,7 +177,7 @@ public class ControlRechercheComplexeTexte {
     }
 
     private String rechercheMotCle(String motCle, int nbOccurrence, Boolean polarite) throws IllegalArgumentException{
-        String resultat = TexteCodeC.rechercheMot(motCle);
+        String resultat = CodeCTexte.rechercheMot(motCle);
         HashMap<String, Integer> conversion = new HashMap<>();
         if(motCle.matches("[a-zA-Z0-9]+")){
             toHashMap(conversion, resultat);
@@ -211,13 +213,13 @@ public class ControlRechercheComplexeTexte {
         if(extension==".xml"|| extension ==".txt"){
             String titre = f.getChemin() + f.getTitre();
             //verification de la presence du fichier
-            if(true){
+            if(this.cvf.fichierPresent(f)){
 
             }
             else{
                 throw new IllegalArgumentException("Le fichier n'est pas présent à l'endroit indiqué");
             }
-            return TexteCodeC.rechercheExemple(titre);
+            return CodeCTexte.rechercheExemple(titre);
         }
         else{
             throw new IllegalArgumentException("L'extension du fichier à chercher est incorrecte");
