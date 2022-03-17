@@ -27,27 +27,62 @@ public class rechercheComplexeTexte {
 
     //A COMPLETER
     private String rechercheMotCle(String motCle,Boolean polarite,String motCle2,Boolean polarite2) throws IllegalArgumentException{
+        HashMap<String, Integer> resultat = new HashMap<>();
         if(motCle.matches("[a-zA-Z0-9]+")){
-            String res;
-            String res2;
+            String res="";
+            String res2="";
             if(polarite){
+                //on récupère le resultat de la recherche avec le motcle choisi
                 res = texteCodeC.rechercheMot(motCle);
             }
-            else if(polarite==false){                
+            else if(polarite==false){ 
+                //on récupère le resultat sans le mot cle choisi               
                 res = texteCodeC.rechercheMotSans(motCle);
             }
-            if(polarite2){                
+            if(polarite2){  
+                //idem avec le mot clé deux              
                 res2 = texteCodeC.rechercheMot(motCle2);
             }            
-            else if(polarite2==false){                
+            else if(polarite2==false){ 
+                //idem sans le mot cle deux               
                 res2 = texteCodeC.rechercheMotSans(motCle2);
+            }
+            //on crée une hashmap contenant les resultats des requetes
+            HashMap<String, Integer> hashMapRes = new HashMap<>();
+            HashMap<String, Integer> hashMapRes2 = new HashMap<>();
+            toHashMap(hashMapRes, res);
+            toHashMap(hashMapRes2, res2);
+            //on fait une intersection entre les deux résultats
+            boolean hm = false;
+            Iterator iterateur;
+            if(hashMapRes.size()>hashMapRes2.size()){
+                iterateur = hashMapRes.entrySet().iterator();
+            }
+            else{                
+                iterateur = hashMapRes2.entrySet().iterator();
+                hm = true;
+            }
+            Map.Entry mapEntry;
+            while(iterateur.hasNext()){
+                mapEntry = (Map.Entry) iterateur.next();
+                if(hm){
+                    if(hashMapRes2.containsKey(mapEntry.getKey())){
+                        resultat.put((String)mapEntry.getKey(),(Integer)mapEntry.getValue());
+                    }
+                }
+                else{
+                    if(hashMapRes.containsKey(mapEntry.getKey())){
+                        resultat.put((String)mapEntry.getKey(),(Integer)mapEntry.getValue());
+                    }
+                }
+                
             }
         }
         else{
             //contient caractères spéciaux
             throw new IllegalArgumentException("Le mot clé contient un ou plusieurs caractères spéciaux");
         } 
-        return "fdhsls";
+        return resultat.toString();
     }
 
     //A COMPLETER
@@ -85,29 +120,8 @@ public class rechercheComplexeTexte {
     private String rechercheMotCle(String motCle, int nbOccurrence, Boolean polarite) throws IllegalArgumentException{
         String resultat = texteCodeC.rechercheMot(motCle);
         HashMap<String, Integer> conversion = new HashMap<>();
-        int index = 0;
-        String titre = "";
         if(motCle.matches("[a-zA-Z0-9]+")){
-            for(int i=0; i<resultat.length(); i++){
-                if(resultat.charAt(i)==':'){
-                    index = i+1;
-                    //on recupère le titre du fichier texte retourné
-                    /*En supposant ici que le retour de la fonction c est de type
-                    titre:nomDuFichier occurrence:nbOccurrence\n */
-                    titre = "";
-                    while(resultat.charAt(index)!=' '){
-                        titre += resultat.charAt(index);
-                        index++;
-                    }
-                    i=index;
-                    while(resultat.charAt(i)!=':'){
-                        i++;
-                    }
-                    if(Character.isDigit(resultat.charAt(i+1))){
-                        conversion.put(titre, (int)(resultat.charAt(i+1)));
-                    }
-                }
-            }
+            toHashMap(conversion, resultat);
             //une fois les résultats de la recherche convertis en hashmap
             //on garde uniquement ceux qui correspondent à notre demamde (>=nbOccurrence)
             Iterator i = conversion.entrySet().iterator();
@@ -151,5 +165,30 @@ public class rechercheComplexeTexte {
         else{
             throw new IllegalArgumentException("L'extension du fichier à chercher est incorrecte");
         }        
+    }
+
+    private void toHashMap(HashMap<String, Integer> hm, String resultat){
+        int index = 0;
+        String titre = "";
+        for(int i=0; i<resultat.length(); i++){
+            if(resultat.charAt(i)==':'){
+                index = i+1;
+                //on recupère le titre du fichier texte retourné
+                /*En supposant ici que le retour de la fonction c est de type
+                titre:nomDuFichier occurrence:nbOccurrence\n */
+                titre = "";
+                while(resultat.charAt(index)!=' '){
+                    titre += resultat.charAt(index);
+                    index++;
+                }
+                i=index;
+                while(resultat.charAt(i)!=':'){
+                    i++;
+                }
+                if(Character.isDigit(resultat.charAt(i+1))){
+                    hm.put(titre, (int)(resultat.charAt(i+1)));
+                }
+            }
+        }
     }
 }

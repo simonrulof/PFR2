@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Historique {
-	private Map<Recherche, String> historiqueRecherches = new HashMap<Recherche, String>();
+	private Map<String, Recherche> historiqueRecherches = new HashMap<String, Recherche>();
 
 	public void viderHistorique() {
 		historiqueRecherches.clear();
@@ -14,7 +14,7 @@ public class Historique {
 	
 	public void ajoutRecherche(Recherche r) {
 		String d = tempsToString(new Date(System.currentTimeMillis()));
-		historiqueRecherches.put(r, d);
+		historiqueRecherches.put(d, r);
 	}
 
 	public void supprimerRecherche(Recherche r) {
@@ -22,11 +22,11 @@ public class Historique {
 		historiqueRecherches.remove(r);
 	}
 
-	public Map<Recherche, String> getHistoriqueRecherches() {
+	public Map<String, Recherche> getHistoriqueRecherches() {
 		return historiqueRecherches;
 	}
 
-	public void setHistoriqueRecherches(Map<Recherche, String> historiqueRecherches) {
+	public void setHistoriqueRecherches(Map<String, Recherche> historiqueRecherches) {
 		this.historiqueRecherches = historiqueRecherches;
 	}
 

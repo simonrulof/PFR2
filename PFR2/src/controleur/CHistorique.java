@@ -9,7 +9,7 @@ import modele.entite.Recherche;
 public class CHistorique {
 	private Historique historique = new Historique();
 
-	public Map<Recherche, String> consulterHistorique()
+	public Map<String, Recherche> consulterHistorique()
 	{
 		return historique.getHistoriqueRecherches();
 	}
