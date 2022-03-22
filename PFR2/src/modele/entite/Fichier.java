@@ -37,6 +37,10 @@ public class Fichier {
         return this.chemin;
     }
 
+    public TypeFichier getType(){
+        return this.type;
+    }
+
     public void setType(TypeFichier t){
         this.type = t;
     }

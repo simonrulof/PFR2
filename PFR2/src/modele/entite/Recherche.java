@@ -8,18 +8,16 @@ import modele.donnee.TypeFichier;
 public class Recherche {
 	private String requete;
 	private TypeFichier typeFichier;
+	private Fichier fichier;
 	private List<String> resultatsRequete = new ArrayList<>();
 
-	public Recherche(TypeFichier typeFichier) {
-		this.typeFichier = typeFichier;
+	public Recherche(Fichier f, String requete) {
+		this.typeFichier = f.getType();
+		this.requete = requete;
 	}
 
 	public String getRequete() {
 		return requete;
-	}
-
-	public void setTypeFichier(TypeFichier typeFichier) {
-		this.typeFichier = typeFichier;
 	}
 	
 	public String ResultatsToString() {
@@ -31,12 +29,12 @@ public class Recherche {
 		return typeFichier;
 	}
 
-	public void setRequete(String requete){
-		this.requete=requete;
+	public Fichier getFichier(){
+		return this.fichier;
 	}
 
 	public void setListResultatsRequete(List<String> resultatsRequete){
 		this.resultatsRequete=resultatsRequete;
 	}
 
-	}
+}

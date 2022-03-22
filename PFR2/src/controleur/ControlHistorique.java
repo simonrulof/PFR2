@@ -7,7 +7,7 @@ import modele.bd.Historique;
 import modele.entite.Recherche;
 
 public class ControlHistorique {
-	private Historique historique = new Historique();
+	private Historique historique = Historique.getInstance();
 
 	public Map<String, Recherche> consulterHistorique()
 	{
