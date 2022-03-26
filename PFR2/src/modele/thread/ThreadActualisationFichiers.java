@@ -3,13 +3,18 @@ package modele.thread;
 import java.io.File;
 import java.util.Calendar;
 
+import controleur.ControlAdministrateur;
+
 public class ThreadActualisationFichiers extends Thread{
     private boolean condition =  true;
     private Calendar temps;
     private String dossierCourant;
+    private ControlAdministrateur ca;
 
-    public ThreadActualisationFichiers(){
+    public ThreadActualisationFichiers(ControlAdministrateur ca){
         this.temps = Calendar.getInstance();
+        this.ca = ca;        
+        this.dossierCourant = System.getProperty("user.dir");
     }
 
     public void arret(){
@@ -30,18 +35,28 @@ public class ThreadActualisationFichiers extends Thread{
             if(tempsCourant.after(temps)){
                 this.temps=tempsCourant;
                 //verification dossier courant
-                dossierCourant = System.getProperty("user.dir");
-                File[] listOfFiles = dossierCourant.listFiles();
-                for (int i = 0; i < listOfFiles.length; i++) {
-                if (listOfFiles[i].isFile()) {
-                    System.out.println("File " + listOfFiles[i].getName());
-                } else if (listOfFiles[i].isDirectory()) {
-                    System.out.println("Directory " + listOfFiles[i].getName());
-                }
-                }
-                //appel de la méthode en c via controleur pour ajouter les descripteurs à la base de données
+                File dossier = new File(this.dossierCourant);
+                this.parcoursFichiers(dossier);                
+            }
+        }
+    }
 
+    private void parcoursFichiers(File dossier){
+        String f = null;
+        for (int i = 0; i < dossier.listFiles().length; i++){
+            if (dossier.listFiles()[i].isFile()){
+                //appel de la méthode en c via controleur pour ajouter les descripteurs à la base de données
+                f = dossier.listFiles()[i].getName();
+                this.ca.addDescripteur(new File(f));
+            } 
+            else if (dossier.listFiles()[i].isDirectory()) {
+                f = dossier.listFiles()[i].getName();
+                parcoursFichiers(new File(f));
+            }
+            else{
+                //fichiers non reconnu
             }
         }
     }
 }
+

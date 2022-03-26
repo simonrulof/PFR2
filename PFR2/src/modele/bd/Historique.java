@@ -28,7 +28,6 @@ public class Historique {
 	}
 
 	public void supprimerRecherche(Recherche r) {
-		
 		historiqueRecherches.remove(r);
 	}
 
