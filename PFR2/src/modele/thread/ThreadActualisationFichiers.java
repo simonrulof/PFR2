@@ -1,13 +1,15 @@
 package modele.thread;
 
-import modele.bd.Historique;
+import java.io.File;
+import java.util.Calendar;
 
 public class ThreadActualisationFichiers extends Thread{
     private boolean condition =  true;
-    private long temps;
+    private Calendar temps;
+    private String dossierCourant;
 
     public ThreadActualisationFichiers(){
-        this.temps = System.currentTimeMillis();
+        this.temps = Calendar.getInstance();
     }
 
     public void arret(){
@@ -23,11 +25,22 @@ public class ThreadActualisationFichiers extends Thread{
             catch(InterruptedException ie){
                 ie.printStackTrace();
             }
-            long tempsCourant = System.currentTimeMillis();
-            if(tempsCourant>temps){
+            Calendar tempsCourant = Calendar.getInstance();
+            temps.add(Calendar.MINUTE,2);
+            if(tempsCourant.after(temps)){
                 this.temps=tempsCourant;
-                //on va chercher le controleur permettant de mettre à jour les fichiers
-                //qui lui même va chercher dans du code c
+                //verification dossier courant
+                dossierCourant = System.getProperty("user.dir");
+                File[] listOfFiles = dossierCourant.listFiles();
+                for (int i = 0; i < listOfFiles.length; i++) {
+                if (listOfFiles[i].isFile()) {
+                    System.out.println("File " + listOfFiles[i].getName());
+                } else if (listOfFiles[i].isDirectory()) {
+                    System.out.println("Directory " + listOfFiles[i].getName());
+                }
+                }
+                //appel de la méthode en c via controleur pour ajouter les descripteurs à la base de données
+
             }
         }
     }
