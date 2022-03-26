@@ -4,9 +4,9 @@ import modele.donnee.Couleur;
 import modele.entite.Image;
 
 public class ControlRechercheComplexeImage {
-    private ControlVerificationFichier cvf;
+    private ControlVerificationFichiers cvf;
 
-    public ControlRechercheComplexeImage(ControlVerificationFichier cvf){
+    public ControlRechercheComplexeImage(ControlVerificationFichiers cvf){
         this.cvf = cvf;
     }
 

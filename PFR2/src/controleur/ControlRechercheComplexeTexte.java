@@ -8,9 +8,9 @@ import codec.CodeCTexte;
 import modele.entite.Texte;
 
 public class ControlRechercheComplexeTexte {
-    private ControlVerificationFichier cvf;
+    private ControlVerificationFichiers cvf;
 
-    public ControlRechercheComplexeTexte(ControlVerificationFichier cvf){
+    public ControlRechercheComplexeTexte(ControlVerificationFichiers cvf){
         this.cvf = cvf;
     }
 

@@ -8,9 +8,9 @@ import modele.entite.Audio;
 
 public class ControlRechercheComplexeAudio {
     
-    private ControlVerificationFichier cvf;
+    private ControlVerificationFichiers cvf;
 
-    public ControlRechercheComplexeAudio(ControlVerificationFichier cvf){
+    public ControlRechercheComplexeAudio(ControlVerificationFichiers cvf){
         this.cvf = cvf;
     }
 
