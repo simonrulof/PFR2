@@ -26,7 +26,7 @@ public class ControlRechercheComplexeAudio {
             else{
                 throw new IllegalArgumentException("Le fichier n'est pas présent à l'endroit indiqué");
             }
-            return CodeCAudio.recherche(titre);
+            return CodeCAudio.rechercher(titre);
         }
         else{
             throw new IllegalArgumentException("L'extension du fichier à chercher est incorrecte");

@@ -12,6 +12,14 @@ public class Fichier {
     public Fichier(String nom, String chemin){
         this.titre = nom;
         this.chemin = chemin;
+        this.setExtension();
+    }
+
+    public Fichier(String nom, String chemin,int taille, String extension){
+        this.titre = nom;
+        this.chemin = chemin;
+        this.taille = taille;
+        this.extension = extension;
     }
 
     private void setExtension(){

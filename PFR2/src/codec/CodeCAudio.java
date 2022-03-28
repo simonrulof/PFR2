@@ -4,7 +4,7 @@ import modele.entite.Audio;
 
 public class CodeCAudio {
 
-    public static String recherche(String titre) {
+    public static String rechercher(String titre) {
         return null;
     }
 
