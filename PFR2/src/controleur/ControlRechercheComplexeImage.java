@@ -20,8 +20,7 @@ public class ControlRechercheComplexeImage {
     }
 
     public String rechercheCouleur(int seuil, Couleur c){
-
-        return "jkljs";
+        return CodeCImage.rechercher(seuil,c);
     }
 
 
