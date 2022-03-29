@@ -219,7 +219,7 @@ public class ControlRechercheComplexeTexte {
             else{
                 throw new IllegalArgumentException("Le fichier n'est pas présent à l'endroit indiqué");
             }
-            return CodeCTexte.rechercheExemple(titre);
+            return CodeCTexte.rechercher(titre);
         }
         else{
             throw new IllegalArgumentException("L'extension du fichier à chercher est incorrecte");

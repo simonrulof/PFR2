@@ -1,11 +1,7 @@
 package codec;
 
-public class CodeCTexte {
+public class CodeCTexte  extends CodeCMoteur{
     public static String rechercheMot(String motCle) {
-        return null;
-    }
-
-    public static String rechercheExemple(String titre) {
         return null;
     }
 

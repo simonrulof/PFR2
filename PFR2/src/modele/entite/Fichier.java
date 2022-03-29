@@ -1,13 +1,20 @@
 package modele.entite;
 
+import java.io.File;
+
 import modele.donnee.TypeFichier;
 
-public class Fichier {
+public class Fichier{
     private String titre;
     private String chemin;
     private String extension;
     private int taille;
     private TypeFichier type;
+
+    public Fichier(String nom){
+        this.titre = nom;
+        this.chemin = "./";
+    }
 
     public Fichier(String nom, String chemin){
         this.titre = nom;

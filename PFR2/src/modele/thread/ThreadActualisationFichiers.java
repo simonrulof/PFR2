@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.Calendar;
 
 import controleur.ControlAdministrateur;
+import modele.entite.Fichier;
 
 public class ThreadActualisationFichiers extends Thread{
     private boolean condition =  true;
@@ -47,7 +48,7 @@ public class ThreadActualisationFichiers extends Thread{
             if (dossier.listFiles()[i].isFile()){
                 //appel de la méthode en c via controleur pour ajouter les descripteurs à la base de données
                 f = dossier.listFiles()[i].getName();
-                this.ca.addDescripteur(new File(f));
+                this.ca.ajouter(new Fichier(f));
             } 
             else if (dossier.listFiles()[i].isDirectory()) {
                 f = dossier.listFiles()[i].getName();
