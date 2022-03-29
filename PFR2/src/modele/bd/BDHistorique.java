@@ -7,15 +7,15 @@ import java.util.Map;
 
 import modele.entite.Recherche;
 
-public class Historique {
+public class BDHistorique {
 	private Map<String, Recherche> historiqueRecherches = new HashMap<String, Recherche>();
 
-	private static class HistoriqueHolder{
-        private final static Historique instance = new Historique();
+	private static class BDHistoriqueHolder{
+        private final static BDHistorique instance = new BDHistorique();
     }
 
-    public static Historique getInstance(){
-        return HistoriqueHolder.instance;
+    public static BDHistorique getInstance(){
+        return BDHistoriqueHolder.instance;
     }
 
 	public void viderHistorique() {

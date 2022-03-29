@@ -4,10 +4,11 @@ import codec.CodeCAdministrateur;
 import codec.CodeCMoteur;
 import modele.entite.Fichier;
 
-public class ControlAdministrateur {
+public class ControlAdministrateur extends ControlUtilisateur{
     private ControlVerifierConnexion cvc;
 
-    public ControlAdministrateur(ControlVerifierConnexion cvc){
+    public ControlAdministrateur(ControlVerifierConnexion cvc,ControlOptionMode com, ControlRechercheComplexeAudio crca, ControlRechercheComplexeImage crci, ControlRechercheComplexeTexte crct){
+        super(com,crca,crci,crct);
         this.cvc = cvc;
     }
 
@@ -30,5 +31,6 @@ public class ControlAdministrateur {
     public void modifierConfiguration(){
 
     }
+
 
 }

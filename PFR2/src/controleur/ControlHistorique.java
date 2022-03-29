@@ -3,14 +3,13 @@ package controleur;
 import java.util.List;
 import java.util.Map;
 
-import modele.bd.Historique;
+import modele.bd.BDHistorique;
 import modele.entite.Recherche;
 
 public class ControlHistorique {
-	private Historique historique = Historique.getInstance();
+	private BDHistorique historique = BDHistorique.getInstance();
 
-	public Map<String, Recherche> consulterHistorique()
-	{
+	public Map<String, Recherche> consulterHistorique()	{
 		return historique.getHistoriqueRecherches();
 	}
 	

@@ -220,27 +220,19 @@ public class ControlRechercheComplexeTexte {
     }
 
     private void toHashMap(HashMap<String, Integer> hm, String resultat){
-        int index = 0;
         String titre = "";
         for(int i=0; i<resultat.length(); i++){
-            if(resultat.charAt(i)==':'){
-                index = i+1;
-                //on recupère le titre du fichier texte retourné
-                /*En supposant ici que le retour de la fonction c est de type
-                titre:nomDuFichier occurrence:nbOccurrence\n */
-                titre = "";
-                while(resultat.charAt(index)!=' '){
-                    titre += resultat.charAt(index);
-                    index++;
-                }
-                i=index;
-                while(resultat.charAt(i)!=':'){
-                    i++;
-                }
+            //on recupère le titre du fichier texte retourné
+            /*En supposant ici que le retour de la fonction c est de type
+            nomDuFichier nbOccurrence */
+            titre += resultat.charAt(i);
+            if(resultat.charAt(i)==' '){
+                //attention pas de gestion si nb>9
                 if(Character.isDigit(resultat.charAt(i+1))){
                     hm.put(titre, (int)(resultat.charAt(i+1)));
+                    titre="";
                 }
-            }
+            }                    
         }
     }
 }

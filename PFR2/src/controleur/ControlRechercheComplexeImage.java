@@ -11,11 +11,14 @@ public class ControlRechercheComplexeImage {
         this.cvf = cvf;
     }
 
-    public String recherche(Image i){   
+    public String recherche(Image i) throws IllegalArgumentException{   
         String res=null; 
         if(this.cvf.fichierPresent(i)){
             res=CodeCImage.rechercher(i.getTitre());
         } 
+        else{
+            throw new IllegalArgumentException("Le fichier n'est pas présent à l'endroit indiqué");
+        }
         return res;
     }
 

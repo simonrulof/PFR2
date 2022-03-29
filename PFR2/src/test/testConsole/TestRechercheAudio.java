@@ -3,7 +3,6 @@ package test.testConsole;
 import controleur.ControlRechercheComplexeAudio;
 import controleur.ControlVerificationFichiers;
 import modele.entite.Audio;
-import modele.entite.Fichier;
 
 public class TestRechercheAudio {
     public static void main(String[] args) {
