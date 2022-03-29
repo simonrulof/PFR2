@@ -22,9 +22,7 @@ public class TestConnexionAdmin {
 
 		// Verification de la bonne realisation du cas
 		System.out.println("VERIFICATION");
-		System.out.println("numero de l'admin = " + numAdmin);
 		System.out.println(ci.visualiserBD());
         System.out.println("Identification admin: "+identificationAdmin1);
-
 	}
 }

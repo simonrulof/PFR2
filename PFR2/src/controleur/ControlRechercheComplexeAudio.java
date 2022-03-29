@@ -6,47 +6,32 @@ import java.util.Map;
 import codec.CodeCAudio;
 import modele.entite.Audio;
 
-public class ControlRechercheComplexeAudio {
-    
+public class ControlRechercheComplexeAudio {    
     private ControlVerificationFichiers cvf;
 
     public ControlRechercheComplexeAudio(ControlVerificationFichiers cvf){
         this.cvf = cvf;
     }
 
-    private String recherche(Audio f) throws IllegalArgumentException{
-        //verification de la validite du fichier (extension...)
-        String extension = f.getExtension();
-        if(extension==".wav"|| extension ==".bin"){
-            String titre = f.getChemin() + f.getTitre();
-            //verification de la presence du fichier
-            if(this.cvf.fichierPresent(f)){
-
-            }
-            else{
-                throw new IllegalArgumentException("Le fichier n'est pas présent à l'endroit indiqué");
-            }
-            return CodeCAudio.rechercher(titre);
+    public String recherche(Audio f) throws IllegalArgumentException{
+        String res ="";
+        //verification de la presence du fichier
+        if(this.cvf.fichierPresent(f)){
+            res = CodeCAudio.rechercher(f.getChemin() + f.getTitre());
         }
         else{
-            throw new IllegalArgumentException("L'extension du fichier à chercher est incorrecte");
-        }        
+            throw new IllegalArgumentException("Le fichier n'est pas présent à l'endroit indiqué");
+        }
+        return res;        
     }
 
-    private String rechercheOccurence(Audio f, int nbOccurrence, boolean polarite) throws IllegalArgumentException{
+    public String rechercheOccurence(Audio f, int nbOccurrence, boolean polarite) throws IllegalArgumentException{
         String descripteur = CodeCAudio.descripteur(f);
         HashMap<String, Double> conversion = new HashMap<>();
         //verification de la validite du fichier (extension...)
-        String extension = f.getExtension();
-        if(extension==".wav"|| extension ==".bin"){
-            String titre = f.getChemin() + f.getTitre();
-            //verification de la presence du fichier
-            if(this.cvf.fichierPresent(f)){
-
-            }
-            else{
-                throw new IllegalArgumentException("Le fichier n'est pas présent à l'endroit indiqué");
-            }
+        String titre = f.getChemin() + f.getTitre();
+        //verification de la presence du fichier
+        if(this.cvf.fichierPresent(f)){
             if(nbOccurrence>=0){
                 toHashMap(conversion, descripteur);
                 //une fois les résultats de la recherche convertis en hashmap
@@ -70,11 +55,11 @@ public class ControlRechercheComplexeAudio {
             }
             else if(nbOccurrence<0 || nbOccurrence==0 && polarite==false){
                 throw new IllegalArgumentException("Le nombre d'occurrence ne convient pas");
-            }            
+            }   
         }
         else{
-            throw new IllegalArgumentException("L'extension du fichier à chercher est incorrecte");
-        }   
+            throw new IllegalArgumentException("Le fichier n'est pas présent à l'endroit indiqué");
+        }               
         return conversion.toString();     
     }
 

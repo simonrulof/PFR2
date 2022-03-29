@@ -19,7 +19,7 @@ public class Administrateur {
     }
 
     public boolean verifierCorrespondaceProfil(String login, String mdp){
-        return this.getLogin()==login & this.getMdp()==mdp;
+        return this.getLogin().equals(login) & this.getMdp().equals(mdp);
     }
 
     public void connexionProfil(){

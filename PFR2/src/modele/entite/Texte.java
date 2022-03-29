@@ -10,5 +10,13 @@ public class Texte extends Fichier{
         if(!(this.getExtension().contains(".xml")||this.getExtension().contains(".txt"))){
             throw new IllegalArgumentException("extension non valide");
         }
-    }    
+    } 
+    
+    public Texte(String nom) {
+        super(nom);
+        this.setType(TypeFichier.TEXTE);
+        if(!(this.getExtension().contains(".xml")||this.getExtension().contains(".txt"))){
+            throw new IllegalArgumentException("extension non valide");
+        }
+    } 
 }

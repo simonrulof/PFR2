@@ -14,7 +14,7 @@ public class ControlRechercheComplexeTexte {
         this.cvf = cvf;
     }
 
-    private String rechercheMotCle(String motCle,Boolean polarite) throws IllegalArgumentException{
+    public String rechercheMotCle(String motCle,Boolean polarite) throws IllegalArgumentException{
         if(motCle.matches("[a-zA-Z0-9]+")){
             if(polarite){
                 return CodeCTexte.rechercheMot(motCle);
@@ -29,7 +29,7 @@ public class ControlRechercheComplexeTexte {
         }        
     }
 
-    private String rechercheMotCle(String motCle,Boolean polarite,String motCle2,Boolean polarite2) throws IllegalArgumentException{
+    public String rechercheMotCle(String motCle,Boolean polarite,String motCle2,Boolean polarite2) throws IllegalArgumentException{
         HashMap<String, Integer> resultat = new HashMap<>();
         if(motCle.matches("[a-zA-Z0-9]+")){
             String res="";
@@ -88,7 +88,7 @@ public class ControlRechercheComplexeTexte {
         return resultat.toString();
     }
 
-    private String rechercheMotCle(String motCle,Boolean polarite,String motCle2,Boolean polarite2,String motCle3,Boolean polarite3) throws IllegalArgumentException{
+    public String rechercheMotCle(String motCle,Boolean polarite,String motCle2,Boolean polarite2,String motCle3,Boolean polarite3) throws IllegalArgumentException{
         HashMap<String, Integer> resultat = new HashMap<>();
         if(motCle.matches("[a-zA-Z0-9]+")){
             String res="";
@@ -176,7 +176,7 @@ public class ControlRechercheComplexeTexte {
         return resultat.toString();       
     }
 
-    private String rechercheMotCle(String motCle, int nbOccurrence, Boolean polarite) throws IllegalArgumentException{
+    public String rechercheMotCle(String motCle, int nbOccurrence, Boolean polarite) throws IllegalArgumentException{
         String resultat = CodeCTexte.rechercheMot(motCle);
         HashMap<String, Integer> conversion = new HashMap<>();
         if(motCle.matches("[a-zA-Z0-9]+")){
@@ -207,23 +207,16 @@ public class ControlRechercheComplexeTexte {
         return conversion.toString();
     }
 
-    private String rechercheExemple(Texte f) throws IllegalArgumentException{
-        //verification de la validite du fichier (extension...)
-        String extension = f.getExtension();
-        if(extension==".xml"|| extension ==".txt"){
-            String titre = f.getChemin() + f.getTitre();
-            //verification de la presence du fichier
-            if(this.cvf.fichierPresent(f)){
-
-            }
-            else{
-                throw new IllegalArgumentException("Le fichier n'est pas présent à l'endroit indiqué");
-            }
-            return CodeCTexte.rechercher(titre);
+    public String rechercheExemple(Texte f) throws IllegalArgumentException{
+        String res = "";
+        //verification de la presence du fichier
+        if(this.cvf.fichierPresent(f)){
+            res = CodeCTexte.rechercher(f.getChemin() + f.getTitre());
         }
         else{
-            throw new IllegalArgumentException("L'extension du fichier à chercher est incorrecte");
-        }        
+            throw new IllegalArgumentException("Le fichier n'est pas présent à l'endroit indiqué");
+        }
+        return res;       
     }
 
     private void toHashMap(HashMap<String, Integer> hm, String resultat){

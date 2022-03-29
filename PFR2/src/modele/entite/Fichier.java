@@ -13,7 +13,8 @@ public class Fichier{
 
     public Fichier(String nom){
         this.titre = nom;
-        this.chemin = "./";
+        this.chemin = "./";        
+        this.setExtension();
     }
 
     public Fichier(String nom, String chemin){
@@ -37,7 +38,7 @@ public class Fichier{
                 break;
             }
         }
-        this.extension = this.titre.substring(indexPoint+1);
+        this.extension = this.titre.substring(indexPoint);
     }
 
     public String getExtension(){
