@@ -31,8 +31,4 @@ public class ControlAdministrateur {
 
     }
 
-    public boolean connexion(int numAdmin){
-        return false;
-    }
-
 }
