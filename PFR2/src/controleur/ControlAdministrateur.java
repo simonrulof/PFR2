@@ -7,8 +7,8 @@ import modele.entite.Fichier;
 public class ControlAdministrateur extends ControlUtilisateur{
     private ControlVerifierConnexion cvc;
 
-    public ControlAdministrateur(ControlVerifierConnexion cvc,ControlOptionMode com, ControlRechercheComplexeAudio crca, ControlRechercheComplexeImage crci, ControlRechercheComplexeTexte crct){
-        super(com,crca,crci,crct);
+    public ControlAdministrateur(ControlHistorique ch,ControlVerifierConnexion cvc, ControlRechercheComplexeAudio crca, ControlRechercheComplexeImage crci, ControlRechercheComplexeTexte crct){
+        super(ch,crca,crci,crct);
         this.cvc = cvc;
     }
 

@@ -1,5 +1,5 @@
 package modele.donnee;
 
 public enum TypeRecherche {
-    SEUIL, SIMILARITE, MOTCLES;
+    SEUIL, SIMILARITE, MOTCLES, OCCURRENCE;
 }

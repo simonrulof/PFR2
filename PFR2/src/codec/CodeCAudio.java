@@ -4,8 +4,8 @@ import modele.entite.Audio;
 
 public class CodeCAudio  extends CodeCMoteur{
 
-    public static String rechercheOccurence(String titre) {
-        return "rechercheOccurence("+titre+")";
+    public static String rechercheOccurrence(Audio a) {
+        return "rechercheOccurence("+a.getTitre()+")";
     }
 
 }

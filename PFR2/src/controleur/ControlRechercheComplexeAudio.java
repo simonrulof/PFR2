@@ -1,39 +1,49 @@
 package controleur;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import codec.CodeCAudio;
+import modele.donnee.TypeRecherche;
 import modele.entite.Audio;
+import modele.entite.Fichier;
+import modele.entite.Recherche;
 
 public class ControlRechercheComplexeAudio {    
     private ControlVerificationFichiers cvf;
+    private int moteur;
 
-    public ControlRechercheComplexeAudio(ControlVerificationFichiers cvf){
+    public ControlRechercheComplexeAudio(ControlVerificationFichiers cvf, int nbMoteur){
         this.cvf = cvf;
+        this.moteur=nbMoteur;
     }
 
-    public String recherche(Audio f) throws IllegalArgumentException{
-        String res ="";
+    public Recherche recherche(Audio f) throws IllegalArgumentException{
+        Recherche r = new Recherche(f, "Recherche de similarité avec "+f.getTitre(), TypeRecherche.SIMILARITE);
         //verification de la presence du fichier
         if(this.cvf.fichierPresent(f)){
-            res = CodeCAudio.rechercher(f.getChemin() + f.getTitre());
+            String s = CodeCAudio.rechercher(f.getChemin() + f.getTitre());
+            List<String> liste = new ArrayList<>();
+            /*this.toList(liste, s);
+            r.setResultatsRequete(liste);*/
         }
         else{
             throw new IllegalArgumentException("Le fichier n'est pas présent à l'endroit indiqué");
         }
-        return res;        
+        return r;        
     }
 
-    public String rechercheOccurence(Audio f, int nbOccurrence, boolean polarite) throws IllegalArgumentException{
-        String descripteur = CodeCAudio.descripteur(f);
-        HashMap<String, Double> conversion = new HashMap<>();
-        //verification de la validite du fichier (extension...)
-        String titre = f.getChemin() + f.getTitre();
+    public Recherche rechercheOccurence(Audio f, int nbOccurrence, boolean polarite) throws IllegalArgumentException{
+        String resultat = CodeCAudio.rechercheOccurrence(f);
+        HashMap<String, Integer> conversion = new HashMap<>();
+        String strPolarite="";
         //verification de la presence du fichier
         if(this.cvf.fichierPresent(f)){
             if(nbOccurrence>=0){
-                toHashMap(conversion, descripteur);
+                toHashMap(conversion, resultat);
                 //une fois les résultats de la recherche convertis en hashmap
                 //on garde uniquement ceux qui correspondent à notre demamde (>=nbOccurrence)
                 Iterator i = conversion.entrySet().iterator();
@@ -41,15 +51,16 @@ public class ControlRechercheComplexeAudio {
                 while(i.hasNext()){
                     mapEntry = (Map.Entry) i.next();
                     if(polarite){
-                        //En vrai ici ça ne fonctionne pas parce que en C on retourne un pourcentage de similarité
                         if(((Integer) mapEntry.getValue()).intValue()>nbOccurrence){
                             conversion.remove(mapEntry.getKey());
                         }
+                        strPolarite=">";
                     }
                     else{
                         if(((Integer) mapEntry.getValue()).intValue()<nbOccurrence){
                             conversion.remove(mapEntry.getKey());
                         }
+                        strPolarite="<";
                     }                    
                 }
             }
@@ -59,40 +70,53 @@ public class ControlRechercheComplexeAudio {
         }
         else{
             throw new IllegalArgumentException("Le fichier n'est pas présent à l'endroit indiqué");
-        }               
-        return conversion.toString();     
+        }  
+        Recherche r =  new Recherche(f,"recherche du fichier "+f.getTitre()+" avec "+strPolarite+nbOccurrence+" occurrences" , TypeRecherche.OCCURRENCE);     
+        //r.setResultatsRequete();
+        return r;
     }
 
-    private void toHashMap(HashMap<String, Double> hm, String resultat){
-        int index = 0;
+    private void toHashMap(HashMap<String, Integer> hm, String resultat){
         String titre = "";
-        String similarite = "";
+        int occurrence=0;
         for(int i=0; i<resultat.length(); i++){
-            if(resultat.charAt(i)==':'){
-                index = i+1;
+            if(resultat.charAt(i)==' '){
                 //on recupère le titre du fichier texte retourné
                 /*En supposant ici que le retour de la fonction c est de type
-                titre:nomDuFichier occurrence:nbOccurrence\n */
+                nomDuFichier nbOccurrence\n */
                 titre = "";
-                while(resultat.charAt(index)!=' '){
-                    titre += resultat.charAt(index);
-                    index++;
-                }
-                i=index;
-                while(resultat.charAt(i)!=':'){
+                while(resultat.charAt(i)!=' '){
+                    titre += resultat.charAt(i);
                     i++;
                 }
                 if(Character.isDigit(resultat.charAt(i+1))){
-                    while(resultat.charAt(i)!='\n'){
-                        similarite += resultat.charAt(i);
-                        i++;
-                    }
-                }
-                else{
-                    //probleme de syntaxe dans le retour de la requete en C
-                }
-                hm.put(titre, Double.parseDouble(similarite));
+                    occurrence = (int)resultat.charAt(i);
+                }                
+                hm.put(titre, occurrence);
             }
+        }
+    }
+
+    private void toHashMapSimilarite(HashMap<File, Double> hm, String resultat){
+        String titre = "";
+        String similarite="";
+        for(int i=0; i<resultat.length(); i++){
+            //on recupère le titre du fichier texte retourné
+            /*En supposant ici que le retour de la fonction c est de type
+            nomDuFichier similarite */
+            titre += resultat.charAt(i);
+            if(resultat.charAt(i)==' '){
+                i++;
+                //attention pas de gestion si nb>9
+                if(Character.isDigit(resultat.charAt(i))){
+                    while(resultat.charAt(i)!=' '){
+                        similarite+=resultat.charAt(i);
+                        i++;
+                    }                   
+                }
+                i--;
+            }  
+            hm.put(new File(titre), Double.parseDouble(similarite));                  
         }
     }
 }
