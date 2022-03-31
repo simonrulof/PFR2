@@ -1,10 +1,7 @@
 package controleur;
 
-import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import codec.CodeCAudio;
 import modele.donnee.TypeRecherche;
@@ -14,9 +11,9 @@ import modele.entite.Recherche;
 
 public class ControlRechercheComplexeAudio {    
     private ControlVerificationFichiers cvf;
-    private int moteur;
+    private boolean moteur;
 
-    public ControlRechercheComplexeAudio(ControlVerificationFichiers cvf, int nbMoteur){
+    public ControlRechercheComplexeAudio(ControlVerificationFichiers cvf, boolean nbMoteur){
         this.cvf = cvf;
         this.moteur=nbMoteur;
     }
@@ -24,11 +21,32 @@ public class ControlRechercheComplexeAudio {
     public Recherche recherche(Audio f) throws IllegalArgumentException{
         Recherche r = new Recherche(f, "Recherche de similarité avec "+f.getTitre(), TypeRecherche.SIMILARITE);
         //verification de la presence du fichier
-        if(this.cvf.fichierPresent(f)){
-            String s = CodeCAudio.rechercher(f.getChemin() + f.getTitre());
-            List<String> liste = new ArrayList<>();
-            /*this.toList(liste, s);
-            r.setResultatsRequete(liste);*/
+        if(this.cvf.fichierPresent(f)){            
+            String s = CodeCAudio.rechercher(f);
+            HashMap<Fichier, Double> conversion = new HashMap<>();
+            HashMap<Fichier, Double> conversion_res = new HashMap<>();
+            HashMap<Fichier, Double> intersection = new HashMap<>();
+            toHashMapSimilarite(conversion, s);
+            if(this.moteur){
+                String res = CodeCAudio.rechercher(f);                
+                toHashMapSimilarite(conversion_res, res);
+                for(Fichier fichier : conversion.keySet()){
+                    if(conversion_res.containsKey(fichier)){
+                        intersection.put(fichier,conversion.get(fichier));
+                    }
+                }
+                for(Fichier fichier : conversion_res.keySet()){
+                    if(!intersection.containsKey(fichier)){
+                        if(conversion.containsKey(fichier)){
+                            intersection.put(fichier,conversion_res.get(fichier));
+                        }
+                    }
+                }                
+            }
+            else{
+                intersection = conversion;
+            }            
+            r.setResultatsRequete(intersection);
         }
         else{
             throw new IllegalArgumentException("Le fichier n'est pas présent à l'endroit indiqué");
@@ -38,7 +56,7 @@ public class ControlRechercheComplexeAudio {
 
     public Recherche rechercheOccurence(Audio f, int nbOccurrence, boolean polarite) throws IllegalArgumentException{
         String resultat = CodeCAudio.rechercheOccurrence(f);
-        HashMap<String, Integer> conversion = new HashMap<>();
+        HashMap<Fichier, Integer> conversion = new HashMap<>();
         String strPolarite="";
         //verification de la presence du fichier
         if(this.cvf.fichierPresent(f)){
@@ -76,7 +94,7 @@ public class ControlRechercheComplexeAudio {
         return r;
     }
 
-    private void toHashMap(HashMap<String, Integer> hm, String resultat){
+    private void toHashMap(HashMap<Fichier, Integer> hm, String resultat){
         String titre = "";
         int occurrence=0;
         for(int i=0; i<resultat.length(); i++){
@@ -92,12 +110,12 @@ public class ControlRechercheComplexeAudio {
                 if(Character.isDigit(resultat.charAt(i+1))){
                     occurrence = (int)resultat.charAt(i);
                 }                
-                hm.put(titre, occurrence);
+                hm.put(new Audio(titre), occurrence);
             }
         }
     }
 
-    private void toHashMapSimilarite(HashMap<File, Double> hm, String resultat){
+    private void toHashMapSimilarite(HashMap<Fichier, Double> hm, String resultat){
         String titre = "";
         String similarite="";
         for(int i=0; i<resultat.length(); i++){
@@ -116,7 +134,7 @@ public class ControlRechercheComplexeAudio {
                 }
                 i--;
             }  
-            hm.put(new File(titre), Double.parseDouble(similarite));                  
+            hm.put(new Audio(titre), Double.parseDouble(similarite));                  
         }
     }
 }

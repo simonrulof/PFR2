@@ -211,7 +211,7 @@ public class ControlRechercheComplexeTexte {
         String res = "";
         //verification de la presence du fichier
         if(this.cvf.fichierPresent(f)){
-            res = CodeCTexte.rechercher(f.getChemin() + f.getTitre());
+            res = CodeCTexte.rechercher(f);
         }
         else{
             throw new IllegalArgumentException("Le fichier n'est pas présent à l'endroit indiqué");

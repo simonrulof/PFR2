@@ -12,8 +12,8 @@ public abstract class CodeCMoteur {
         return "descripteur("+f.getTitre()+")";
     }
     
-    public static String rechercher(String titre) {
-        return "rechercher("+titre+")";
+    public static String rechercher(Fichier f) {
+        return "rechercher("+f.getTitre()+")";
     }
 
     public static boolean indexer(Fichier f) {
