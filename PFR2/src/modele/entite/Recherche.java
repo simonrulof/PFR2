@@ -1,9 +1,6 @@
 package modele.entite;
 
-import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import modele.donnee.TypeFichier;
@@ -14,7 +11,9 @@ public class Recherche {
 	private Fichier fichier;
 	private TypeFichier typeFichier;
 	private TypeRecherche typeRecherche;
-	private Map<Fichier, Double> resultatsRequete = new HashMap<>();
+	private HashMap<Fichier, Double> resultatsRequete = new HashMap<>();
+	//pour la rechercher avec nombre d'occurrence dans les fichiers audio, car nous avons l'occurrence et les marqueurs temps
+	private HashMap<Fichier, String> resultatsRequeteTemps = new HashMap<>();
 
 	public Recherche(Fichier f, String requete, TypeRecherche type) {
 		this.typeRecherche=type;
@@ -27,8 +26,12 @@ public class Recherche {
 		return requete;
 	}
 	
-	public String ResultatsToString() {
-		return resultatsRequete.toString();		
+	public HashMap<Fichier, String> getResultatsTemps() {
+		return resultatsRequeteTemps;		
+	}
+
+	public HashMap<Fichier, Double> getResultats() {
+		return resultatsRequete;		
 	}
 	
 	public TypeFichier getTypeFichier() {
@@ -39,8 +42,18 @@ public class Recherche {
 		return this.fichier;
 	}
 
-	public void setResultatsRequete(Map<Fichier, Double> resultatsRequete){
+	public void setResultatsRequete(HashMap<Fichier, Double> resultatsRequete){
 		this.resultatsRequete=resultatsRequete;
 	}
+
+	public void setResultatsRequeteTemps(HashMap<Fichier, String> resultatsRequete){
+		this.resultatsRequeteTemps=resultatsRequete;
+	}
+
+    public void setRequete(String r) {
+		this.requete= r;
+    }
+
+
 
 }
