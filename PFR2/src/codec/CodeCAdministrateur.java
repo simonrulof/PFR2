@@ -10,7 +10,7 @@ public class CodeCAdministrateur{
         //appel de la methode pour supprimer un descripteur
         File dossier = new File(System.getProperty("user.dir"));
         for (int i = 0; i < dossier.listFiles().length; i++){
-            if (dossier.listFiles()[i].isFile()&&dossier.listFiles()[i].getName().equals(f.getTitre())){
+            if (dossier.listFiles()[i].isFile()&&dossier.listFiles()[i].getName().equals(f.getName())){
                 dossier.listFiles()[i].delete();
                 break;
             } 
@@ -20,7 +20,7 @@ public class CodeCAdministrateur{
 
     public static boolean ajouter(Fichier f) {
         File dossier = new File(System.getProperty("user.dir"));
-        File fichierAjouter = new File(dossier, f.getTitre());
+        f.renameTo(new File(dossier.getAbsolutePath()+f.getName()));
         CodeCMoteur.indexer(f);
         return false;
     }

@@ -9,11 +9,11 @@ public abstract class CodeCMoteur {
     }
 
     public static String descripteur(Fichier f) {
-        return "descripteur("+f.getTitre()+")";
+        return "descripteur("+f.getAbsolutePath()+")";
     }
     
     public static String rechercher(Fichier f) {
-        return "rechercher("+f.getTitre()+")";
+        return "rechercher("+f.getAbsolutePath()+")";
     }
 
     public static boolean indexer(Fichier f) {
