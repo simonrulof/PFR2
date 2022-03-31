@@ -1,5 +1,6 @@
 package modele.entite;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,16 +11,16 @@ import modele.donnee.TypeRecherche;
 
 public class Recherche {
 	private String requete;
-	private TypeFichier typeFichier;
 	private Fichier fichier;
+	private TypeFichier typeFichier;
 	private TypeRecherche typeRecherche;
 	private Map<Fichier, Double> resultatsRequete = new HashMap<>();
 
 	public Recherche(Fichier f, String requete, TypeRecherche type) {
 		this.typeRecherche=type;
 		this.fichier = f;
-		this.typeFichier = f.getType();
 		this.requete = requete;
+		this.typeFichier = this.getTypeFichier();
 	}
 
 	public String getRequete() {
@@ -31,7 +32,7 @@ public class Recherche {
 	}
 	
 	public TypeFichier getTypeFichier() {
-		return typeFichier;
+		return this.fichier.getType();
 	}
 
 	public Fichier getFichier(){
