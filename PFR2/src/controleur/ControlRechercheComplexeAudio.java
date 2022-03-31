@@ -11,11 +11,11 @@ import modele.entite.Recherche;
 
 public class ControlRechercheComplexeAudio {    
     private ControlVerificationFichiers cvf;
-    private boolean moteur;
+    private boolean multimoteur;
 
-    public ControlRechercheComplexeAudio(ControlVerificationFichiers cvf, boolean nbMoteur){
+    public ControlRechercheComplexeAudio(ControlVerificationFichiers cvf, boolean multimoteur){
         this.cvf = cvf;
-        this.moteur=nbMoteur;
+        this.multimoteur=multimoteur;
     }
 
     public Recherche recherche(Fichier f) throws IllegalArgumentException{
@@ -27,9 +27,13 @@ public class ControlRechercheComplexeAudio {
             HashMap<Fichier, Double> conversion_res = new HashMap<>();
             HashMap<Fichier, Double> intersection = new HashMap<>();
             toHashMapSimilarite(conversion, s);
-            if(this.moteur){
+            if(this.multimoteur){
                 String res = CodeCAudio.rechercher(f);                
-                toHashMapSimilarite(conversion_res, res);
+                toHashMapSimilarite(conversion_res, res);            
+            //PROBLEME: COMPARAISON ADRESSE FICHIER
+            //faire le retour du toHashMap en string puis double
+            //faire l'intersection puis tris
+            //puis string to fichier avec le ifPresent et biCompute
                 for(Fichier fichier : conversion.keySet()){
                     if(conversion_res.containsKey(fichier)){
                         intersection.put(fichier,conversion.get(fichier));
