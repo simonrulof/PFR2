@@ -3,14 +3,13 @@ package test.testConsole;
 import controleur.ControlRechercheComplexeImage;
 import controleur.ControlVerificationFichiers;
 import modele.donnee.Couleur;
-import modele.entite.Image;
-
+import modele.entite.Fichier;
 public class TestRechercheImage {
     public static void main(String[] args) {
 		// Mise en place de l'environnement
         ControlVerificationFichiers cvf = new ControlVerificationFichiers();
         ControlRechercheComplexeImage crci = new ControlRechercheComplexeImage(cvf);
-        Image image = new Image("test.bmp");
+        Fichier image = new Fichier("test.bmp");
 
 		// Verification de la bonne realisation du cas
 		System.out.println("VERIFICATION");      

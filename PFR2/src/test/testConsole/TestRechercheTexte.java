@@ -2,14 +2,14 @@ package test.testConsole;
 
 import controleur.ControlRechercheComplexeTexte;
 import controleur.ControlVerificationFichiers;
-import modele.entite.Texte;
+import modele.entite.Fichier;
 
 public class TestRechercheTexte {
     public static void main(String[] args) {
 		// Mise en place de l'environnement
         ControlVerificationFichiers cvf = new ControlVerificationFichiers();
         ControlRechercheComplexeTexte crct = new ControlRechercheComplexeTexte(cvf);
-        Texte texte = new Texte("test.txt");
+        Fichier texte = new Fichier("test.txt");
 
 		// Verification de la bonne realisation du cas
 		System.out.println("VERIFICATION");
