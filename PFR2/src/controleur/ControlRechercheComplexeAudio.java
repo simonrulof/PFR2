@@ -1,11 +1,11 @@
 package controleur;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import codec.CodeCAudio;
 import modele.donnee.TypeRecherche;
-import modele.entite.Audio;
 import modele.entite.Fichier;
 import modele.entite.Recherche;
 
@@ -18,8 +18,8 @@ public class ControlRechercheComplexeAudio {
         this.moteur=nbMoteur;
     }
 
-    public Recherche recherche(Audio f) throws IllegalArgumentException{
-        Recherche r = new Recherche(f, "Recherche de similarité avec "+f.getTitre(), TypeRecherche.SIMILARITE);
+    public Recherche recherche(Fichier f) throws IllegalArgumentException{
+        Recherche r = new Recherche(f, "Recherche de similarité avec "+f.getName(), TypeRecherche.SIMILARITE);
         //verification de la presence du fichier
         if(this.cvf.fichierPresent(f)){            
             String s = CodeCAudio.rechercher(f);
@@ -54,7 +54,7 @@ public class ControlRechercheComplexeAudio {
         return r;        
     }
 
-    public Recherche rechercheOccurence(Audio f, int nbOccurrence, boolean polarite) throws IllegalArgumentException{
+    public Recherche rechercheOccurence(Fichier f, int nbOccurrence, boolean polarite) throws IllegalArgumentException{
         String resultat = CodeCAudio.rechercheOccurrence(f);
         HashMap<Fichier, Integer> conversion = new HashMap<>();
         String strPolarite="";
@@ -89,7 +89,7 @@ public class ControlRechercheComplexeAudio {
         else{
             throw new IllegalArgumentException("Le fichier n'est pas présent à l'endroit indiqué");
         }  
-        Recherche r =  new Recherche(f,"recherche du fichier "+f.getTitre()+" avec "+strPolarite+nbOccurrence+" occurrences" , TypeRecherche.OCCURRENCE);     
+        Recherche r =  new Recherche(f,"recherche du fichier "+f.getName()+" avec "+strPolarite+nbOccurrence+" occurrences" , TypeRecherche.OCCURRENCE);     
         //r.setResultatsRequete();
         return r;
     }
@@ -110,7 +110,7 @@ public class ControlRechercheComplexeAudio {
                 if(Character.isDigit(resultat.charAt(i+1))){
                     occurrence = (int)resultat.charAt(i);
                 }                
-                hm.put(new Audio(titre), occurrence);
+                hm.put(new Fichier(titre), occurrence);
             }
         }
     }
@@ -134,7 +134,7 @@ public class ControlRechercheComplexeAudio {
                 }
                 i--;
             }  
-            hm.put(new Audio(titre), Double.parseDouble(similarite));                  
+            hm.put(new Fichier(titre), Double.parseDouble(similarite));                  
         }
     }
 }

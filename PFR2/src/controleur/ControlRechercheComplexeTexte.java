@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 import codec.CodeCTexte;
-import modele.entite.Texte;
+import modele.entite.Fichier;
 
 public class ControlRechercheComplexeTexte {
     private ControlVerificationFichiers cvf;
@@ -178,7 +178,7 @@ public class ControlRechercheComplexeTexte {
 
     public String rechercheMotCle(String motCle, int nbOccurrence, Boolean polarite) throws IllegalArgumentException{
         String resultat = CodeCTexte.rechercheMot(motCle);
-        HashMap<String, Integer> conversion = new HashMap<>();
+        HashMap<Fichier, Integer> conversion = new HashMap<>();
         if(motCle.matches("[a-zA-Z0-9]+")){
             toHashMap(conversion, resultat);
             //une fois les résultats de la recherche convertis en hashmap
@@ -207,7 +207,7 @@ public class ControlRechercheComplexeTexte {
         return conversion.toString();
     }
 
-    public String rechercheExemple(Texte f) throws IllegalArgumentException{
+    public String rechercheExemple(Fichier f) throws IllegalArgumentException{
         String res = "";
         //verification de la presence du fichier
         if(this.cvf.fichierPresent(f)){
@@ -219,7 +219,7 @@ public class ControlRechercheComplexeTexte {
         return res;       
     }
 
-    private void toHashMap(HashMap<String, Integer> hm, String resultat){
+    private void toHashMap(HashMap<Fichier, Integer> hm, String resultat){
         String titre = "";
         for(int i=0; i<resultat.length(); i++){
             //on recupère le titre du fichier texte retourné
@@ -229,7 +229,7 @@ public class ControlRechercheComplexeTexte {
             if(resultat.charAt(i)==' '){
                 //attention pas de gestion si nb>9
                 if(Character.isDigit(resultat.charAt(i+1))){
-                    hm.put(titre, (int)(resultat.charAt(i+1)));
+                    hm.put(new Fichier(titre), (int)(resultat.charAt(i+1)));
                     titre="";
                 }
             }                    

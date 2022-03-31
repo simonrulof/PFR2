@@ -2,7 +2,7 @@ package controleur;
 
 import codec.CodeCImage;
 import modele.donnee.Couleur;
-import modele.entite.Image;
+import modele.entite.Fichier;
 
 public class ControlRechercheComplexeImage {
     private ControlVerificationFichiers cvf;
@@ -11,10 +11,10 @@ public class ControlRechercheComplexeImage {
         this.cvf = cvf;
     }
 
-    public String recherche(Image i) throws IllegalArgumentException{   
+    public String recherche(Fichier i) throws IllegalArgumentException{   
         String res=null; 
         if(this.cvf.fichierPresent(i)){
-            res=CodeCImage.rechercher(i.getTitre());
+            res=CodeCImage.rechercher(i);
         } 
         else{
             throw new IllegalArgumentException("Le fichier n'est pas présent à l'endroit indiqué");
