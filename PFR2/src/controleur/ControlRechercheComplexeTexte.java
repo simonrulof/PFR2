@@ -3,7 +3,6 @@ package controleur;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-
 import codec.CodeCTexte;
 import modele.donnee.TypeRecherche;
 import modele.entite.Fichier;
@@ -18,22 +17,47 @@ public class ControlRechercheComplexeTexte {
         this.multimoteur=multimoteur;
     }
 
-    public Recherche rechercheMotCle(String requete) throws IllegalArgumentException{
-        if(requete.matches("[a-zA-Z0-9]+")){
-            HashMap<String,String> hm = traitementRequete(requete);
-            for(String s : hm.keySet()){
-                boolean polarite = this.getPolarite((hm.get(s)));
-                int nbOccurence = this.getOccurence((hm.get(s)));
-                rechercheMotCle(s, polarite, nbOccurence);
+    public Recherche recherche(String requete){
+        if(requete.contains("/")){
+            return rechercheExemple(requete);
+        }
+        else{
+            return rechercheMotCle(requete);
+        }
+    }
+
+    private Recherche rechercheMotCle(String requete) throws IllegalArgumentException{   
+        HashMap<String,String> hm = traitementRequete(requete);
+        HashMap<String,String> res = new HashMap<>();
+        HashMap<String,String> res_2 = new HashMap<>();
+        HashMap<Fichier,String> resultat = new HashMap<>();
+        HashMap<String, Integer> conversion = new HashMap<>();
+        HashMap<String, Integer> conversion_2 = new HashMap<>();
+        HashMap<String, Integer> intersection = new HashMap<>();
+        Recherche r = new Recherche(null, requete, TypeRecherche.MOTCLES);
+        for(String s : hm.keySet()){
+            if(!s.matches("[a-zA-Z0-9]+")){
+                //contient caractères spéciaux
+                throw new IllegalArgumentException("Le mot clé contient un ou plusieurs caractères spéciaux");
+            } 
+        }
+        if(this.multimoteur){
+            rechercheMotCleComparaison(hm,conversion,conversion_2,intersection,res);
+            rechercheMotCleComparaison(hm,conversion,conversion_2,intersection,res_2);
+            for(String fichier : res.keySet()){
+                if(res_2.containsKey(fichier)){
+                    resultat.put(new Fichier(getClass().getClassLoader().getResource("./"+fichier).getFile()),conversion.get(fichier).toString());
+                }
             }
         }
         else{
-            //contient caractères spéciaux
-            throw new IllegalArgumentException("Le mot clé contient un ou plusieurs caractères spéciaux");
-        } 
-        //à la place de null mettre l'emplacement des fichiers texte indexés
-        //pour montrer que cela porte sur tout les fichers textes
-        return new Recherche(null, requete, TypeRecherche.MOTCLES) ;      
+            rechercheMotCleComparaison(hm,conversion,conversion_2,intersection,res);
+            for(String fichier : res.keySet()){
+                resultat.put(new Fichier(getClass().getClassLoader().getResource("./"+fichier).getFile()),conversion.get(fichier).toString());
+            }
+        }             
+        r.setResultatsRequeteArguments(resultat);
+        return r;      
     }
 
    
@@ -88,139 +112,106 @@ public class ControlRechercheComplexeTexte {
         return retour;
     }
 
-    public String rechercheMotCle(String motCle,Boolean polarite,int nbOccurence) throws IllegalArgumentException{
-        HashMap<String, Integer> resultat = new HashMap<>();
-        if(motCle.matches("[a-zA-Z0-9]+")){
-            String res="";
-            String res2="";
-            String res3="";
+    private HashMap<String, Integer> rechercheMotCle(String motCle,Boolean polarite,int nbOccurrence) throws IllegalArgumentException{
+        String res = CodeCTexte.rechercheMot(motCle);
+        HashMap<String, Integer> requete = new HashMap<>();
+        toHashMap(requete, res);
+        Iterator i = requete.entrySet().iterator();
+        Map.Entry mapEntry;
+        while(i.hasNext()){
+            mapEntry = (Map.Entry) i.next();
             if(polarite){
-                res = CodeCTexte.rechercheMot(motCle);
-            }
-            else if(polarite==false){                
-                res = CodeCTexte.rechercheMotSans(motCle);
-            }
-            
-            //on crée une hashmap contenant les resultats des requetes
-            HashMap<String, Integer> hashMapRes = new HashMap<>();
-            HashMap<String, Integer> hashMapRes2 = new HashMap<>();
-            HashMap<String, Integer> hashMapRes3 = new HashMap<>();
-            HashMap<String, Integer> intersection = new HashMap<>();
-            //on fait une intersection entre les deux premiers résultats
-            boolean hm = false;
-            Iterator iterateur;
-            if(hashMapRes.size()>hashMapRes2.size()){
-                iterateur = hashMapRes.entrySet().iterator();
-            }
-            else{                
-                iterateur = hashMapRes2.entrySet().iterator();
-                hm = true;
-            }
-            Map.Entry mapEntry;
-            while(iterateur.hasNext()){
-                mapEntry = (Map.Entry) iterateur.next();
-                if(hm){
-                    if(hashMapRes2.containsKey(mapEntry.getKey())){
-                        intersection.put((String)mapEntry.getKey(),(Integer)mapEntry.getValue());
-                    }
+                if((int)mapEntry.getValue()<nbOccurrence){
+                    requete.remove(mapEntry.getKey());
                 }
-                else{
-                    if(hashMapRes.containsKey(mapEntry.getKey())){
-                        intersection.put((String)mapEntry.getKey(),(Integer)mapEntry.getValue());
-                    }
+            }
+            else{
+                if((int)mapEntry.getValue()>=nbOccurrence){
+                    requete.remove(mapEntry.getKey());
                 }
-                
-            }
-            //maintenant on effectue une intersection entre la précédente et la dernière hashmap
-            if(hashMapRes3.size()>intersection.size()){
-                iterateur = hashMapRes3.entrySet().iterator();
-                hm=false;
-            }
-            else{                
-                iterateur = intersection.entrySet().iterator();
-                hm = true;
-            }
-            while(iterateur.hasNext()){
-                mapEntry = (Map.Entry) iterateur.next();
-                if(hm){
-                    if(hashMapRes3.containsKey(mapEntry.getKey())){
-                        resultat.put((String)mapEntry.getKey(),(Integer)mapEntry.getValue());
-                    }
-                }
-                else{
-                    if(intersection.containsKey(mapEntry.getKey())){
-                        resultat.put((String)mapEntry.getKey(),(Integer)mapEntry.getValue());
-                    }
-                }
-                
-            }
+            }                    
         }
-        else{
-            //contient caractères spéciaux
-            throw new IllegalArgumentException("Le mot clé contient un ou plusieurs caractères spéciaux");
+        return requete;
+    }
+
+    private void rechercheMotCleComparaison(HashMap<String, String> hm, HashMap<String, Integer> conversion, HashMap<String, Integer> conversion_2, HashMap<String, Integer> intersection, HashMap<String, String> res){
+        int compteur = hm.size();
+        int index = 0;
+        for(String s : hm.keySet()){
+            boolean polarite = this.getPolarite((hm.get(s)));
+            int nbOccurence = this.getOccurence((hm.get(s)));
+            if(compteur==1){
+                conversion=rechercheMotCle(s, polarite, nbOccurence);
+                for(String fichier : conversion.keySet()){
+                    //changer dans la fonction de conversion avec le biCompute
+                    res.put(fichier, conversion.get(fichier).toString());
+                }
+                break;
+            }
+            else if(compteur==2){ 
+                if(index==0){
+                    conversion=rechercheMotCle(s, polarite, nbOccurence);
+                }  
+                else{
+                    conversion_2=rechercheMotCle(s, polarite, nbOccurence);
+                    for(String fichier : conversion.keySet()){
+                        if(conversion_2.containsKey(fichier)){
+                            //changer dans la fonction de conversion avec le biCompute
+                            res.put(fichier,conversion.get(fichier).toString());
+                        }
+                    }
+                }              
+            }
+            else if(compteur==3){
+                if(index==0){
+                    conversion=rechercheMotCle(s, polarite, nbOccurence);
+                } 
+                else if(index ==1){
+                    conversion_2=rechercheMotCle(s, polarite, nbOccurence);
+                    for(String fichier : conversion.keySet()){
+                        if(conversion_2.containsKey(fichier)){
+                            intersection.put(fichier,conversion.get(fichier));
+                        }
+                    }
+                } 
+                else{
+                    conversion_2 = new HashMap<>();
+                    conversion_2=rechercheMotCle(s, polarite, nbOccurence);
+                    for(String fichier : intersection.keySet()){
+                        if(conversion_2.containsKey(fichier)){
+                            //changer dans la fonction de conversion avec le biCompute
+                            res.put(fichier,conversion.get(fichier).toString());
+                        }
+                    }
+                }
+            }
+            index++;
         } 
-        return resultat.toString();       
     }
 
-    public String rechercheMotCle(String motCle, int nbOccurrence, Boolean polarite) throws IllegalArgumentException{
-        String resultat = CodeCTexte.rechercheMot(motCle);
-        HashMap<Fichier, Integer> conversion = new HashMap<>();
-        if(motCle.matches("[a-zA-Z0-9]+")){
-            toHashMap(conversion, resultat);
-            //une fois les résultats de la recherche convertis en hashmap
-            //on garde uniquement ceux qui correspondent à notre demamde (>=nbOccurrence)
-            Iterator i = conversion.entrySet().iterator();
-            Map.Entry mapEntry;
-            while(i.hasNext()){
-                mapEntry = (Map.Entry) i.next();
-                if(polarite){
-                    if(((Integer) mapEntry.getValue()).intValue()>nbOccurrence){
-                        conversion.remove(mapEntry.getKey());
-                    }
-                }
-                else{
-                    if(((Integer) mapEntry.getValue()).intValue()<nbOccurrence){
-                        conversion.remove(mapEntry.getKey());
-                    }
-                }
-                
-            }
-        }
-        else{
-            //contient des caractères spéciaux
-            throw new IllegalArgumentException("Le mot clé contient un ou plusieurs caractères spéciaux");
-        }        
-        return conversion.toString();
-    }
-
-    public Recherche rechercheExemple(Fichier f) throws IllegalArgumentException{
+    public Recherche rechercheExemple(String nom) throws IllegalArgumentException{
+        Fichier f = new Fichier(getClass().getClassLoader().getResource("./"+nom).getFile());
         Recherche r = new Recherche(f, "Recherche de similarité avec "+f.getName(), TypeRecherche.SIMILARITE);
         //verification de la presence du fichier
         if(this.cvf.fichierPresent(f)){            
             String s = CodeCTexte.rechercher(f);
-            HashMap<Fichier, Double> conversion = new HashMap<>();
-            HashMap<Fichier, Double> conversion_res = new HashMap<>();
+            HashMap<String, Double> conversion = new HashMap<>();
+            HashMap<String, Double> conversion_2 = new HashMap<>();
             HashMap<Fichier, Double> intersection = new HashMap<>();
             toHashMapSimilarite(conversion, s);
             if(this.multimoteur){
                 String res = CodeCTexte.rechercher(f);                
-                toHashMapSimilarite(conversion_res, res);
-            //PROBLEME: COMPARAISON ADRESSE FICHIER
-                for(Fichier fichier : conversion.keySet()){
-                    if(conversion_res.containsKey(fichier)){
-                        intersection.put(fichier,conversion.get(fichier));
+                toHashMapSimilarite(conversion_2, res);            
+                for(String fichier : conversion.keySet()){
+                    if(conversion_2.containsKey(fichier)){
+                        intersection.put(new Fichier(getClass().getClassLoader().getResource("./"+fichier).getFile()),conversion.get(fichier));
                     }
-                }
-                for(Fichier fichier : conversion_res.keySet()){
-                    if(!intersection.containsKey(fichier)){
-                        if(conversion.containsKey(fichier)){
-                            intersection.put(fichier,conversion_res.get(fichier));
-                        }
-                    }
-                }                
+                }               
             }
             else{
-                intersection = conversion;
+                for(String fichier : conversion.keySet()){
+                    intersection.put(new Fichier(getClass().getClassLoader().getResource("./"+fichier).getFile()),conversion.get(fichier));
+                }
             }            
             r.setResultatsRequete(intersection);
         }
@@ -230,8 +221,9 @@ public class ControlRechercheComplexeTexte {
         return r;      
     }
 
-    private void toHashMap(HashMap<Fichier, Integer> hm, String resultat){
+    private void toHashMap(HashMap<String, Integer> hm, String resultat){
         String titre = "";
+        String occurrence ="";
         for(int i=0; i<resultat.length(); i++){
             //on recupère le titre du fichier texte retourné
             /*En supposant ici que le retour de la fonction c est de type
@@ -239,15 +231,18 @@ public class ControlRechercheComplexeTexte {
             titre += resultat.charAt(i);
             if(resultat.charAt(i)==' '){
                 //attention pas de gestion si nb>9
-                if(Character.isDigit(resultat.charAt(i+1))){
-                    hm.put(new Fichier(titre), (int)(resultat.charAt(i+1)));
-                    titre="";
+                while(Character.isDigit(resultat.charAt(i+1))){
+                    occurrence+=resultat.charAt(i+1);
+                    i++;
                 }
-            }                    
+            }
+            hm.put(titre, Integer.valueOf(occurrence));
+            occurrence="";
+            titre="";                    
         }
     }
 
-    private void toHashMapSimilarite(HashMap<Fichier, Double> hm, String resultat){
+    private void toHashMapSimilarite(HashMap<String, Double> hm, String resultat){
         String titre = "";
         String similarite="";
         for(int i=0; i<resultat.length(); i++){
@@ -257,7 +252,6 @@ public class ControlRechercheComplexeTexte {
             titre += resultat.charAt(i);
             if(resultat.charAt(i)==' '){
                 i++;
-                //attention pas de gestion si nb>9
                 if(Character.isDigit(resultat.charAt(i))){
                     while(resultat.charAt(i)!=' '){
                         similarite+=resultat.charAt(i);
@@ -266,7 +260,7 @@ public class ControlRechercheComplexeTexte {
                 }
                 i--;
             }  
-            hm.put(new Fichier(titre), Double.parseDouble(similarite));                  
+            hm.put(titre, Double.parseDouble(similarite));                  
         }
     }
 }

@@ -1,6 +1,5 @@
 package controleur;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -18,7 +17,29 @@ public class ControlRechercheComplexeAudio {
         this.multimoteur=multimoteur;
     }
 
-    public Recherche recherche(Fichier f) throws IllegalArgumentException{
+    public Recherche rechercher(String requete){
+        Recherche r;
+        //en fonction de ce que contient la requete on lance differente recherche
+        //si la requete contient des espaces c'est qu'il ya d'autres paramètres que le fichier
+        if(requete.contains(" ")){
+            r = recherche(requete);
+        }
+        else{
+            r = rechercheOccurence(requete);
+        }
+
+        return r;
+    }
+
+    private Recherche recherche(String requete) throws IllegalArgumentException{
+        String nom="";
+        for(int i =0;i<requete.length();i++){
+            if(requete.charAt(i)!=' '){
+                nom+=requete.charAt(i);
+            }
+        }
+        //les chemins seront probablement à changer
+        Fichier f = new Fichier(getClass().getClassLoader().getResource("./"+nom).getFile());
         Recherche r = new Recherche(f, "Recherche de similarité avec "+f.getName(), TypeRecherche.SIMILARITE);
         //verification de la presence du fichier
         if(this.cvf.fichierPresent(f)){            
@@ -34,16 +55,11 @@ public class ControlRechercheComplexeAudio {
                     if(conversion_2.containsKey(fichier)){
                         intersection.put(new Fichier(getClass().getClassLoader().getResource("./"+fichier).getFile()),conversion.get(fichier));
                     }
-                }
-                for(String fichier : conversion_2.keySet()){
-                    if(conversion.containsKey(fichier)){
-                        intersection.put(new Fichier(getClass().getClassLoader().getResource("./"+fichier).getFile()),conversion_2.get(fichier));
-                    }
-                }                
+                }               
             }
             else{
                 for(String fichier : conversion.keySet()){
-                    intersection.put(new Fichier(getClass().getClassLoader().getResource("./"+fichier).getFile()),conversion_2.get(fichier));
+                    intersection.put(new Fichier(getClass().getClassLoader().getResource("./"+fichier).getFile()),conversion.get(fichier));
                 }
             }            
             r.setResultatsRequete(intersection);
@@ -76,23 +92,18 @@ public class ControlRechercheComplexeAudio {
                 comparaisonOccurrenceResultat(nbOccurrence, polarite, conversion, r, resultat);
                 //l'intersection
                 for(String s : conversion.keySet()){
-                    if(conversion_2.containsKey(fichier)){
-                        intersection.put(new Fichier(getClass().getClassLoader().getResource("./"+fichier).getFile()),conversion.get(fichier));
-                    }
-                }
-                for(String s : conversion_2.keySet()){
-                    if(conversion.containsKey(fichier)){
-                        intersection.put(new Fichier(getClass().getClassLoader().getResource("./"+fichier).getFile()),conversion_2.get(fichier));
+                    if(conversion_2.containsKey(s)){
+                        intersection.put(new Fichier(getClass().getClassLoader().getResource("./"+s).getFile()),conversion.get(s));
                     }
                 }
             }
             else{
                 comparaisonOccurrenceResultat(nbOccurrence, polarite, conversion,r,resultat); 
                 for(String s : conversion.keySet()){
-                    intersection.put(new Fichier(getClass().getClassLoader().getResource("./"+fichier).getFile()),conversion_2.get(fichier));
+                    intersection.put(new Fichier(getClass().getClassLoader().getResource("./"+s).getFile()),conversion.get(s));
                 }           
             }                
-            r.setResultatsRequeteTemps(intersection);
+            r.setResultatsRequeteArguments(intersection);
         }
         else{
             throw new IllegalArgumentException("Le fichier n'est pas présent à l'endroit indiqué");
@@ -114,13 +125,13 @@ public class ControlRechercheComplexeAudio {
             while(i.hasNext()){
                 mapEntry = (Map.Entry) i.next();
                 if(polarite){
-                    if((getOccurenceSansTemps(mapEntry.getValue().toString()))>nbOccurrence){
+                    if((getOccurenceSansTemps(mapEntry.getValue().toString()))<nbOccurrence){
                         hm.remove(mapEntry.getKey());
                     }
                     strPolarite=">";
                 }
                 else{
-                    if((getOccurenceSansTemps(mapEntry.getValue().toString()))<nbOccurrence){
+                    if((getOccurenceSansTemps(mapEntry.getValue().toString()))>=nbOccurrence){
                         hm.remove(mapEntry.getKey());
                     }
                     strPolarite="<";

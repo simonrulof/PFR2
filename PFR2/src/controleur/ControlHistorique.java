@@ -1,6 +1,5 @@
 package controleur;
 
-import java.util.List;
 import java.util.Map;
 
 import modele.bd.BDHistorique;

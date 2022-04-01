@@ -13,7 +13,7 @@ public class Recherche {
 	private TypeRecherche typeRecherche;
 	private HashMap<Fichier, Double> resultatsRequete = new HashMap<>();
 	//pour la rechercher avec nombre d'occurrence dans les fichiers audio, car nous avons l'occurrence et les marqueurs temps
-	private HashMap<Fichier, String> resultatsRequeteTemps = new HashMap<>();
+	private HashMap<Fichier, String> resultatsRequeteArguments = new HashMap<>();
 
 	public Recherche(Fichier f, String requete, TypeRecherche type) {
 		this.typeRecherche=type;
@@ -26,8 +26,8 @@ public class Recherche {
 		return requete;
 	}
 	
-	public HashMap<Fichier, String> getResultatsTemps() {
-		return resultatsRequeteTemps;		
+	public HashMap<Fichier, String> getResultatsRequeteArguments() {
+		return resultatsRequeteArguments;		
 	}
 
 	public HashMap<Fichier, Double> getResultats() {
@@ -46,8 +46,8 @@ public class Recherche {
 		this.resultatsRequete=resultatsRequete;
 	}
 
-	public void setResultatsRequeteTemps(HashMap<Fichier, String> resultatsRequete){
-		this.resultatsRequeteTemps=resultatsRequete;
+	public void setResultatsRequeteArguments(HashMap<Fichier, String> resultatsRequete){
+		this.resultatsRequeteArguments=resultatsRequete;
 	}
 
     public void setRequete(String r) {
