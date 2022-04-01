@@ -1,3 +1,4 @@
+package codec;
 import com.sun.jna.*;
 
 import java.awt.*;

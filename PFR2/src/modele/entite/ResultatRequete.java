@@ -1,10 +1,11 @@
+package modele.entite;
 import java.io.File;
 
-public class Recherche {
+public class ResultatRequete {
     private File nomDoc;
     private int similarite;
 
-    public Recherche(File nomDoc, int similarite){
+    public ResultatRequete(File nomDoc, int similarite){
         this.nomDoc = nomDoc;
         this.similarite = similarite;
     }

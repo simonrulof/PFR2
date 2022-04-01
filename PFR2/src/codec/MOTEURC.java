@@ -1,3 +1,4 @@
+package codec;
 import com.sun.jna.*;
 
 public interface MOTEURC extends Library {
