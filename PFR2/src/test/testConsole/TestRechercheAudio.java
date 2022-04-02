@@ -22,7 +22,7 @@ public class TestRechercheAudio {
         System.out.println("TypeFichier : " + r.getTypeFichier());
         System.out.println("Resultat basique : " + r.getResultats().toString());
         System.out.println("Resultats : " + r.getResultatsRequeteArguments().toString());
-        //System.out.println(crca.rechercheOccurence(audio,0,true));
+        
         System.out.println("Requete : " + r2.getRequete());
         System.out.println("Fichier : " + r2.getFichier());
         System.out.println("TypeFichier : " + r2.getTypeFichier());

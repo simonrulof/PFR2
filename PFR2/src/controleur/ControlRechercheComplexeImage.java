@@ -20,7 +20,7 @@ public class ControlRechercheComplexeImage {
     public Recherche rechercher(String requete){
         Recherche r;
         //si la requete contient un back slash alors elle porte sur un fichier
-        if(requete.contains("/")){
+        if(requete.contains("/")||requete.contains(".")){
             r = recherche(requete);
         }
         //sinon il sagit d'un seuil et d'une couleur
@@ -48,6 +48,9 @@ public class ControlRechercheComplexeImage {
             if(Character.isDigit(requete.charAt(i))){
                 seuil+=requete.charAt(i);
             }
+            if(requete.charAt(i)=='-'){
+                seuil = requete.charAt(i) + seuil;
+            }
         }
         return Integer.valueOf(seuil);
     }
@@ -60,7 +63,7 @@ public class ControlRechercheComplexeImage {
             }
         }
         //les chemins seront probablement à changer
-        Fichier f = new Fichier(getClass().getClassLoader().getResource("./"+nom).getFile());
+        Fichier f = new Fichier(nom);
         Recherche r = new Recherche(f, "Recherche de similarité avec "+f.getName(), TypeRecherche.SIMILARITE);
         if(this.cvf.fichierPresent(f)){
             String s = CodeCImage.rechercher(f);
@@ -73,13 +76,13 @@ public class ControlRechercheComplexeImage {
                 toHashMapStringDouble(conversion_2, res);            
                 for(String fichier : conversion.keySet()){
                     if(conversion_2.containsKey(fichier)){
-                        intersection.put(new Fichier(getClass().getClassLoader().getResource("./"+fichier).getFile()),conversion.get(fichier));
+                        intersection.put(new Fichier(fichier),conversion.get(fichier));
                     }
                 }
             }
             else{
                 for(String fichier : conversion.keySet()){
-                    intersection.put(new Fichier(getClass().getClassLoader().getResource("./"+fichier).getFile()),conversion.get(fichier));
+                    intersection.put(new Fichier(fichier),conversion.get(fichier));
                 }
             }
             r.setResultatsRequete(intersection);
@@ -90,9 +93,8 @@ public class ControlRechercheComplexeImage {
         return r;
     }
 
-    private Recherche rechercheCouleur(int seuil, Couleur c){        
-        Fichier f = new Fichier(getClass().getClassLoader().getResource("./").getFile());
-        Recherche r = new Recherche(f, "Recherche d'un seuil de couleur", TypeRecherche.SEUIL);
+    private Recherche rechercheCouleur(int seuil, Couleur c){    
+        Recherche r = new Recherche(new Fichier(".bmp"),"Recherche d'un seuil de "+c.name(), TypeRecherche.SEUIL);
         String s = CodeCImage.rechercher(seuil,c.getColonne());
         HashMap<String, Double> conversion = new HashMap<>();
         HashMap<String, Double> conversion_2 = new HashMap<>();
@@ -103,14 +105,14 @@ public class ControlRechercheComplexeImage {
             toHashMapStringDouble(conversion_2, res);          
             for(String fichier : conversion.keySet()){
                 if(conversion_2.containsKey(fichier)&&conversion.get(fichier)>=seuil){
-                    intersection.put(new Fichier(getClass().getClassLoader().getResource("./"+fichier).getFile()),conversion.get(fichier));
+                    intersection.put(new Fichier(fichier),conversion.get(fichier));
                 }
             }
         }
         else{
             for(String fichier : conversion.keySet()){
                 if(conversion.get(fichier)>=seuil){
-                    intersection.put(new Fichier(getClass().getClassLoader().getResource("./"+fichier).getFile()),conversion.get(fichier));
+                    intersection.put(new Fichier(fichier),conversion.get(fichier));
                 }
             }
         }
@@ -125,18 +127,25 @@ public class ControlRechercheComplexeImage {
             //on recupère le titre du fichier texte retourné
             /*En supposant ici que le retour de la fonction c est de type
             nomDuFichier similarite */
-            titre += resultat.charAt(i);
-            if(resultat.charAt(i)==' '){
+            while(resultat.charAt(i)!=' '){
+                titre += resultat.charAt(i);
                 i++;
-                if(Character.isDigit(resultat.charAt(i))){
-                    while(resultat.charAt(i)!=' '){
-                        similarite+=resultat.charAt(i);
+            }            
+            i++;
+            if(Character.isDigit(resultat.charAt(i))){
+                while(resultat.charAt(i)!=' '){
+                    similarite+=resultat.charAt(i);
+                    if(resultat.length()==i+1){ 
+                        break;
+                    }
+                    else{
                         i++;
-                    }                   
-                }
-                i--;
-            }  
-            hm.put(titre, Double.parseDouble(similarite));                  
+                    }                    
+                }                   
+            }      
+            hm.put(titre, Double.parseDouble(similarite));
+            titre="";
+            similarite="";                  
         }
     }
 }
