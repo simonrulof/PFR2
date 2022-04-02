@@ -76,11 +76,6 @@ public class ControlRechercheComplexeImage {
                         intersection.put(new Fichier(getClass().getClassLoader().getResource("./"+fichier).getFile()),conversion.get(fichier));
                     }
                 }
-                for(String fichier : conversion_2.keySet()){
-                    if(conversion.containsKey(fichier)){
-                        intersection.put(new Fichier(getClass().getClassLoader().getResource("./"+fichier).getFile()),conversion_2.get(fichier));
-                    }
-                }
             }
             else{
                 for(String fichier : conversion.keySet()){
@@ -109,11 +104,6 @@ public class ControlRechercheComplexeImage {
             for(String fichier : conversion.keySet()){
                 if(conversion_2.containsKey(fichier)&&conversion.get(fichier)>=seuil){
                     intersection.put(new Fichier(getClass().getClassLoader().getResource("./"+fichier).getFile()),conversion.get(fichier));
-                }
-            }
-            for(String fichier : conversion_2.keySet()){
-                if(conversion.containsKey(fichier)&&conversion_2.get(fichier)>=seuil){
-                    intersection.put(new Fichier(getClass().getClassLoader().getResource("./"+fichier).getFile()),conversion_2.get(fichier));
                 }
             }
         }

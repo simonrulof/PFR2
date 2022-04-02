@@ -128,7 +128,7 @@ public class ControlRechercheComplexeAudio {
                     if((getOccurenceSansTemps(mapEntry.getValue().toString()))<nbOccurrence){
                         hm.remove(mapEntry.getKey());
                     }
-                    strPolarite=">";
+                    strPolarite=">=";
                 }
                 else{
                     if((getOccurenceSansTemps(mapEntry.getValue().toString()))>=nbOccurrence){
