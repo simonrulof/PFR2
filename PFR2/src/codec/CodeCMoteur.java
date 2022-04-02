@@ -13,7 +13,7 @@ public abstract class CodeCMoteur {
     }
     
     public static String rechercher(Fichier f) {
-        return "rechercher("+f.getAbsolutePath()+")";
+        return "fichier1.txt 26.2 fichier.wav 2.2 fichier.bin 100";
     }
 
     public static boolean indexer(Fichier f) {

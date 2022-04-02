@@ -21,7 +21,7 @@ public class ControlRechercheComplexeAudio {
         Recherche r;
         //en fonction de ce que contient la requete on lance differente recherche
         //si la requete contient des espaces c'est qu'il ya d'autres paramètres que le fichier
-        if(requete.contains(" ")){
+        if(!requete.contains(" ")){
             r = recherche(requete);
         }
         else{
@@ -39,7 +39,7 @@ public class ControlRechercheComplexeAudio {
             }
         }
         //les chemins seront probablement à changer
-        Fichier f = new Fichier(getClass().getClassLoader().getResource("./"+nom).getFile());
+        Fichier f = new Fichier(nom);
         Recherche r = new Recherche(f, "Recherche de similarité avec "+f.getName(), TypeRecherche.SIMILARITE);
         //verification de la presence du fichier
         if(this.cvf.fichierPresent(f)){            
@@ -53,7 +53,7 @@ public class ControlRechercheComplexeAudio {
                 toHashMapStringDouble(conversion_2, res);            
                 for(String fichier : conversion.keySet()){
                     if(conversion_2.containsKey(fichier)){
-                        intersection.put(new Fichier(getClass().getClassLoader().getResource("./"+fichier).getFile()),conversion.get(fichier));
+                        intersection.put(new Fichier(fichier),conversion.get(fichier));
                     }
                 }               
             }
@@ -73,11 +73,20 @@ public class ControlRechercheComplexeAudio {
     public Recherche rechercheOccurence(String requete) throws IllegalArgumentException{
         String fichier="";
         for(int i =0;i<requete.length();i++){
-            if(requete.charAt(i)!=' '){
-                fichier+=requete.charAt(i);
+            if(Character.isAlphabetic(requete.charAt(i))){
+                while(requete.charAt(i)!=' '){   
+                    fichier+=requete.charAt(i);
+                    if(i+1==requete.length()){
+                        break;
+                    }
+                    else{
+                        i++;
+                    }                    
+                }
             }
         }
-        Fichier f = new Fichier(getClass().getClassLoader().getResource("./"+fichier).getFile());
+        System.out.println("Fichier : "+fichier);
+        Fichier f = new Fichier(fichier);
         String resultat = CodeCAudio.rechercheOccurrence(f);
         int nbOccurrence = getOccurence(requete);
         boolean polarite = getPolarite(requete);
@@ -93,14 +102,14 @@ public class ControlRechercheComplexeAudio {
                 //l'intersection
                 for(String s : conversion.keySet()){
                     if(conversion_2.containsKey(s)){
-                        intersection.put(new Fichier(getClass().getClassLoader().getResource("./"+s).getFile()),conversion.get(s));
+                        intersection.put(new Fichier(s),conversion.get(s));
                     }
                 }
             }
             else{
                 comparaisonOccurrenceResultat(nbOccurrence, polarite, conversion,r,resultat); 
                 for(String s : conversion.keySet()){
-                    intersection.put(new Fichier(getClass().getClassLoader().getResource("./"+s).getFile()),conversion.get(s));
+                    intersection.put(new Fichier(s),conversion.get(s));
                 }           
             }                
             r.setResultatsRequeteArguments(intersection);
@@ -113,6 +122,7 @@ public class ControlRechercheComplexeAudio {
 
     private void comparaisonOccurrenceResultat(int nbOccurrence, boolean polarite, HashMap<String, String> hm, Recherche r, String resultat){
         String strPolarite="";
+        HashMap<String, String> res = new HashMap<>();
         if(nbOccurrence<0 || nbOccurrence==0 && polarite==false){
             throw new IllegalArgumentException("Le nombre d'occurrence ne convient pas");
         }
@@ -125,19 +135,21 @@ public class ControlRechercheComplexeAudio {
             while(i.hasNext()){
                 mapEntry = (Map.Entry) i.next();
                 if(polarite){
-                    if((getOccurenceSansTemps(mapEntry.getValue().toString()))<nbOccurrence){
-                        hm.remove(mapEntry.getKey());
+                    if((getOccurenceSansTemps(mapEntry.getValue().toString()))>=nbOccurrence){
+                        res.put(mapEntry.getKey().toString(),mapEntry.getValue().toString());
                     }
                     strPolarite=">=";
                 }
                 else{
-                    if((getOccurenceSansTemps(mapEntry.getValue().toString()))>=nbOccurrence){
-                        hm.remove(mapEntry.getKey());
+                    if((getOccurenceSansTemps(mapEntry.getValue().toString()))<nbOccurrence){
+                        res.put(mapEntry.getKey().toString(),mapEntry.getValue().toString());
                     }
                     strPolarite="<";
                 }                    
             }
         }
+        hm.clear();
+        hm.putAll(res);
         r.setRequete("recherche du fichier "+r.getFichier().getName()+" avec "+strPolarite+nbOccurrence+" occurrences");
     }
 
@@ -180,24 +192,32 @@ public class ControlRechercheComplexeAudio {
         String titre = "";
         String occurrence="";
         for(int i=0; i<resultat.length(); i++){
-            if(resultat.charAt(i)==' '){
-                //on recupère le titre du fichier texte retourné
-                /*En supposant ici que le retour de la fonction c est de type
-                nomDuFichier nbOccurrence marqueurTemps\n */
-                titre = "";
+            //on recupère le titre du fichier texte retourné
+            /*En supposant ici que le retour de la fonction c est de type
+            nomDuFichier nbOccurrence marqueurTemps\n */
+            if(i>=1){
+                i--;
+            }
+            if(Character.isAlphabetic(resultat.charAt(i))){
                 while(resultat.charAt(i)!=' '){
                     titre += resultat.charAt(i);
                     i++;
-                }
-                i++;
-                if(Character.isDigit(resultat.charAt(i))){
-                    while(!Character.isAlphabetic(resultat.charAt(i))){
-                        occurrence += resultat.charAt(i);
+                }               
+            }     
+            if(resultat.charAt(i)==' '){
+                while(!Character.isAlphabetic(resultat.charAt(i))){
+                    occurrence += resultat.charAt(i);
+                    if(i+1==resultat.length()){
+                        break;
+                    }
+                    else{
                         i++;
-                    }                        
-                }                
-                hm.put(titre, occurrence);
-            }
+                    }
+                }                        
+            } 
+            hm.put(titre, occurrence.substring(1));             
+            occurrence="";
+            titre = "";
         }
     }
 
@@ -208,19 +228,25 @@ public class ControlRechercheComplexeAudio {
             //on recupère le titre du fichier texte retourné
             /*En supposant ici que le retour de la fonction c est de type
             nomDuFichier similarite */
-            titre += resultat.charAt(i);
-            if(resultat.charAt(i)==' '){
+            while(resultat.charAt(i)!=' '){
+                titre += resultat.charAt(i);
                 i++;
-                //attention pas de gestion si nb>9
-                if(Character.isDigit(resultat.charAt(i))){
-                    while(resultat.charAt(i)!=' '){
-                        similarite+=resultat.charAt(i);
+            }            
+            i++;
+            if(Character.isDigit(resultat.charAt(i))){
+                while(resultat.charAt(i)!=' '){
+                    similarite+=resultat.charAt(i);
+                    if(resultat.length()==i+1){ 
+                        break;
+                    }
+                    else{
                         i++;
-                    }                   
-                }
-                i--;
-            }  
-            hm.put(titre, Double.parseDouble(similarite));                  
+                    }                    
+                }                   
+            }      
+            hm.put(titre, Double.parseDouble(similarite));
+            titre="";
+            similarite="";                  
         }
     }
 }

@@ -60,4 +60,9 @@ public class Fichier extends File{
             throw new IllegalArgumentException("Le type du fichier ne correspond à rien de reconnu par le moteur");
         }
     }
+
+    public static String getFile(String fichier) {
+        //https://mkyong.com/java/search-directories-recursively-for-file-in-java/
+        return null;
+    }
 }
