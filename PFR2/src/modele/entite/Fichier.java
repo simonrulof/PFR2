@@ -46,8 +46,8 @@ public class Fichier extends File{
     }
 
     public void setType() throws IllegalArgumentException{
-        //techniquement on est pas sensé considérer les fichiers .txt comme audio mais vu que dans notre moteur on le fait
-        if(this.getExtension().contains(".bin")||this.getExtension().contains(".wav")||this.getExtension().contains(".txt")){
+        
+        if(this.getExtension().contains(".bin")||this.getExtension().contains(".wav")){
             this.type = TypeFichier.AUDIO;
         }
         else if(this.getExtension().contains(".jpg")||this.getExtension().contains(".bmp")){

@@ -18,8 +18,8 @@ public class ControlRechercheComplexeTexte {
         this.multimoteur=multimoteur;
     }
 
-    public Recherche recherche(String requete){
-        if(requete.contains("/")){
+    public Recherche rechercher(String requete){
+        if(requete.contains("/")||requete.contains(".")){
             return rechercheExemple(requete);
         }
         else{
@@ -29,13 +29,14 @@ public class ControlRechercheComplexeTexte {
 
     private Recherche rechercheMotCle(String requete) throws IllegalArgumentException{   
         HashMap<String,String> hm = traitementRequete(requete);
+        System.out.println(hm.toString());
         HashMap<String,String> res = new HashMap<>();
         HashMap<String,String> res_2 = new HashMap<>();
         HashMap<Fichier,String> resultat = new HashMap<>();
         HashMap<String, Integer> conversion = new HashMap<>();
         HashMap<String, Integer> conversion_2 = new HashMap<>();
         HashMap<String, Integer> intersection = new HashMap<>();
-        Recherche r = new Recherche(null, requete, TypeRecherche.MOTCLES);
+        Recherche r = new Recherche(new Fichier(".txt"), requete, TypeRecherche.MOTCLES);
         for(String s : hm.keySet()){
             if(!s.matches("[a-zA-Z]+")){
                 //contient caractères spéciaux
@@ -47,14 +48,19 @@ public class ControlRechercheComplexeTexte {
             rechercheMotCleComparaison(hm,conversion,conversion_2,intersection,res_2);
             for(String fichier : res.keySet()){
                 if(res_2.containsKey(fichier)){
-                    resultat.put(new Fichier(getClass().getClassLoader().getResource("./"+fichier).getFile()),conversion.get(fichier).toString());
+                    if(conversion.get(fichier)==null){
+                        resultat.put(new Fichier(fichier),"");
+                    }
+                    else{
+                        resultat.put(new Fichier(fichier),conversion.get(fichier).toString());
+                    }
                 }
             }
         }
         else{
             rechercheMotCleComparaison(hm,conversion,conversion_2,intersection,res);
             for(String fichier : res.keySet()){
-                resultat.put(new Fichier(getClass().getClassLoader().getResource("./"+fichier).getFile()),conversion.get(fichier).toString());
+                resultat.put(new Fichier(fichier),conversion.get(fichier).toString());
             }
         }             
         r.setResultatsRequeteArguments(resultat);
@@ -89,21 +95,36 @@ public class ControlRechercheComplexeTexte {
         String motCle="";
         String occuranceETpolarite="";
         for(int i=0; i<requete.length(); i++){
-            if((requete.charAt(i) >= 'a' && requete.charAt(i) <= 'z') || (requete.charAt(i) >= 'A' && requete.charAt(i) <= 'Z')){
+            if(Character.isAlphabetic(requete.charAt(i))){
                 while(requete.charAt(i)!=' '){
                     motCle+=requete.charAt(i);
-                    i++;
+                    if(i+1==requete.length()){
+                        break;
+                    }
+                    else{
+                        i++;
+                    }
                 }
                 occuranceETpolarite="+";
             }
             else{
-                while(!((requete.charAt(i) >= 'a' && requete.charAt(i) <= 'z') || (requete.charAt(i) >= 'A' && requete.charAt(i) <= 'Z'))){
+                while(!Character.isAlphabetic(requete.charAt(i))){
                     occuranceETpolarite+=requete.charAt(i);
-                    i++;
+                    if(i+1==requete.length()){
+                        break;
+                    }
+                    else{
+                        i++;
+                    }
                 }
                 while(requete.charAt(i)!=' '){
                     motCle+=requete.charAt(i);
-                    i++;
+                    if(i+1==requete.length()){
+                        break;
+                    }
+                    else{
+                        i++;
+                    }                    
                 }
             }
             retour.put(motCle, occuranceETpolarite);
@@ -287,7 +308,7 @@ public class ControlRechercheComplexeTexte {
     }
 
     public Recherche rechercheExemple(String nom) throws IllegalArgumentException{
-        Fichier f = new Fichier(getClass().getClassLoader().getResource("./"+nom).getFile());
+        Fichier f = new Fichier(nom);
         Recherche r = new Recherche(f, "Recherche de similarité avec "+f.getName(), TypeRecherche.SIMILARITE);
         //verification de la presence du fichier
         if(this.cvf.fichierPresent(f)){            
@@ -301,13 +322,13 @@ public class ControlRechercheComplexeTexte {
                 toHashMapSimilarite(conversion_2, res);            
                 for(String fichier : conversion.keySet()){
                     if(conversion_2.containsKey(fichier)){
-                        intersection.put(new Fichier(getClass().getClassLoader().getResource("./"+fichier).getFile()),conversion.get(fichier));
+                        intersection.put(new Fichier(fichier),conversion.get(fichier));
                     }
                 }               
             }
             else{
                 for(String fichier : conversion.keySet()){
-                    intersection.put(new Fichier(getClass().getClassLoader().getResource("./"+fichier).getFile()),conversion.get(fichier));
+                    intersection.put(new Fichier(fichier),conversion.get(fichier));
                 }
             }            
             r.setResultatsRequete(intersection);
@@ -325,17 +346,39 @@ public class ControlRechercheComplexeTexte {
             //on recupère le titre du fichier texte retourné
             /*En supposant ici que le retour de la fonction c est de type
             nomDuFichier nbOccurrence */
-            titre += resultat.charAt(i);
-            if(resultat.charAt(i)==' '){
-                //attention pas de gestion si nb>9
-                while(Character.isDigit(resultat.charAt(i+1))){
-                    occurrence+=resultat.charAt(i+1);
+            while(resultat.charAt(i)!=' '){
+                titre += resultat.charAt(i);
+                System.out.println("titre : "+titre); 
+                if(resultat.length()==i+1){ 
+                    break;
+                }
+                else{
                     i++;
+                    System.out.println("index : "+i); 
                 }
             }
+            if(i+1==resultat.length()){break;} 
+            else{i++;}  
+            System.out.println("index : "+i); 
+            if(Character.isDigit(resultat.charAt(i))){
+                while(resultat.charAt(i)!=' '){
+                    occurrence+=resultat.charAt(i);
+                    System.out.println("occurrence : "+occurrence); 
+                    if(resultat.length()==i+1){ 
+                        break;
+                    }
+                    else{
+                        i++;
+                        System.out.println("index : "+i); 
+                    }                    
+                }                   
+            } 
+            if(occurrence.isEmpty()){
+                occurrence="-1";
+            }      
             hm.put(titre, Integer.valueOf(occurrence));
-            occurrence="";
-            titre="";                    
+            titre="";
+            occurrence="";                    
         }
     }
 
@@ -346,18 +389,25 @@ public class ControlRechercheComplexeTexte {
             //on recupère le titre du fichier texte retourné
             /*En supposant ici que le retour de la fonction c est de type
             nomDuFichier similarite */
-            titre += resultat.charAt(i);
-            if(resultat.charAt(i)==' '){
+            while(resultat.charAt(i)!=' '){
+                titre += resultat.charAt(i);
                 i++;
-                if(Character.isDigit(resultat.charAt(i))){
-                    while(resultat.charAt(i)!=' '){
-                        similarite+=resultat.charAt(i);
+            }            
+            i++;
+            if(Character.isDigit(resultat.charAt(i))){
+                while(resultat.charAt(i)!=' '){
+                    similarite+=resultat.charAt(i);
+                    if(resultat.length()==i+1){ 
+                        break;
+                    }
+                    else{
                         i++;
-                    }                   
-                }
-                i--;
-            }  
-            hm.put(titre, Double.parseDouble(similarite));                  
+                    }                    
+                }                   
+            }      
+            hm.put(titre, Double.parseDouble(similarite));
+            titre="";
+            similarite="";                  
         }
     }
 }
