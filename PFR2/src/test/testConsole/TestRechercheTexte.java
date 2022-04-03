@@ -11,8 +11,8 @@ public class TestRechercheTexte {
         ControlRechercheComplexeTexte crct = new ControlRechercheComplexeTexte(cvf, true);
         String fichier = "test.txt";
         String requete = "+ Football - mortel";
-        String requete2 = "+ Football -2 mortel";
-        String requete3 = "+ Football - mortel + machine";
+        String requete2 = "+ Football 4 mortel";
+        String requete3 = "- Football - mortel - machine";
 
 		// Verification de la bonne realisation du cas
 		System.out.println("VERIFICATION"); 
