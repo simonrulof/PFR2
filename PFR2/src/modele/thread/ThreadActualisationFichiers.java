@@ -2,8 +2,11 @@ package modele.thread;
 
 import java.io.File;
 import java.util.Calendar;
+import java.util.List;
 
+import codec.CodeCMoteur;
 import controleur.ControlAdministrateur;
+import controleur.ControlRechercheFile;
 import modele.entite.Fichier;
 
 public class ThreadActualisationFichiers extends Thread{
@@ -11,11 +14,17 @@ public class ThreadActualisationFichiers extends Thread{
     private Calendar temps;
     private String dossierCourant;
     private ControlAdministrateur ca;
+    private ControlRechercheFile crf;
+    private List<String> fichiers;
 
     public ThreadActualisationFichiers(ControlAdministrateur ca){
         this.temps = Calendar.getInstance();
         this.ca = ca;        
         this.dossierCourant = System.getProperty("user.dir");
+        this.crf = new ControlRechercheFile();
+        this.crf.searchDirectory(new File(this.dossierCourant));
+        this.fichiers.addAll(this.crf.getResult());
+        this.crf.clearResult();
     }
 
     public void arret(){
@@ -36,26 +45,13 @@ public class ThreadActualisationFichiers extends Thread{
             if(tempsCourant.after(temps)){
                 this.temps=tempsCourant;
                 //verification dossier courant
-                File dossier = new File(this.dossierCourant);
-                this.parcoursFichiers(dossier);                
-            }
-        }
-    }
-
-    private void parcoursFichiers(File dossier){
-        String f = null;
-        for (int i = 0; i < dossier.listFiles().length; i++){
-            if (dossier.listFiles()[i].isFile()){
-                //appel de la méthode en c via controleur pour ajouter les descripteurs à la base de données
-                f = dossier.listFiles()[i].getName();
-                this.ca.ajouter(new Fichier(f));
-            } 
-            else if (dossier.listFiles()[i].isDirectory()) {
-                f = dossier.listFiles()[i].getName();
-                parcoursFichiers(new File(f));
-            }
-            else{
-                //fichiers non reconnu
+                this.crf.searchDirectory(new File(this.dossierCourant));
+                for(String s : this.crf.getResult()){
+                    if(!this.fichiers.contains(s)){
+                        CodeCMoteur.indexer(new Fichier(s));
+                        this.fichiers.add(s);
+                    }
+                }
             }
         }
     }

@@ -25,7 +25,7 @@ public class Fichier extends File{
         this.setExtension();
         this.setType();
     }
-
+    
     private void setExtension(){
         int indexPoint = 0;
         for(int i=0; i<this.getName().length(); i++){
@@ -59,10 +59,5 @@ public class Fichier extends File{
         else{
             throw new IllegalArgumentException("Le type du fichier ne correspond à rien de reconnu par le moteur");
         }
-    }
-
-    public static String getFile(String fichier) {
-        //https://mkyong.com/java/search-directories-recursively-for-file-in-java/
-        return null;
     }
 }
