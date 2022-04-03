@@ -54,6 +54,8 @@ public class Recherche {
 		this.requete= r;
     }
 
-
+	public String toString(){
+		return "\n\tRequete : " + this.getRequete() + "\n\tTypeFichier : " + this.getTypeFichier() + "\n\tResultat basique : " + this.getResultats().toString() + "\n\tResultats : " + this.getResultatsRequeteArguments().toString() + "\n";
+	}
 
 }

@@ -1,5 +1,6 @@
 package controleur;
 
+import java.sql.Date;
 import java.util.Map;
 
 import modele.bd.BDHistorique;
@@ -14,6 +15,10 @@ public class ControlHistorique {
 	
 	public void ajoutRecherche(Recherche recherche) {
 		historique.ajoutRecherche(recherche);
+	}
+
+	public void ajoutRecherche(Date d) {
+		historique.ajoutRecherche(d);
 	}
 
 	public void supprimerRecherche(Recherche recherche) {

@@ -28,7 +28,13 @@ public class BDHistorique {
 	}
 
 	public void supprimerRecherche(Recherche r) {
-		historiqueRecherches.remove(r);
+		Map<String, Recherche> historique = new HashMap<String, Recherche>();
+		for(String s : historiqueRecherches.keySet()){
+			if(!(historiqueRecherches.get(s).getRequete().equals(r.getRequete()))){
+				historique.put(s, historiqueRecherches.get(s));
+			}
+		}
+		historiqueRecherches = historique;
 	}
 
 	public Map<String, Recherche> getHistoriqueRecherches() {
@@ -42,6 +48,11 @@ public class BDHistorique {
 	private String tempsToString(Date d){
 		SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
 		return formatter.format(d);
+	}
+
+	public void ajoutRecherche(java.sql.Date d) {
+		String date = tempsToString(d);
+		historiqueRecherches.remove(date);
 	}
 
 	
