@@ -29,6 +29,7 @@ public class ControlRechercheComplexeImage {
             Couleur c = getCouleur(requete);
             r = rechercheCouleur(seuil, c);
         }
+        r.setRequete(requete);
         return r;
     }
 

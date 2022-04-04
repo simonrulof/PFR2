@@ -19,12 +19,15 @@ public class ControlRechercheComplexeTexte {
     }
 
     public Recherche rechercher(String requete){
+        Recherche r;
         if(requete.contains("/")||requete.contains(".")){
-            return rechercheExemple(requete);
+            r = rechercheExemple(requete);
         }
         else{
-            return rechercheMotCle(requete);
-        }
+            r = rechercheMotCle(requete);
+        }        
+        r.setRequete(requete);
+        return r;
     }
 
     private Recherche rechercheMotCle(String requete) throws IllegalArgumentException{   

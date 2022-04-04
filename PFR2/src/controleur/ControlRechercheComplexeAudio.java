@@ -27,7 +27,7 @@ public class ControlRechercheComplexeAudio {
         else{
             r = rechercheOccurence(requete);
         }
-
+        r.setRequete(requete);
         return r;
     }
 
