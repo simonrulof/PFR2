@@ -3,7 +3,6 @@ package modele.thread;
 import java.io.File;
 import java.util.Calendar;
 import java.util.List;
-
 import codec.CodeCMoteur;
 import controleur.ControlRechercheFile;
 import modele.entite.Fichier;

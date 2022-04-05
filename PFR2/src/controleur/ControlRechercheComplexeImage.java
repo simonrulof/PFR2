@@ -2,7 +2,6 @@ package controleur;
 
 import java.io.File;
 import java.util.HashMap;
-
 import codec.CodeCImage;
 import modele.donnee.Couleur;
 import modele.donnee.TypeRecherche;
