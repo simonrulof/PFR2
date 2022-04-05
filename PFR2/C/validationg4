@@ -1,0 +1,721 @@
+Script started on 2022-01-21 15:25:58+01:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="80" LINES="21"]
+]0;simon@simojn: ~/Projet/CodeFini[01;32msimon@simojn[00m:[01;34m~/Projet/CodeFini[00m$ ./main.out[1Pmake main
+gcc -c indexationTexte.c
+gcc -c IndexImage.c
+gcc -c Audio.c
+gcc -c fonctionsAdmin.c
+gcc -c main.c
+gcc -o main.out main.o fonctionsAdmin.o indexationTexte.o IndexImage.o Audio.o -lm -fno-stack-protector
+]0;simon@simojn: ~/Projet/CodeFini[01;32msimon@simojn[00m:[01;34m~/Projet/CodeFini[00m$ make main./main.out[1Pmake main./main.out
+[H[2J[3JMENU: 
+  1.Administrateur
+  2.Utilisateur
+  3.Quitter
+Menu auquel acceder : 1
+Saisissez le mot de passe : 1234
+[H[2J[3JQue voulez vous faire ?
+	(0) Revenir en arriere
+	(1) Indexer un fichier seul
+	(2) Indexer tous les fichiers
+	(3) Modifier le fichier config
+	(4) Lire un descripteur
+	(5) Ajouter un fichier
+	(6) Supprimer un fichier
+Saisissez l'option desirée :0
+voulez vous revenir en arriere ?
+	(1) Oui
+	(2) Non
+Saisissez l'option desirée :1
+[H[2J[3JMENU: 
+  1.Administrateur
+  2.Utilisateur
+  3.Quitter
+Menu auquel acceder : 1
+Saisissez le mot de passe : 1258
+[H[2J[3JMauvais mot de passe, retentez :
+Saisissez le mot de passe : 1478
+[H[2J[3JMauvais mot de passe, retentez :
+Saisissez le mot de passe : 159
+[H[2J[3JMauvais mot de passe, retentez :
+Saisissez le mot de passe : 1475
+Mauvais mot de passe trop de fois de suite
+ENTRER POUR CONTINUER
+
+[H[2J[3JMENU: 
+  1.Administrateur
+  2.Utilisateur
+  3.Quitter
+Menu auquel acceder : 2
+[H[2J[3JLa Diggy Tech vous souhaite la bienvenue sur 
+son moteur de recherche Diggy Search
+Que souhaitez-vous rechercher?
+	(0) Revenir en arriere
+	(1) Image
+	(2) Textes
+	(3) Audio
+Saisissez l'option desirée :0
+voulez vous revenir en arriere ?
+	(1) Oui
+	(2) Non
+Saisissez l'option desirée :1
+[H[2J[3JMENU: 
+  1.Administrateur
+  2.Utilisateur
+  3.Quitter
+Menu auquel acceder : 3
+
+Fin du programme.
+]0;simon@simojn: ~/Projet/CodeFini[01;32msimon@simojn[00m:[01;34m~/Projet/CodeFini[00m$ ./main.out[1Pmake main./main.out
+[H[2J[3JMENU: 
+  1.Administrateur
+  2.Utilisateur
+  3.Quitter
+Menu auquel acceder : 2
+[H[2J[3JLa Diggy Tech vous souhaite la bienvenue sur 
+son moteur de recherche Diggy Search
+Que souhaitez-vous rechercher?
+	(0) Revenir en arriere
+	(1) Image
+	(2) Textes
+	(3) Audio
+Saisissez l'option desirée :2
+
+à partir de quoi voulez-vous rechercher dans un texte?
+	(1) Fichier texte
+	(2) Mot-clé
+Saisissez l'option desirée : 2
+nombre de mots cles : musique
+Mots Cles : 
+^[[A^[[B        ^C
+]0;simon@simojn: ~/Projet/CodeFini[01;32msimon@simojn[00m:[01;34m~/Projet/CodeFini[00m$ ./main.out
+[H[2J[3JMENU: 
+  1.Administrateur
+  2.Utilisateur
+  3.Quitter
+Menu auquel acceder : 2
+[H[2J[3JLa Diggy Tech vous souhaite la bienvenue sur 
+son moteur de recherche Diggy Search
+Que souhaitez-vous rechercher?
+	(0) Revenir en arriere
+	(1) Image
+	(2) Textes
+	(3) Audio
+Saisissez l'option desirée :2
+
+à partir de quoi voulez-vous rechercher dans un texte?
+	(1) Fichier texte
+	(2) Mot-clé
+Saisissez l'option desirée : 2
+nombre de mots cles : 1
+Mots Cles : musique
+Fin de la recherche, voulez-vous relancer une autre recherche?
+	(1) Oui
+	(2) Non
+Saisissez l'option desirée :1
+[H[2J[3JLa Diggy Tech vous souhaite la bienvenue sur 
+son moteur de recherche Diggy Search
+Que souhaitez-vous rechercher?
+	(0) Revenir en arriere
+	(1) Image
+	(2) Textes
+	(3) Audio
+Saisissez l'option desirée :t 2
+
+à partir de quoi voulez-vous rechercher dans un texte?
+	(1) Fichier texte
+	(2) Mot-clé
+Saisissez l'option desirée : 2
+nombre de mots cles : 1
+Mots Cles : tsunami
+Fin de la recherche, voulez-vous relancer une autre recherche?
+	(1) Oui
+	(2) Non
+Saisissez l'option desirée :1
+[H[2J[3JLa Diggy Tech vous souhaite la bienvenue sur 
+son moteur de recherche Diggy Search
+Que souhaitez-vous rechercher?
+	(0) Revenir en arriere
+	(1) Image
+	(2) Textes
+	(3) Audio
+Saisissez l'option desirée :2
+
+à partir de quoi voulez-vous rechercher dans un texte?
+	(1) Fichier texte
+	(2) Mot-clé
+Saisissez l'option desirée : 2
+nombre de mots cles : hauss     1
+Mots Cles : hausse
+Fin de la recherche, voulez-vous relancer une autre recherche?
+	(1) Oui
+	(2) Non
+Saisissez l'option desirée :1
+[H[2J[3JLa Diggy Tech vous souhaite la bienvenue sur 
+son moteur de recherche Diggy Search
+Que souhaitez-vous rechercher?
+	(0) Revenir en arriere
+	(1) Image
+	(2) Textes
+	(3) Audio
+Saisissez l'option desirée :2
+
+à partir de quoi voulez-vous rechercher dans un texte?
+	(1) Fichier texte
+	(2) Mot-clé
+Saisissez l'option desirée : 2
+nombre de mots cles : 3
+Mots Cles : calotte
+frederic        Frederique
+tsunami
+Nom fichier : texte1.xml
+ Similarite : 4  
+Fin de la recherche, voulez-vous relancer une autre recherche?
+	(1) Oui
+	(2) Non
+Saisissez l'option desirée :1
+[H[2J[3JLa Diggy Tech vous souhaite la bienvenue sur 
+son moteur de recherche Diggy Search
+Que souhaitez-vous rechercher?
+	(0) Revenir en arriere
+	(1) Image
+	(2) Textes
+	(3) Audio
+Saisissez l'option desirée :2
+
+à partir de quoi voulez-vous rechercher dans un texte?
+	(1) Fichier texte
+	(2) Mot-clé
+Saisissez l'option desirée : 1
+Quel est le chemin du fichier (finir avec le nom) ? test    fichird  ersTests/texte^[[D            t. /texte2.xml
+Nom fichier : texte1.xml
+ Similarite : 54  
+Fin de la recherche, voulez-vous relancer une autre recherche?
+	(1) Oui
+	(2) Non
+Saisissez l'option desirée :2 1
+[H[2J[3JLa Diggy Tech vous souhaite la bienvenue sur 
+son moteur de recherche Diggy Search
+Que souhaitez-vous rechercher?
+	(0) Revenir en arriere
+	(1) Image
+	(2) Textes
+	(3) Audio
+Saisissez l'option desirée :1
+Saisissez le chemin du fichier à comparer : fichiersTest/01.txt
+fichiersTest/ 01.txt Descripteurs/descripteurImage.txt
+[H[2J[3JFin de la recherche, voulez-vous relancer une autre recherche?
+	(1) Oui
+	(2) Non
+Saisissez l'option desirée :1
+[H[2J[3JLa Diggy Tech vous souhaite la bienvenue sur 
+son moteur de recherche Diggy Search
+Que souhaitez-vous rechercher?
+	(0) Revenir en arriere
+	(1) Image
+	(2) Textes
+	(3) Audio
+Saisissez l'option desirée :1
+Saisissez le chemin du fichier à comparer : fichiersTest/02.txt
+fichiersTest/ 02.txt Descripteurs/descripteurImage.txt
+[H[2J[3JFin de la recherche, voulez-vous relancer une autre recherche?
+	(1) Oui
+	(2) Non
+Saisissez l'option desirée :2
+voulez vous revenir en arriere ?
+	(1) Oui
+	(2) Non
+Saisissez l'option desirée :1
+[H[2J[3JMENU: 
+  1.Administrateur
+  2.Utilisateur
+  3.Quitter
+Menu auquel acceder : 2
+[H[2J[3JLa Diggy Tech vous souhaite la bienvenue sur 
+son moteur de recherche Diggy Search
+Que souhaitez-vous rechercher?
+	(0) Revenir en arriere
+	(1) Image
+	(2) Textes
+	(3) Audio
+Saisissez l'option desirée :3
+Quel est le nom du fichier ? fichiersTest/ci orpus_fi.bin
+Nom fichier : corpus_fi.bin Similarite : 75140  
+
+(totem:4322): Gtk-[1;33mWARNING[0m **: [34m15:45:01.544[0m: Drawing a gadget with negative dimensions. Did you forget to allocate a size? (node slider owner GtkScale)
+Fin de la recherche, voulez-vous relancer une autre recherche?
+	(1) Oui
+	(2) Non
+Saisissez l'option desirée :2
+voulez vous revenir en arriere ?
+	(1) Oui
+	(2) Non
+Saisissez l'option desirée :1
+[H[2J[3JMENU: 
+  1.Administrateur
+  2.Utilisateur
+  3.Quitter
+Menu auquel acceder : 2
+[H[2J[3JLa Diggy Tech vous souhaite la bienvenue sur 
+son moteur de recherche Diggy Search
+Que souhaitez-vous rechercher?
+	(0) Revenir en arriere
+	(1) Image
+	(2) Textes
+	(3) Audio
+Saisissez l'option desirée :0
+voulez vous revenir en arriere ?
+	(1) Oui
+	(2) Non
+Saisissez l'option desirée :1
+[H[2J[3JMENU: 
+  1.Administrateur
+  2.Utilisateur
+  3.Quitter
+Menu auquel acceder : 1
+Saisissez le mot de passe : 1234
+[H[2J[3JQue voulez vous faire ?
+	(0) Revenir en arriere
+	(1) Indexer un fichier seul
+	(2) Indexer tous les fichiers
+	(3) Modifier le fichier config
+	(4) Lire un descripteur
+	(5) Ajouter un fichier
+	(6) Supprimer un fichier
+Saisissez l'option desirée :4
+Quel descripteur voulez vous visualiser ?
+	(0) revenir en arriere
+	(1) Texte
+	(2) Image
+	(3) Son
+Saisissez l'option desirée :1
+[H[2J[3Jtexte1.xml
+plus 8
+superficie 7
+Arctique 7
+dernieres 5
+septembre 5
+glace 5
+NSIDC 4
+calotte 4
+effectuees 4
+ete 4
+APPUYEZ SUR ENTRER POUR CONTINUER
+
+[H[2J[3Jtexte3.xml
+Francis 7
+Delattre 6
+sports 5
+ministere 5
+FFE 5
+Serge 5
+Lecomte 5
+federation 4
+annonce 4
+depute 4
+APPUYEZ SUR ENTRER POUR CONTINUER
+
+[H[2J[3Jtexte4.xml
+comportement 4
+hote 4
+pousser 3
+parasite 3
+suicide 3
+nematomorphes 3
+Frederic 3
+proteines 3
+explique 2
+devore 2
+APPUYEZ SUR ENTRER POUR CONTINUER
+
+[H[2J[3JVoulez-vous faire une autre demande ?
+	(1) Oui
+	(2) Non
+Saisissez l'option desirée :1
+[H[2J[3JQue voulez vous faire ?
+	(0) Revenir en arriere
+	(1) Indexer un fichier seul
+	(2) Indexer tous les fichiers
+	(3) Modifier le fichier config
+	(4) Lire un descripteur
+	(5) Ajouter un fichier
+	(6) Supprimer un fichier
+Saisissez l'option desirée :1
+quel type de fichier ?
+	(0) revenir en arriere
+	(1) Texte
+	(2) Image
+	(3) Son
+Saisissez l'option desirée :1
+Quel est le nom du fichier ? texte1.xml
+Voulez-vous faire une autre demande ?
+	(1) Oui
+	(2) Non
+Saisissez l'option desirée :1
+[H[2J[3JQue voulez vous faire ?
+	(0) Revenir en arriere
+	(1) Indexer un fichier seul
+	(2) Indexer tous les fichiers
+	(3) Modifier le fichier config
+	(4) Lire un descripteur
+	(5) Ajouter un fichier
+	(6) Supprimer un fichier
+Saisissez l'option desirée :4
+Quel descripteur voulez vous visualiser ?
+	(0) revenir en arriere
+	(1) Texte
+	(2) Image
+	(3) Son
+Saisissez l'option desirée :1
+[H[2J[3Jtexte3.xml
+Francis 7
+Delattre 6
+sports 5
+ministere 5
+FFE 5
+Serge 5
+Lecomte 5
+federation 4
+annonce 4
+depute 4
+APPUYEZ SUR ENTRER POUR CONTINUER
+
+[H[2J[3Jtexte4.xml
+comportement 4
+hote 4
+pousser 3
+parasite 3
+suicide 3
+nematomorphes 3
+Frederic 3
+proteines 3
+explique 2
+devore 2
+APPUYEZ SUR ENTRER POUR CONTINUER
+
+[H[2J[3Jtexte1.xml
+plus 8
+superficie 7
+Arctique 7
+dernieres 5
+septembre 5
+glace 5
+NSIDC 4
+calotte 4
+effectuees 4
+ete 4
+APPUYEZ SUR ENTRER POUR CONTINUER
+
+[H[2J[3JVoulez-vous faire une autre demande ?
+	(1) Oui
+	(2) Non
+Saisissez l'option desirée :1
+[H[2J[3JQue voulez vous faire ?
+	(0) Revenir en arriere
+	(1) Indexer un fichier seul
+	(2) Indexer tous les fichiers
+	(3) Modifier le fichier config
+	(4) Lire un descripteur
+	(5) Ajouter un fichier
+	(6) Supprimer un fichier
+Saisissez l'option desirée :1 3
+[H[2J[3JQue voulez vous changer dans le fichier config ?
+	(0) Revenir en arriere
+	(1) Mot de passe
+	(2) Noms des dossier contenant les fichiers
+	(3) Noms du dossier contenant les descripteurs
+	(4) Noms des descripteurs
+	(5) Nombre de mots clés (indexation Texte)
+	(6) Nombre de bits de quantification (indexation Image)
+	(7) Nombre de partition (indexation Audio)
+	(8) Nombre d'echantillonage (indexation Audio)
+Que voulez-vous modifier ?5
+quel est le nouveau nombre de mots clés ? 15
+Voulez-vous faire une autre demande ?
+	(1) Oui
+	(2) Non
+Saisissez l'option desirée :1
+[H[2J[3JQue voulez vous changer dans le fichier config ?
+	(0) Revenir en arriere
+	(1) Mot de passe
+	(2) Noms des dossier contenant les fichiers
+	(3) Noms du dossier contenant les descripteurs
+	(4) Noms des descripteurs
+	(5) Nombre de mots clés (indexation Texte)
+	(6) Nombre de bits de quantification (indexation Image)
+	(7) Nombre de partition (indexation Audio)
+	(8) Nombre d'echantillonage (indexation Audio)
+Que voulez-vous modifier ?0
+Voulez-vous faire une autre demande ?
+	(1) Oui
+	(2) Non
+Saisissez l'option desirée :1
+[H[2J[3JQue voulez vous changer dans le fichier config ?
+	(0) Revenir en arriere
+	(1) Mot de passe
+	(2) Noms des dossier contenant les fichiers
+	(3) Noms du dossier contenant les descripteurs
+	(4) Noms des descripteurs
+	(5) Nombre de mots clés (indexation Texte)
+	(6) Nombre de bits de quantification (indexation Image)
+	(7) Nombre de partition (indexation Audio)
+	(8) Nombre d'echantillonage (indexation Audio)
+Que voulez-vous modifier ?0
+Voulez-vous faire une autre demande ?
+	(1) Oui
+	(2) Non
+Saisissez l'option desirée :2
+Voulez-vous faire une autre demande ?
+	(1) Oui
+	(2) Non
+Saisissez l'option desirée :1
+[H[2J[3JQue voulez vous faire ?
+	(0) Revenir en arriere
+	(1) Indexer un fichier seul
+	(2) Indexer tous les fichiers
+	(3) Modifier le fichier config
+	(4) Lire un descripteur
+	(5) Ajouter un fichier
+	(6) Supprimer un fichier
+Saisissez l'option desirée :1
+quel type de fichier ?
+	(0) revenir en arriere
+	(1) Texte
+	(2) Image
+	(3) Son
+Saisissez l'option desirée :1
+Quel est le nom du fichier ? texte1.xml
+Voulez-vous faire une autre demande ?
+	(1) Oui
+	(2) Non
+Saisissez l'option desirée :1
+[H[2J[3JQue voulez vous faire ?
+	(0) Revenir en arriere
+	(1) Indexer un fichier seul
+	(2) Indexer tous les fichiers
+	(3) Modifier le fichier config
+	(4) Lire un descripteur
+	(5) Ajouter un fichier
+	(6) Supprimer un fichier
+Saisissez l'option desirée :4
+Quel descripteur voulez vous visualiser ?
+	(0) revenir en arriere
+	(1) Texte
+	(2) Image
+	(3) Son
+Saisissez l'option desirée :1
+[H[2J[3Jtexte3.xml
+Francis 7
+Delattre 6
+sports 5
+ministere 5
+FFE 5
+Serge 5
+Lecomte 5
+federation 4
+annonce 4
+depute 4
+APPUYEZ SUR ENTRER POUR CONTINUER
+
+[H[2J[3Jtexte4.xml
+comportement 4
+hote 4
+pousser 3
+parasite 3
+suicide 3
+nematomorphes 3
+Frederic 3
+proteines 3
+explique 2
+devore 2
+APPUYEZ SUR ENTRER POUR CONTINUER
+
+[H[2J[3Jtexte1.xml
+plus 8
+superficie 7
+Arctique 7
+dernieres 5
+septembre 5
+glace 5
+NSIDC 4
+calotte 4
+effectuees 4
+ete 4
+etait 4
+faible 4
+glaces 3
+arctique 3
+phenomene 3
+APPUYEZ SUR ENTRER POUR CONTINUER
+
+[H[2J[3JVoulez-vous faire une autre demande ?
+	(1) Oui
+	(2) Non
+Saisissez l'option desirée :1
+[H[2J[3JQue voulez vous faire ?
+	(0) Revenir en arriere
+	(1) Indexer un fichier seul
+	(2) Indexer tous les fichiers
+	(3) Modifier le fichier config
+	(4) Lire un descripteur
+	(5) Ajouter un fichier
+	(6) Supprimer un fichier
+Saisissez l'option desirée :0
+voulez vous revenir en arriere ?
+	(1) Oui
+	(2) Non
+Saisissez l'option desirée :1
+[H[2J[3JMENU: 
+  1.Administrateur
+  2.Utilisateur
+  3.Quitter
+Menu auquel acceder : 2
+[H[2J[3JLa Diggy Tech vous souhaite la bienvenue sur 
+son moteur de recherche Diggy Search
+Que souhaitez-vous rechercher?
+	(0) Revenir en arriere
+	(1) Image
+	(2) Textes
+	(3) Audio
+Saisissez l'option desirée :1 2
+
+à partir de quoi voulez-vous rechercher dans un texte?
+	(1) Fichier texte
+	(2) Mot-clé
+Saisissez l'option desirée : 1
+Quel est le chemin du fichier (finir avec le nom) ? fier  chersTest/texet  te2.xlm  ml^[[D                      iersTest/texte4 2.xml
+Nom fichier : eptembre 5
+glace 5
+NSIDC 4
+calotte 4
+effectuees 4
+ete 4
+etait 4
+faible 4
+glaces 3
+arctique 3
+phenomene 3texte1.xml
+ Similarite : 857761134  
+Nom fichier : texte1.xml
+ Similarite : 36  
+
+
+^CFin de la recherche, voulez-vous relancer une autre recherche?
+	(1) Oui
+	(2) Non
+Saisissez l'option desirée :1
+[H[2J[3JLa Diggy Tech vous souhaite la bienvenue sur 
+son moteur de recherche Diggy Search
+Que souhaitez-vous rechercher?
+	(0) Revenir en arriere
+	(1) Image
+	(2) Textes
+	(3) Audio
+Saisissez l'option desirée :0
+voulez vous revenir en arriere ?
+	(1) Oui
+	(2) Non
+Saisissez l'option desirée :1
+[H[2J[3JMENU: 
+  1.Administrateur
+  2.Utilisateur
+  3.Quitter
+Menu auquel acceder : 1
+Saisissez le mot de passe : 1234
+[H[2J[3JQue voulez vous faire ?
+	(0) Revenir en arriere
+	(1) Indexer un fichier seul
+	(2) Indexer tous les fichiers
+	(3) Modifier le fichier config
+	(4) Lire un descripteur
+	(5) Ajouter un fichier
+	(6) Supprimer un fichier
+Saisissez l'option desirée :2
+quel type de fichier ?
+	(0) revenir en arriere
+	(1) Texte
+	(2) Image
+	(3) Son
+Saisissez l'option desirée :1
+sh: 0: Pipe call failed
+sh: 0: Pipe call failed
+rm: cannot remove 'descripteurTemp.txt': No such file or directory
+Voulez-vous faire une autre demande ?
+	(1) Oui
+	(2) Non
+Saisissez l'option desirée :1
+[H[2J[3JQue voulez vous faire ?
+	(0) Revenir en arriere
+	(1) Indexer un fichier seul
+	(2) Indexer tous les fichiers
+	(3) Modifier le fichier config
+	(4) Lire un descripteur
+	(5) Ajouter un fichier
+	(6) Supprimer un fichier
+Saisissez l'option desirée :4
+Quel descripteur voulez vous visualiser ?
+	(0) revenir en arriere
+	(1) Texte
+	(2) Image
+	(3) Son
+Saisissez l'option desirée :1
+sh: 0: Pipe call failed
+voulez vous revenir en arriere ?
+	(1) Oui
+	(2) Non
+Saisissez l'option desirée :1
+[H[2J[3JMENU: 
+  1.Administrateur
+  2.Utilisateur
+  3.Quitter
+Menu auquel acceder : 1
+Saisissez le mot de passe : 1234
+sh: 0: Pipe call failed
+[H[2J[3JQue voulez vous faire ?
+	(0) Revenir en arriere
+	(1) Indexer un fichier seul
+	(2) Indexer tous les fichiers
+	(3) Modifier le fichier config
+	(4) Lire un descripteur
+	(5) Ajouter un fichier
+	(6) Supprimer un fichier
+Saisissez l'option desirée :4
+Quel descripteur voulez vous visualiser ?
+	(0) revenir en arriere
+	(1) Texte
+	(2) Image
+	(3) Son
+Saisissez l'option desirée :1
+sh: 0: Pipe call failed
+voulez vous revenir en arriere ?
+	(1) Oui
+	(2) Non
+Saisissez l'option desirée :
+1
+[H[2J[3JMENU: 
+  1.Administrateur
+  2.Utilisateur
+  3.Quitter
+Menu auquel acceder : 2
+[H[2J[3JLa Diggy Tech vous souhaite la bienvenue sur 
+son moteur de recherche Diggy Search
+Que souhaitez-vous rechercher?
+	(0) Revenir en arriere
+	(1) Image
+	(2) Textes
+	(3) Audio
+Saisissez l'option desirée :0
+voulez vous revenir en arriere ?
+	(1) Oui
+	(2) Non
+Saisissez l'option desirée :1
+[H[2J[3JMENU: 
+  1.Administrateur
+  2.Utilisateur
+  3.Quitter
+Menu auquel acceder : 3
+
+Fin du programme.
+]0;simon@simojn: ~/Projet/CodeFini[01;32msimon@simojn[00m:[01;34m~/Projet/CodeFini[00m$ exit
+exit
+
+Script done on 2022-01-21 15:54:58+01:00 [COMMAND_EXIT_CODE="0"]
