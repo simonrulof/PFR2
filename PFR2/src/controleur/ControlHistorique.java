@@ -13,12 +13,17 @@ public class ControlHistorique {
 		return historique.getHistoriqueRecherches();
 	}
 	
-	public void ajoutRecherche(Recherche recherche) {
+	public void ajoutRecherche(Recherche recherche) {		
+		try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 		historique.ajoutRecherche(recherche);
 	}
 
-	public void ajoutRecherche(Date d) {
-		historique.ajoutRecherche(d);
+	public void supprimerRecherche(Date d) {
+		historique.supprimerRecherche(d);
 	}
 
 	public void supprimerRecherche(Recherche recherche) {

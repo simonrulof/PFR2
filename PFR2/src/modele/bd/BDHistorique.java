@@ -50,10 +50,15 @@ public class BDHistorique {
 		return formatter.format(d);
 	}
 
-	public void ajoutRecherche(java.sql.Date d) {
-		String date = tempsToString(d);
-		historiqueRecherches.remove(date);
-	}
+    public void supprimerRecherche(java.sql.Date d) {
+		Map<String, Recherche> historique = new HashMap<String, Recherche>();
+		for(String s : historiqueRecherches.keySet()){
+			if(!(s.equals(tempsToString(d)))){
+				historique.put(s, historiqueRecherches.get(s));
+			}
+		}
+		historiqueRecherches = historique;
+    }
 
 	
 }

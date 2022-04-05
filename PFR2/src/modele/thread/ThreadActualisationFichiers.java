@@ -5,7 +5,6 @@ import java.util.Calendar;
 import java.util.List;
 
 import codec.CodeCMoteur;
-import controleur.ControlAdministrateur;
 import controleur.ControlRechercheFile;
 import modele.entite.Fichier;
 
@@ -13,13 +12,12 @@ public class ThreadActualisationFichiers extends Thread{
     private boolean condition =  true;
     private Calendar temps;
     private String dossierCourant;
-    private ControlAdministrateur ca;
     private ControlRechercheFile crf;
     private List<String> fichiers;
 
-    public ThreadActualisationFichiers(ControlAdministrateur ca){
+    public ThreadActualisationFichiers(){
         this.temps = Calendar.getInstance();
-        this.ca = ca;        
+        //a modifier en fonction de ou on se situe        
         this.dossierCourant = System.getProperty("user.dir");
         this.crf = new ControlRechercheFile();
         this.crf.searchDirectory(new File(this.dossierCourant));
@@ -34,8 +32,8 @@ public class ThreadActualisationFichiers extends Thread{
     public void marche(){
         while(condition){
             try{
-                //sommeil pendant 30 secondes
-                Thread.sleep(30000);
+                //sommeil pendant 3 secondes
+                Thread.sleep(3000);
             }
             catch(InterruptedException ie){
                 ie.printStackTrace();

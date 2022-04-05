@@ -6,11 +6,11 @@ import modele.entite.Fichier;
 
 public class ControlVerificationFichiers {
    
-    public boolean fichierPresent(Fichier f) {
+    public boolean fichierPresent(Fichier f, String dossier) {
         boolean res = false;
-        File dossier = new File(System.getProperty("user.dir"));
-        for (int i = 0; i < dossier.listFiles().length; i++){
-            if (dossier.listFiles()[i].isFile()&&dossier.listFiles()[i].getName().equals(f.getName())){
+        File dossierCourant = new File(dossier);
+        for (int i = 0; i < dossierCourant.listFiles().length; i++){
+            if (dossierCourant.listFiles()[i].isFile()&&dossierCourant.listFiles()[i].getName().equals(f.getName())){
                 res=true;
                 break;
             } 

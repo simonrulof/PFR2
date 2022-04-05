@@ -66,7 +66,8 @@ public class ControlRechercheComplexeImage {
         //les chemins seront probablement à changer
         Fichier f = new Fichier(nom);
         Recherche r = new Recherche(f, "Recherche de similarité avec "+f.getName(), TypeRecherche.SIMILARITE);
-        if(this.cvf.fichierPresent(f)){
+        //definir l'emplacement des fichiers image
+        if(this.cvf.fichierPresent(f,System.getProperty("user.dir"))){
             String s = CodeCImage.rechercher(f);
             HashMap<String, Double> conversion = new HashMap<>();
             HashMap<String, Double> conversion_2 = new HashMap<>();

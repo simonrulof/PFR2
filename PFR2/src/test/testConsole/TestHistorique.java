@@ -22,27 +22,11 @@ public class TestHistorique {
 		Recherche r2 = crct.rechercher(requete2);
         
         ch.ajoutRecherche(r);
-        try {
-            Thread.sleep(10000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         ch.ajoutRecherche(r2);
-
         System.out.println("Historique: "+ch.consulterHistorique());
-
-        ch.supprimerRecherche(r);
-        
+        ch.supprimerRecherche(r);        
         System.out.println("Historique: "+ch.consulterHistorique());
-
-        try {
-            Thread.sleep(10000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
         ch.ajoutRecherche(r2);
-
         System.out.println("Historique: "+ch.consulterHistorique());
 	}
 }

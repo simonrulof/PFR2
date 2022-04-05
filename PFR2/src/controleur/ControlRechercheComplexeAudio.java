@@ -42,7 +42,8 @@ public class ControlRechercheComplexeAudio {
         Fichier f = new Fichier(nom);
         Recherche r = new Recherche(f, "Recherche de similarité avec "+f.getName(), TypeRecherche.SIMILARITE);
         //verification de la presence du fichier
-        if(this.cvf.fichierPresent(f)){            
+        //definir l'emplacement des fichiers audio
+        if(this.cvf.fichierPresent(f,System.getProperty("user.dir"))){            
             String s = CodeCAudio.rechercher(f);
             HashMap<String, Double> conversion = new HashMap<>();
             HashMap<String, Double> conversion_2 = new HashMap<>();
@@ -95,7 +96,8 @@ public class ControlRechercheComplexeAudio {
         HashMap<Fichier, String> intersection = new HashMap<>();
         Recherche r =  new Recherche(f,"" , TypeRecherche.OCCURRENCE);     
         //verification de la presence du fichier
-        if(this.cvf.fichierPresent(f)){
+        //definir l'emplacement des fichiers audio
+        if(this.cvf.fichierPresent(f, System.getProperty("user.dir"))){
             if(this.multimoteur){
                 comparaisonOccurrenceResultat(nbOccurrence, polarite, conversion_2,r,resultat);
                 comparaisonOccurrenceResultat(nbOccurrence, polarite, conversion, r, resultat);
@@ -121,7 +123,6 @@ public class ControlRechercheComplexeAudio {
     }
 
     private void comparaisonOccurrenceResultat(int nbOccurrence, boolean polarite, HashMap<String, String> hm, Recherche r, String resultat){
-        String strPolarite="";
         HashMap<String, String> res = new HashMap<>();
         if(nbOccurrence<0 || nbOccurrence==0 && polarite==false){
             throw new IllegalArgumentException("Le nombre d'occurrence ne convient pas");
@@ -138,19 +139,16 @@ public class ControlRechercheComplexeAudio {
                     if((getOccurenceSansTemps(mapEntry.getValue().toString()))>=nbOccurrence){
                         res.put(mapEntry.getKey().toString(),mapEntry.getValue().toString());
                     }
-                    strPolarite=">=";
                 }
                 else{
                     if((getOccurenceSansTemps(mapEntry.getValue().toString()))<nbOccurrence){
                         res.put(mapEntry.getKey().toString(),mapEntry.getValue().toString());
                     }
-                    strPolarite="<";
                 }                    
             }
         }
         hm.clear();
-        hm.putAll(res);
-        r.setRequete("recherche du fichier "+r.getFichier().getName()+" avec "+strPolarite+nbOccurrence+" occurrences");
+        hm.putAll(res); 
     }
 
     private int getOccurenceSansTemps(String valeur) {
