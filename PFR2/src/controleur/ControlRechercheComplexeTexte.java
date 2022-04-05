@@ -218,7 +218,7 @@ public class ControlRechercheComplexeTexte {
         }
         else{
             String r = CodeCTexte.rechercheMot(motCle); 
-            File dossier = new File(System.getProperty("user.dir"));
+            File dossier = new File(System.getProperty("user.dir")+"/PFR2/C/DocTexte");
             for (int i = 0; i < dossier.listFiles().length; i++){
                 if (dossier.listFiles()[i].isFile()&&!(r.contains(dossier.listFiles()[i].getName()))){
                     resultat.put(dossier.listFiles()[i].getName(), 0);                     
@@ -263,7 +263,7 @@ public class ControlRechercheComplexeTexte {
         Recherche r = new Recherche(f, "Recherche de similarité avec "+f.getName(), TypeRecherche.SIMILARITE);
         //verification de la presence du fichier
         //definir l'emplacement des fichiers textes
-        if(this.cvf.fichierPresent(f,System.getProperty("user.dir"))){            
+        if(this.cvf.fichierPresent(f,System.getProperty("user.dir")+"/PFR2/C/DocTexte")){            
             String s = CodeCTexte.rechercher(f);
             HashMap<String, Double> conversion = new HashMap<>();
             HashMap<String, Double> conversion_2 = new HashMap<>();
@@ -281,7 +281,7 @@ public class ControlRechercheComplexeTexte {
                         }
                         else{
                             if(nbOccurrence == 0){
-                                File dossierCourant = new File(System.getProperty("user.dir"));
+                                File dossierCourant = new File(System.getProperty("user.dir")+"/PFR2/C/DocTexte");
                                 for (int i = 0; i < dossierCourant.listFiles().length; i++){
                                     if (dossierCourant.listFiles()[i].isFile()&&!dossierCourant.listFiles()[i].getName().equals(fichier)){
                                         intersection.put(new Fichier(dossierCourant.listFiles()[i].getAbsolutePath()),0.0);
@@ -306,7 +306,7 @@ public class ControlRechercheComplexeTexte {
                     }
                     else{
                         if(nbOccurrence == 0){
-                            File dossierCourant = new File(System.getProperty("user.dir"));
+                            File dossierCourant = new File(System.getProperty("user.dir")+"/PFR2/C/DocTexte");
                             for (int i = 0; i < dossierCourant.listFiles().length; i++){
                                 if (dossierCourant.listFiles()[i].isFile()&&!dossierCourant.listFiles()[i].getName().equals(fichier)){
                                     intersection.put(new Fichier(dossierCourant.listFiles()[i].getAbsolutePath()),0.0);

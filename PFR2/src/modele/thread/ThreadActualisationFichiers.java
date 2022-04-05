@@ -17,7 +17,7 @@ public class ThreadActualisationFichiers extends Thread{
     public ThreadActualisationFichiers(){
         this.temps = Calendar.getInstance();
         //a modifier en fonction de ou on se situe        
-        this.dossierCourant = System.getProperty("user.dir");
+        this.dossierCourant = System.getProperty("user.dir")+"/PFR2/C";
         this.crf = new ControlRechercheFile();
         this.crf.searchDirectory(new File(this.dossierCourant));
         this.fichiers.addAll(this.crf.getResult());

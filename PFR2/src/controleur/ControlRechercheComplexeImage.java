@@ -91,7 +91,7 @@ public class ControlRechercheComplexeImage {
         Fichier f = new Fichier(nom);
         Recherche r = new Recherche(f, "Recherche de similarité avec "+f.getName(), TypeRecherche.SIMILARITE);
         //definir l'emplacement des fichiers image
-        if(this.cvf.fichierPresent(f,System.getProperty("user.dir"))){
+        if(this.cvf.fichierPresent(f,System.getProperty("user.dir")+"/PFR2/C/DocImage")){
             String s = CodeCImage.rechercher(f);
             HashMap<String, Double> conversion = new HashMap<>();
             HashMap<String, Double> conversion_2 = new HashMap<>();
@@ -109,7 +109,7 @@ public class ControlRechercheComplexeImage {
                         }
                         else{
                             if(nbOccurrence == 0){
-                                File dossierCourant = new File(System.getProperty("user.dir"));
+                                File dossierCourant = new File(System.getProperty("user.dir")+"/PFR2/C/DocImage");
                                 for (int i = 0; i < dossierCourant.listFiles().length; i++){
                                     if (dossierCourant.listFiles()[i].isFile()&&!dossierCourant.listFiles()[i].getName().equals(fichier)){
                                         intersection.put(new Fichier(dossierCourant.listFiles()[i].getAbsolutePath()),0.0);
@@ -134,7 +134,7 @@ public class ControlRechercheComplexeImage {
                     }
                     else{
                         if(nbOccurrence == 0){
-                            File dossierCourant = new File(System.getProperty("user.dir"));
+                            File dossierCourant = new File(System.getProperty("user.dir")+"/PFR2/C/DocImage");
                             for (int i = 0; i < dossierCourant.listFiles().length; i++){
                                 if (dossierCourant.listFiles()[i].isFile()&&!dossierCourant.listFiles()[i].getName().equals(fichier)){
                                     intersection.put(new Fichier(dossierCourant.listFiles()[i].getAbsolutePath()),0.0);

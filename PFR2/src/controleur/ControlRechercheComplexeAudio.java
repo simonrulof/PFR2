@@ -43,7 +43,7 @@ public class ControlRechercheComplexeAudio {
         Recherche r = new Recherche(f, "Recherche de similarité avec "+f.getName(), TypeRecherche.SIMILARITE);
         //verification de la presence du fichier
         //definir l'emplacement des fichiers audio
-        if(this.cvf.fichierPresent(f,System.getProperty("user.dir"))){            
+        if(this.cvf.fichierPresent(f,System.getProperty("user.dir")+"/PFR2/C/DocAudio")){            
             String s = CodeCAudio.rechercher(f);
             HashMap<String, Double> conversion = new HashMap<>();
             HashMap<String, Double> conversion_2 = new HashMap<>();
@@ -97,7 +97,7 @@ public class ControlRechercheComplexeAudio {
         Recherche r =  new Recherche(f,"" , TypeRecherche.OCCURRENCE);     
         //verification de la presence du fichier
         //definir l'emplacement des fichiers audio
-        if(this.cvf.fichierPresent(f, System.getProperty("user.dir"))){
+        if(this.cvf.fichierPresent(f, System.getProperty("user.dir")+"/PFR2/C/DocAudio")){
             if(this.multimoteur){
                 comparaisonOccurrenceResultat(nbOccurrence, polarite, conversion_2,r,resultat);
                 comparaisonOccurrenceResultat(nbOccurrence, polarite, conversion, r, resultat);
