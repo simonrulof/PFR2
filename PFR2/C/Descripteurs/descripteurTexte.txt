@@ -1,0 +1,38 @@
+DEBUT_DESC
+texte1.xml
+plus 8
+superficie 7
+Arctique 7
+dernieres 5
+septembre 5
+glace 5
+NSIDC 4
+calotte 4
+effectuees 4
+ete 4
+endDoc
+texte3.xml
+Francis 7
+Delattre 6
+sports 5
+ministere 5
+FFE 5
+Serge 5
+Lecomte 5
+federation 4
+annonce 4
+depute 4
+endDoc
+texte4.xml
+comportement 4
+hote 4
+pousser 3
+parasite 3
+suicide 3
+nematomorphes 3
+Frederic 3
+proteines 3
+explique 2
+devore 2
+endDoc
+END_DESC

@@ -1,10 +1,9 @@
-package modele.moteurs;
+package Moteurs;
+
 import java.io.File;
 
-import modele.entite.ResultatRequete;
-
 public abstract class Moteur {
-    protected ResultatRequete derniereRecherche[];
+    protected Recherche derniereRecherche[];
 
     public Moteur(){}
 
@@ -12,7 +11,7 @@ public abstract class Moteur {
 
     public abstract String comparerFichier(File nomFichier);
 
-    public ResultatRequete[] getDerniereRecherche() {
+    public Recherche[] getDerniereRecherche() {
         return this.derniereRecherche;
     }
 }

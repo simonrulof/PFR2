@@ -1,11 +1,11 @@
+package Model;
+
 import java.io.File;
-
+import Moteurs.*;
 public class User {
-    MoteurTexte moteurTexte = new MoteurTexte();
-    MoteurImage moteurImage = new MoteurImage();
-    MoteurAudio moteurAudio = new MoteurAudio();
-
-
+    private MoteurTexte moteurTexte = new MoteurTexte();
+    private MoteurImage moteurImage = new MoteurImage();
+    private MoteurAudio moteurAudio = new MoteurAudio();
 
     private User(){}
 
@@ -22,53 +22,45 @@ public class User {
         for(int i = 0; i < entree.length(); i++){
             if (entree.charAt(i) == '/') return true;
         }
-        return false
+        return false;
     }
 
-    public File[] comparer(String entree, boolean complexe, boolean multimoteur, boolean texte, boolean image, boolean audio){
-        File[] fichiersTexte = new File[100];
-        File[] fichiersImage = new File[100];
-        File[] fichiersAudio = new File[100];
+    public Recherche[] comparer(String entree, boolean complexe, boolean multimoteur, boolean texte, boolean image, boolean audio){
+        Recherche[] fichiersTexte = new Recherche[100];
+        Recherche[] fichiersImage = new Recherche[100];
+        Recherche[] fichiersAudio = new Recherche[100];
         if (complexe){
             if (texte){
-                boolean motCle = isFile(entree;
+                boolean motCle = isFile(entree);
                 //ControlRechercheComplexeTexte(ControlVerificationFichiers cvf, boolean multimoteur)
             }
             if (image){
-                //ControlRechercheComplexeImage(ControlVerificationFichiers cvf, boolean multimoteur)
+                //ControlRechercheComplexeImagemoteurImage(ControlVerificationFichiers cvf, boolean multimoteur)
             }
             if (audio){
                 //ControlRechercheComplexeAudio(ControlVerificationFichiers cvf, boolean multimoteur)
             }
         }else{
             if (texte){
-                boolean motCle = isFile(entree);
-                if (motCle)
-                    moteurTexte.comparermotcle(entree);
-                else
-                    moteurImage.comparer(entree);
-                fichiersTexte = moteurTexte.getDerniereRecherche();
-            }
-            if (audio){
-                moteurAudio.comparer(entree);
+                boolean isFile = isFile(entree);
+                if (isFile) {
+                    moteurTexte.comparerFichier(new File(entree));
+                }
+                else {
+                    String mots[] = entree.split(" ");
+                    moteurTexte.comparerFichier(mots);
+                }
+                return moteurTexte.getDerniereRecherche();
             }
             if (image){
-                moteurImage.comparer(entree);
+                moteurImage.comparerFichier(new File(entree));
+                return moteurImage.getDerniereRecherche();
+            }
+            if (audio){
+                moteurAudio.comparerFichier(new File(entree));
+                return moteurAudio.getDerniereRecherche();
             }
         }
-        File[] sortie = new File[300];
-        int i = 0;
-        int j = 0;
-        int k = 0;
-        for(i = 0; i < fichiersTexte.length; i++){
-            sortie[i] = fichiersTexte[i];
-        }
-        for(j = i; j-i < fichiersTexte.length; j++){
-            sortie[j] = fichiersImage[j-i];
-        }
-        for(k = j; k-j < fichiersTexte.length; k++){
-            sortie[k] = fichiersAudio[k-j];
-        }
-        return sortie;
+        return null;
     }
 }
