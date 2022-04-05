@@ -10,6 +10,7 @@ public class TestRechercheTexte {
         ControlVerificationFichiers cvf = new ControlVerificationFichiers();
         ControlRechercheComplexeTexte crct = new ControlRechercheComplexeTexte(cvf, true);
         String fichier = "test.txt";
+        String requete4 = "- 50 test.txt";
         String requete = "+ Football - mortel";
         String requete2 = "+ Football 4 mortel";
         String requete3 = "- Football - mortel - machine";
@@ -18,6 +19,7 @@ public class TestRechercheTexte {
 		System.out.println("VERIFICATION"); 
 		Recherche r = crct.rechercher(fichier); 
 		Recherche r2 = crct.rechercher(requete); 
+		Recherche r5 = crct.rechercher(requete4); 
 		Recherche r3 = crct.rechercher(requete2); 
 		Recherche r4 = crct.rechercher(requete3); 
 
@@ -44,5 +46,11 @@ public class TestRechercheTexte {
         System.out.println("TypeFichier : " + r4.getTypeFichier());
         System.out.println("Resultat basique : " + r4.getResultats().toString());
         System.out.println("Resultats : " + r4.getResultatsRequeteArguments().toString());
+
+        System.out.println("Requete : " + r5.getRequete());
+        System.out.println("Fichier : " + r5.getFichier());
+        System.out.println("TypeFichier : " + r5.getTypeFichier());
+        System.out.println("Resultat basique : " + r5.getResultats().toString());
+        System.out.println("Resultats : " + r5.getResultatsRequeteArguments().toString());
 	}
 }

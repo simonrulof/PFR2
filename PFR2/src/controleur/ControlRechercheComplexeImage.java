@@ -1,5 +1,6 @@
 package controleur;
 
+import java.io.File;
 import java.util.HashMap;
 
 import codec.CodeCImage;
@@ -58,11 +59,35 @@ public class ControlRechercheComplexeImage {
 
     private Recherche recherche(String requete) throws IllegalArgumentException{  
         String nom="";
-        for(int i =0;i<requete.length();i++){
-            if(requete.charAt(i)!=' '){
-                nom+=requete.charAt(i);
-            }
+        String occurrence = "";
+        boolean polarite = true;
+        if(requete.contains("-")){
+            polarite=false;
+            requete = requete.substring(2);
         }
+        else if(requete.contains("+")){
+            requete = requete.substring(2);
+        }
+        for(int i =0;i<requete.length();i++){
+            while(requete.charAt(i)!=' '){
+                if(Character.isDigit(requete.charAt(i))){
+                    occurrence+=requete.charAt(i);
+                }
+                else{
+                    nom+=requete.charAt(i);
+                }
+                if(i+1==requete.length()){
+                    break;
+                }
+                else{  
+                    i++;
+                }                
+            }
+        }      
+        if(occurrence.isEmpty()){
+            occurrence="0";
+        }  
+        Integer nbOccurrence = Integer.valueOf(occurrence);
         //les chemins seront probablement à changer
         Fichier f = new Fichier(nom);
         Recherche r = new Recherche(f, "Recherche de similarité avec "+f.getName(), TypeRecherche.SIMILARITE);
@@ -78,13 +103,51 @@ public class ControlRechercheComplexeImage {
                 toHashMapStringDouble(conversion_2, res);            
                 for(String fichier : conversion.keySet()){
                     if(conversion_2.containsKey(fichier)){
-                        intersection.put(new Fichier(fichier),conversion.get(fichier));
+                        if(polarite){
+                            if(conversion.get(fichier)>=nbOccurrence){
+                                intersection.put(new Fichier(fichier),conversion.get(fichier));
+                            }
+                        }
+                        else{
+                            if(nbOccurrence == 0){
+                                File dossierCourant = new File(System.getProperty("user.dir"));
+                                for (int i = 0; i < dossierCourant.listFiles().length; i++){
+                                    if (dossierCourant.listFiles()[i].isFile()&&!dossierCourant.listFiles()[i].getName().equals(fichier)){
+                                        intersection.put(new Fichier(dossierCourant.listFiles()[i].getAbsolutePath()),0.0);
+                                    } 
+                                }
+                            }
+                            else{
+                                if(conversion.get(fichier)<nbOccurrence){
+                                    intersection.put(new Fichier(fichier),conversion.get(fichier));
+                                }
+                            }
+                        }                        
                     }
                 }
             }
             else{
                 for(String fichier : conversion.keySet()){
-                    intersection.put(new Fichier(fichier),conversion.get(fichier));
+                    if(polarite){
+                        if(conversion.get(fichier)>=nbOccurrence){
+                            intersection.put(new Fichier(fichier),conversion.get(fichier));
+                        }
+                    }
+                    else{
+                        if(nbOccurrence == 0){
+                            File dossierCourant = new File(System.getProperty("user.dir"));
+                            for (int i = 0; i < dossierCourant.listFiles().length; i++){
+                                if (dossierCourant.listFiles()[i].isFile()&&!dossierCourant.listFiles()[i].getName().equals(fichier)){
+                                    intersection.put(new Fichier(dossierCourant.listFiles()[i].getAbsolutePath()),0.0);
+                                } 
+                            }
+                        }
+                        else{
+                            if(conversion.get(fichier)<nbOccurrence){
+                                intersection.put(new Fichier(fichier),conversion.get(fichier));
+                            }
+                        }
+                    } 
                 }
             }
             r.setResultatsRequete(intersection);
