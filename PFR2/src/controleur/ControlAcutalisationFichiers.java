@@ -3,10 +3,17 @@ package controleur;
 import modele.thread.ThreadActualisationFichiers;
 
 public class ControlAcutalisationFichiers {
-    
+    private ThreadActualisationFichiers taf;
+
     public ControlAcutalisationFichiers(){
-        ThreadActualisationFichiers taf = new ThreadActualisationFichiers();
+        taf = new ThreadActualisationFichiers();
         taf.start();
     }
+
+    public ThreadActualisationFichiers getThread(){
+        return this.taf;
+    }
+
+
     
 }
