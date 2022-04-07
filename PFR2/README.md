@@ -17,8 +17,12 @@ Notre projet contient différents dossiers et sous dossier, tel que:
 ## Organisation de l'équipe
 
 Chaques tâches dépends d'un membre : 
-- `tache 1`: DESCRIPTION : Personne
-- `tache 2`: DESCRIPTION : Personne
-- `tache 3`: DESCRIPTION : Personne
-- `tache 4`: DESCRIPTION : Personne
-- `tache 5`: DESCRIPTION : Personne
+- `Gestion rôle Administrateur`: DESCRIPTION : Mehdi NOEL & Simon BERLANGA
+- `Gestion rôle Administrateur`: DESCRIPTION : Mehdi NOEL & Simon BERLANGA
+- `Gestion mode ouvert`: permet d'avoir l'intersection des résultats de recherche entre deux moteurs : Anna OLFI
+- `Gestion recherche ouverte`: actualise l'indexation des fichiers toutes les x secondes : Anna OLFI
+- `Gestion recherches complexes audio`: recherche avec occurrences et polarités : Adélie TRICARD
+- `Gestion recherches complexes image`: recherche avec seuils de couleur et polarités : Adélie TRICARD
+- `Gestion recherches complexes texte`: recherche avec occurrences et polarités : Adélie TRICARD
+- `Gestion de l'interface`: DESCRIPTION : Noé MARZAT
+- `Gestion de JNA`: DESCRIPTION : Simon BERLANGA
