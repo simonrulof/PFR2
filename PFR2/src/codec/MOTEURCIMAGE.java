@@ -2,8 +2,8 @@ package codec;
 import com.sun.jna.Library;
 import com.sun.jna.Native;
 
-public interface MOTEURCIMAGE extends Library {
-    MOTEURCIMAGE INSTANCE = (MOTEURCIMAGE) Native.load("C/moteurCImage.so", MOTEURCIMAGE.class);
+public interface MoteurCImage extends Library {
+    MoteurCImage INSTANCE = (MoteurCImage) Native.load("C/moteurCImage.so", MoteurCImage.class);
 
     String comparaisonImage(String dossierFichier, String nomFichierAComparer);
 

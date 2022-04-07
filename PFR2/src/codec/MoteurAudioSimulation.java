@@ -3,7 +3,7 @@ package codec;
 import modele.donnee.TypeFichier;
 import modele.entite.Fichier;
 
-public class CodeCAudio  extends CodeCMoteur{
+public class MoteurAudioSimulation  extends MoteurSimulation{
 
     public static String rechercheOccurrence(Fichier a) throws IllegalArgumentException{
         if(a.getType()==TypeFichier.AUDIO){

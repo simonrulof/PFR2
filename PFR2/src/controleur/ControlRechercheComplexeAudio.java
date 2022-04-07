@@ -3,7 +3,7 @@ package controleur;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import codec.CodeCAudio;
+import codec.MoteurAudioSimulation;
 import modele.donnee.TypeRecherche;
 import modele.entite.Fichier;
 import modele.entite.Recherche;
@@ -44,13 +44,13 @@ public class ControlRechercheComplexeAudio {
         //verification de la presence du fichier
         //definir l'emplacement des fichiers audio
         if(this.cvf.fichierPresent(f,System.getProperty("user.dir")+"/PFR2/C/DocAudio")){            
-            String s = CodeCAudio.rechercher(f);
+            String s = MoteurAudioSimulation.rechercher(f);
             HashMap<String, Double> conversion = new HashMap<>();
             HashMap<String, Double> conversion_2 = new HashMap<>();
             HashMap<Fichier, Double> intersection = new HashMap<>();
             toHashMapStringDouble(conversion, s);
             if(this.multimoteur){
-                String res = CodeCAudio.rechercher(f);                
+                String res = MoteurAudioSimulation.rechercher(f);                
                 toHashMapStringDouble(conversion_2, res);            
                 for(String fichier : conversion.keySet()){
                     if(conversion_2.containsKey(fichier)){
@@ -88,7 +88,7 @@ public class ControlRechercheComplexeAudio {
         }
         System.out.println("Fichier : "+fichier);
         Fichier f = new Fichier(fichier);
-        String resultat = CodeCAudio.rechercheOccurrence(f);
+        String resultat = MoteurAudioSimulation.rechercheOccurrence(f);
         int nbOccurrence = getOccurence(requete);
         boolean polarite = getPolarite(requete);
         HashMap<String, String> conversion = new HashMap<>();

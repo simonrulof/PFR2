@@ -2,7 +2,7 @@ package codec;
 
 import modele.entite.Fichier;
 
-public abstract class CodeCMoteur {
+public abstract class MoteurSimulation {
     
     public static boolean indexerTout(){
         return false;

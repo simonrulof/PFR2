@@ -3,7 +3,7 @@ package modele.thread;
 import java.io.File;
 import java.util.Calendar;
 import java.util.List;
-import codec.CodeCMoteur;
+import codec.MoteurSimulation;
 import controleur.ControlRechercheFile;
 import modele.entite.Fichier;
 
@@ -45,7 +45,7 @@ public class ThreadActualisationFichiers extends Thread{
                 this.crf.searchDirectory(new File(this.dossierCourant));
                 for(String s : this.crf.getResult()){
                     if(!this.fichiers.contains(s)){
-                        CodeCMoteur.indexer(new Fichier(s));
+                        MoteurSimulation.indexer(new Fichier(s));
                         this.fichiers.add(s);
                     }
                 }

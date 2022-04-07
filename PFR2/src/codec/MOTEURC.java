@@ -1,7 +1,7 @@
 package codec;
 import com.sun.jna.*;
 
-public interface MOTEURC extends Library {
-    MOTEURC INSTANCE = (MOTEURC) Native.load("C/malib.so", MOTEURC.class);
+public interface MoteurC extends Library {
+    MoteurC INSTANCE = (MoteurC) Native.load("C/malib.so", MoteurC.class);
     void test(String[] mots);
 }

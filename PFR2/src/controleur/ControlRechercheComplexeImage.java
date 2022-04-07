@@ -2,7 +2,7 @@ package controleur;
 
 import java.io.File;
 import java.util.HashMap;
-import codec.CodeCImage;
+import codec.MoteurImageSimulation;
 import modele.donnee.Couleur;
 import modele.donnee.TypeRecherche;
 import modele.entite.Fichier;
@@ -92,13 +92,13 @@ public class ControlRechercheComplexeImage {
         Recherche r = new Recherche(f, "Recherche de similarité avec "+f.getName(), TypeRecherche.SIMILARITE);
         //definir l'emplacement des fichiers image
         if(this.cvf.fichierPresent(f,System.getProperty("user.dir")+"/PFR2/C/DocImage")){
-            String s = CodeCImage.rechercher(f);
+            String s = MoteurImageSimulation.rechercher(f);
             HashMap<String, Double> conversion = new HashMap<>();
             HashMap<String, Double> conversion_2 = new HashMap<>();
             HashMap<Fichier, Double> intersection = new HashMap<>();
             toHashMapStringDouble(conversion, s);
             if(this.multimoteur){
-                String res = CodeCImage.rechercher(f);                
+                String res = MoteurImageSimulation.rechercher(f);                
                 toHashMapStringDouble(conversion_2, res);            
                 for(String fichier : conversion.keySet()){
                     if(conversion_2.containsKey(fichier)){
@@ -159,13 +159,13 @@ public class ControlRechercheComplexeImage {
 
     private Recherche rechercheCouleur(int seuil, Couleur c){    
         Recherche r = new Recherche(new Fichier(".bmp"),"Recherche d'un seuil de "+c.name(), TypeRecherche.SEUIL);
-        String s = CodeCImage.rechercher(seuil,c.getColonne());
+        String s = MoteurImageSimulation.rechercher(seuil,c.getColonne());
         HashMap<String, Double> conversion = new HashMap<>();
         HashMap<String, Double> conversion_2 = new HashMap<>();
         HashMap<Fichier, Double> intersection = new HashMap<>();
         toHashMapStringDouble(conversion, s);
         if(this.multimoteur){
-            String res = CodeCImage.rechercher(seuil,c.getColonne());                
+            String res = MoteurImageSimulation.rechercher(seuil,c.getColonne());                
             toHashMapStringDouble(conversion_2, res);          
             for(String fichier : conversion.keySet()){
                 if(conversion_2.containsKey(fichier)&&conversion.get(fichier)>=seuil){

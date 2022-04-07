@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import codec.CodeCTexte;
+import codec.MoteurTexteSimulation;
 import modele.donnee.TypeRecherche;
 import modele.entite.Fichier;
 import modele.entite.Recherche;
@@ -127,7 +127,7 @@ public class ControlRechercheComplexeTexte {
     }
 
     private HashMap<String, Integer> rechercheMotCle(String motCle,Boolean polarite,int nbOccurrence) throws IllegalArgumentException{
-        String res = CodeCTexte.rechercheMot(motCle);
+        String res = MoteurTexteSimulation.rechercheMot(motCle);
         HashMap<String, Integer> requete = new HashMap<>();
         HashMap<String, Integer> resultat = new HashMap<>();
         toHashMap(requete, res);
@@ -213,11 +213,11 @@ public class ControlRechercheComplexeTexte {
     private HashMap<String, Integer> rechercheMotCleSansOccurrence(String motCle, boolean polarite) {
         HashMap<String, Integer> resultat = new HashMap<>();
         if(polarite){
-            String r = CodeCTexte.rechercheMot(motCle);              
+            String r = MoteurTexteSimulation.rechercheMot(motCle);              
             toHashMap(resultat, r);
         }
         else{
-            String r = CodeCTexte.rechercheMot(motCle); 
+            String r = MoteurTexteSimulation.rechercheMot(motCle); 
             File dossier = new File(System.getProperty("user.dir")+"/PFR2/C/DocTexte");
             for (int i = 0; i < dossier.listFiles().length; i++){
                 if (dossier.listFiles()[i].isFile()&&!(r.contains(dossier.listFiles()[i].getName()))){
@@ -264,13 +264,13 @@ public class ControlRechercheComplexeTexte {
         //verification de la presence du fichier
         //definir l'emplacement des fichiers textes
         if(this.cvf.fichierPresent(f,System.getProperty("user.dir")+"/PFR2/C/DocTexte")){            
-            String s = CodeCTexte.rechercher(f);
+            String s = MoteurTexteSimulation.rechercher(f);
             HashMap<String, Double> conversion = new HashMap<>();
             HashMap<String, Double> conversion_2 = new HashMap<>();
             HashMap<Fichier, Double> intersection = new HashMap<>();
             toHashMapSimilarite(conversion, s);
             if(this.multimoteur){
-                String res = CodeCTexte.rechercher(f);                
+                String res = MoteurTexteSimulation.rechercher(f);                
                 toHashMapSimilarite(conversion_2, res);            
                 for(String fichier : conversion.keySet()){
                     if(conversion_2.containsKey(fichier)){
