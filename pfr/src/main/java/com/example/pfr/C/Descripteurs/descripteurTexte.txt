@@ -1,0 +1,326 @@
+DEBUT_DESC
+03-Des_chercheurs_parviennent_Ã _rÃ©gÃ©nÃ©rer.xml
+cellules 21
+souches 10
+chercheurs 6
+souris 5
+musculaires 5
+adultes 5
+Institut 4
+chez 4
+Une 3
+Pasteur 3
+endDoc
+03-Mimer_un_signal_nerveux_pour.xml
+comportement 4
+hote 4
+pousser 3
+parasite 3
+suicide 3
+nematomorphes 3
+Frederic 3
+proteines 3
+explique 2
+devore 2
+endDoc
+05-Au_stade_d_Abidjan,_la_dÃ©faite.xml
+Abidjan 5
+victoire 5
+reve 4
+pays 4
+equipe 3
+Cote 3
+Ivoire 3
+fin 3
+Elephants 2
+guerre 2
+endDoc
+05-Edition___les_mots_et.xml
+% 23
+plus 7
+etude 5
+expressions 3
+mots 3
+ete 3
+question 3
+hommes 3
+Petit 2
+Larousse 2
+endDoc
+05-Jean-Christophe_Bette_a_dÃ»_attendre.xml
+Jean 6
+Christophe 6
+Bette 5
+bateau 5
+ans 4
+etait 4
+ete 4
+quatre 4
+monde 4
+plus 3
+endDoc
+05-La_circoncision_pourrait_rÃ©duire_le.xml
+VIH 12
+circoncision 11
+hommes 9
+circoncis 9
+infection 8
+etude 7
+risque 5
+sida 5
+essai 5
+resultats 5
+endDoc
+05-L_apnÃ©iste_franÃ§ais_Guillaume_NÃ©ry_plonge.xml
+plus 7
+metres 7
+Nery 6
+monde 6
+record 5
+Guillaume 5
+On 5
+dont 4
+etait 4
+AIDA 3
+endDoc
+05-Le_Colombien_Juan_Pablo_Montoya.xml
+s 12
+McLaren 11
+Renault 10
+1 9
+points 9
+Kimi 7
+pilotes 7
+Alonso 6
+Juan 6
+min 6
+endDoc
+05-Musique_Ã©lectronique___l_Ã©lan_collectif.xml
+Can 8
+SACD 8
+groupe 5
+Landed 5
+quatre 4
+musique 4
+Days 3
+Soon 3
+Over 3
+Babaluma 3
+endDoc
+05-Photographie___Philip_Blenkinsop_a.xml
+Visa 6
+ete 5
+festival 4
+or 4
+prix 3
+septembre 3
+reportage 3
+travail 2
+tsunami 2
+17e 2
+endDoc
+05-Prague_inaugure_les_JournÃ©es_europÃ©ennes.xml
+Prague 6
+patrimoine 6
+palais 6
+France 5
+tcheque 5
+septembre 5
+Journees 4
+historiques 4
+18 4
+En 4
+endDoc
+05-Rock___l_Illinois_magique_de.xml
+The 8
+plus 7
+Sufjan 5
+Stevens 5
+Feel 4
+Illinois 4
+disque 4
+On 4
+album 3
+Illinoise 3
+endDoc
+05-Tours_d_honneur_pour_les_athlÃštes.xml
+athletes 7
+ete 6
+saut 5
+euros 5
+France 4
+000 4
+DecaNation 4
+etre 4
+etait 4
+equipe 4
+endDoc
+06-La_contamination_du_maÃ¯s_par.xml
+transgenes 6
+ete 6
+contamination 5
+2004 5
+region 5
+plus 5
+etre 5
+Chapela 5
+2003 5
+La 5
+endDoc
+06-Les_mauvais_comptes_d_une_Ã©limination.xml
+France 19
+Coupe 8
+Et 7
+equipe 7
+monde 6
+2006 6
+match 6
+groupe 6
+matches 6
+millions 6
+endDoc
+06-Sensibiliser_Ã _la_vaccination_grippale.xml
+virus 11
+vaccination 10
+grippe 9
+aviaire 8
+contre 6
+plus 6
+couverture 6
+vaccinale 6
+chez 5
+DGS 5
+endDoc
+06-US_Open___Mauresmo_et.xml
+Pour 2
+visualiser 2
+Desk 2
+faut 2
+navigateur 2
+affiche 2
+frames 2
+Open 1
+Mauresmo 1
+Pierce 1
+endDoc
+07-Un_dÃ©putÃ©_UMP_lance_une.xml
+Francis 7
+Delattre 6
+sports 5
+ministere 5
+FFE 5
+Serge 5
+Lecomte 5
+federation 4
+annonce 4
+depute 4
+endDoc
+08-La_mission_Deep_Impact_permet.xml
+ete 11
+comete 9
+La 9
+Tempel 8
+1 8
+sonde 6
+Impact 5
+Deep 5
+plus 5
+tres 5
+endDoc
+08-Sous_l_effet_du_rÃ©chauffement,_les.xml
+carbone 16
+sols 12
+effet 9
+rechauffement 5
+chercheurs 5
+climatique 5
+regions 5
+zones 5
+egalement 5
+cours 4
+endDoc
+08-US_Open___Pierce_Ã©limine.xml
+6 7
+3 4
+finale 3
+Mauresmo 2
+Agassi 2
+demi 2
+US 2
+Open 2
+Pierce 2
+Pour 2
+endDoc
+09-Miracle___le_cricket_est.xml
+Angleterre 4
+plus 4
+cricket 3
+equipe 3
+devenu 2
+8 2
+tournoi 2
+Ashes 2
+petite 2
+urne 2
+endDoc
+10-Le_cyclone_Katrina_complique_le.xml
+Les 6
+NASA 6
+navette 5
+2006 5
+mars 4
+Katrina 4
+vols 4
+meme 4
+spatial 4
+La 3
+endDoc
+11-La_troposphÃšre_paie,_au_prix.xml
+NO2 6
+plus 5
+Granier 5
+autres 5
+baisse 4
+combustion 4
+directement 4
+Mme 4
+polluants 4
+Chine 3
+endDoc
+12-Agassi_plie_face_au_meilleur.xml
+Federer 10
+Roger 9
+Agassi 9
+6 9
+Andre 8
+tournoi 8
+Grand 8
+plus 8
+1 8
+Chelem 7
+endDoc
+12-Fernando_Alonso_n_est_plus_qu_Ã .xml
+plus 5
+septembre 4
+Spa 4
+FIA 4
+Michelin 4
+pilote 4
+course 4
+McLaren 4
+Prix 3
+Renault 3
+endDoc
+12-Jean-Marie_Sevestre,_libraire_et_PDG.xml
+Marie 11
+Sevestre 10
+librairie 10
+Jean 8
+rentree 7
+Sauramps 6
+titres 6
+En 5
+Montpellier 5
+Pour 5
+endDoc
+END_DESC

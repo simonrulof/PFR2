@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<!-- Codé par MARZAT Noé -->
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pfr.Controller.MenuResultatController">
+   <children>
+      <SplitPane dividerPositions="0.1617954070981211" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="960.0" scaleShape="false">
+         <items>
+            <SplitPane dividerPositions="0.1875" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" pickOnBounds="false" prefHeight="480.0" prefWidth="160.0">
+              <items>
+                  <ImageView fitHeight="113.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icon/logo_large.png" />
+                     </image>
+                  </ImageView>
+                <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="363.0" prefWidth="160.0" SplitPane.resizableWithParent="false">
+                     <children>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffd4004d" height="128.0" layoutX="11.0" layoutY="54.0" stroke="BLACK" strokeType="INSIDE" width="139.0" />
+                        <Label alignment="CENTER" layoutX="11.0" layoutY="61.0" prefHeight="19.0" prefWidth="139.0" text="Cliquer sur le bouton" textAlignment="CENTER" />
+                        <Label alignment="CENTER" layoutX="11.0" layoutY="80.0" prefHeight="19.0" prefWidth="139.0" text="ci-dessous pour" textAlignment="CENTER" />
+                        <Label alignment="CENTER" layoutX="11.0" layoutY="99.0" prefHeight="19.0" prefWidth="139.0" text="afficher le resultat " textAlignment="CENTER" />
+                        <Label alignment="CENTER" layoutX="11.0" layoutY="118.0" prefHeight="19.0" prefWidth="139.0" text="de la requête" textAlignment="CENTER" />
+                        <Button fx:id="displayResultButton" layoutX="22.0" layoutY="143.0" mnemonicParsing="false" onAction="#displayResult" prefHeight="25.0" prefWidth="117.0" text="Afficher resultat" textAlignment="CENTER">
+                           <font>
+                              <Font size="12.0" />
+                           </font></Button>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffd4004d" height="50.0" layoutX="11.0" layoutY="306.0" stroke="BLACK" strokeType="INSIDE" width="139.0" />
+                        <ImageView fx:id="returnButton" fitHeight="50.0" fitWidth="56.0" layoutX="18.0" layoutY="306.0" onMouseReleased="#goBack" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icon/arrowLeft.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="saveButton" fitHeight="50.0" fitWidth="56.0" layoutX="92.0" layoutY="306.0" onMouseReleased="#saveRequete" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icon/save.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
+            <SplitPane dividerPositions="0.15145228215767634, 0.22614107883817428" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" orientation="VERTICAL" pickOnBounds="false" prefHeight="480.0" prefWidth="800.0">
+              <items>
+                  <SplitPane dividerPositions="0.19125" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="790.0">
+                     <items>
+                        <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="180.0" text="  Requête effectuée : ">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="requeteLabel" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="630.0">
+                           <font>
+                              <Font name="Calibri" size="14.0" />
+                           </font>
+                        </Label>
+                     </items>
+                  </SplitPane>
+                  <Label alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="264.0" text="Résultats de recherches">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <TableView fx:id="tableResult" prefHeight="360.0" prefWidth="800.0" SplitPane.resizableWithParent="false">
+                    <columns>
+                      <TableColumn fx:id="nameCol" prefWidth="643.0" text="Nom document" />
+                      <TableColumn fx:id="similarityCol" prefWidth="149.0" text="Taux de similarité" />
+                    </columns>
+                  </TableView>
+              </items>
+            </SplitPane>
+         </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

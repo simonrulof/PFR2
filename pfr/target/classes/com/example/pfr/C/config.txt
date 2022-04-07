@@ -1,0 +1,12 @@
+password= 1234
+cheminTexte= DocTexte/
+cheminImage= DocImage/
+cheminAudio= DocAudio/
+cheminDescripteurs= Descripteurs/
+nomDescripteurTexte= descripteurTexte.txt
+nomDescripteurImage= descripteurImage.txt
+nomDescripteurAudio= descripteurAudio.txt
+nombreMotCles= 10
+BitQuantification= 2
+nombrePartition= 50
+nombreEchantillonage= 1024
