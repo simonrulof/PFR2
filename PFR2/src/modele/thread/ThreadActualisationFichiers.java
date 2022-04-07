@@ -13,6 +13,11 @@ public class ThreadActualisationFichiers extends Thread{
     private String dossierCourant;
     private ControlRechercheFichier crf;
     private List<String> fichiers;
+    /*Si JNA marche:
+    private MoteurCAudio mca;
+    private MoteurCImage mci;
+    private MoteurCTexte mct;
+    */
 
     public ThreadActualisationFichiers(){
         this.temps = Calendar.getInstance();
@@ -46,6 +51,17 @@ public class ThreadActualisationFichiers extends Thread{
                 for(String s : this.crf.getResult()){
                     if(!this.fichiers.contains(s)){
                         MoteurSimulation.indexer(new Fichier(s));
+                        /*Si JNA marche:
+                        Fichier f = new Fichier(s);
+                        if(f.getType()==TypeFichier.AUDIO){
+                            this.mca.indexationAudio(this.dossierCourant,f.getName(),f.getName());
+                        }
+                        else if(f.getType()==TypeFichier.IMAGE){
+                            this.mci.indexationImage(this.dossierCourant,f.getName(),f.getName());
+                        } 
+                        else{
+                            this.mct.indexationTexte(this.dossierCourant,f.getName(),f.getName());
+                        }*/
                         this.fichiers.add(s);
                     }
                 }

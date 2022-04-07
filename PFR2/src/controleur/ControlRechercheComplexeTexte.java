@@ -12,6 +12,8 @@ import modele.entite.Recherche;
 public class ControlRechercheComplexeTexte {
     private ControlVerificationFichiers cvf;
     private boolean multimoteur;
+    //Si JNA marche:
+    //private MoteurCTexte mct;
 
     public ControlRechercheComplexeTexte(ControlVerificationFichiers cvf, boolean multimoteur){
         this.cvf = cvf;
@@ -127,7 +129,7 @@ public class ControlRechercheComplexeTexte {
     }
 
     private HashMap<String, Integer> rechercheMotCle(String motCle,Boolean polarite,int nbOccurrence) throws IllegalArgumentException{
-        String res = MoteurTexteSimulation.rechercheMot(motCle);
+        String res = MoteurTexteSimulation.rechercheMot(motCle);           
         HashMap<String, Integer> requete = new HashMap<>();
         HashMap<String, Integer> resultat = new HashMap<>();
         toHashMap(requete, res);
@@ -213,11 +215,11 @@ public class ControlRechercheComplexeTexte {
     private HashMap<String, Integer> rechercheMotCleSansOccurrence(String motCle, boolean polarite) {
         HashMap<String, Integer> resultat = new HashMap<>();
         if(polarite){
-            String r = MoteurTexteSimulation.rechercheMot(motCle);              
+            String r = MoteurTexteSimulation.rechercheMot(motCle);                         
             toHashMap(resultat, r);
         }
         else{
-            String r = MoteurTexteSimulation.rechercheMot(motCle); 
+            String r = MoteurTexteSimulation.rechercheMot(motCle);
             File dossier = new File(System.getProperty("user.dir")+"/PFR2/C/DocTexte");
             for (int i = 0; i < dossier.listFiles().length; i++){
                 if (dossier.listFiles()[i].isFile()&&!(r.contains(dossier.listFiles()[i].getName()))){
@@ -265,12 +267,17 @@ public class ControlRechercheComplexeTexte {
         //definir l'emplacement des fichiers textes
         if(this.cvf.fichierPresent(f,System.getProperty("user.dir")+"/PFR2/C/DocTexte")){            
             String s = MoteurTexteSimulation.rechercher(f);
+            //Si JNA marche :             
+            //String s = this.mct.comparerDescripteursTxtDoc(f.getAbsolutePath(),f.getName());
             HashMap<String, Double> conversion = new HashMap<>();
             HashMap<String, Double> conversion_2 = new HashMap<>();
             HashMap<Fichier, Double> intersection = new HashMap<>();
             toHashMapSimilarite(conversion, s);
             if(this.multimoteur){
-                String res = MoteurTexteSimulation.rechercher(f);                
+                String res = MoteurTexteSimulation.rechercher(f); 
+                //Si JNA marche :             
+                //String res = this.mct.comparerDescripteursTxtDoc(f.getAbsolutePath(),f.getName());
+                           
                 toHashMapSimilarite(conversion_2, res);            
                 for(String fichier : conversion.keySet()){
                     if(conversion_2.containsKey(fichier)){

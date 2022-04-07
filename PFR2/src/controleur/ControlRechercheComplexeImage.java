@@ -11,6 +11,8 @@ import modele.entite.Recherche;
 public class ControlRechercheComplexeImage {
     private ControlVerificationFichiers cvf;
     private boolean multimoteur;
+    //Si JNA marche:
+    //private MoteurCImage mci;
 
     public ControlRechercheComplexeImage(ControlVerificationFichiers cvf, boolean multimoteur){
         this.cvf = cvf;
@@ -93,12 +95,16 @@ public class ControlRechercheComplexeImage {
         //definir l'emplacement des fichiers image
         if(this.cvf.fichierPresent(f,System.getProperty("user.dir")+"/PFR2/C/DocImage")){
             String s = MoteurImageSimulation.rechercher(f);
+            //Si JNA marche:
+            //String s = this.mci.comparaisonImage(f.getAbsolutePath(),f.getName());
             HashMap<String, Double> conversion = new HashMap<>();
             HashMap<String, Double> conversion_2 = new HashMap<>();
             HashMap<Fichier, Double> intersection = new HashMap<>();
             toHashMapStringDouble(conversion, s);
             if(this.multimoteur){
-                String res = MoteurImageSimulation.rechercher(f);                
+                String res = MoteurImageSimulation.rechercher(f); 
+                //Si JNA marche:
+                //String res = this.mci.comparaisonImage(f.getAbsolutePath(),f.getName());               
                 toHashMapStringDouble(conversion_2, res);            
                 for(String fichier : conversion.keySet()){
                     if(conversion_2.containsKey(fichier)){

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import codec.MoteurAudioSimulation;
+import codec.MoteurCAudio;
 import modele.donnee.TypeRecherche;
 import modele.entite.Fichier;
 import modele.entite.Recherche;
@@ -11,6 +12,8 @@ import modele.entite.Recherche;
 public class ControlRechercheComplexeAudio {    
     private ControlVerificationFichiers cvf;
     private boolean multimoteur;
+    //Si JNA marche:
+    //private MoteurCAudio mca;
 
     public ControlRechercheComplexeAudio(ControlVerificationFichiers cvf, boolean multimoteur){
         this.cvf = cvf;
@@ -45,12 +48,16 @@ public class ControlRechercheComplexeAudio {
         //definir l'emplacement des fichiers audio
         if(this.cvf.fichierPresent(f,System.getProperty("user.dir")+"/PFR2/C/DocAudio")){            
             String s = MoteurAudioSimulation.rechercher(f);
+            //Si JNA marche:
+            //String s = this.mca.comparerAudio(f.getAbsolutePath(),f.getName());
             HashMap<String, Double> conversion = new HashMap<>();
             HashMap<String, Double> conversion_2 = new HashMap<>();
             HashMap<Fichier, Double> intersection = new HashMap<>();
             toHashMapStringDouble(conversion, s);
             if(this.multimoteur){
-                String res = MoteurAudioSimulation.rechercher(f);                
+                String res = MoteurAudioSimulation.rechercher(f);  
+                //Si JNA marche:
+                //String res = this.mca.comparerAudio(f.getAbsolutePath(),f.getName());              
                 toHashMapStringDouble(conversion_2, res);            
                 for(String fichier : conversion.keySet()){
                     if(conversion_2.containsKey(fichier)){

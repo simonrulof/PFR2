@@ -1,6 +1,8 @@
 package modele.entite;
 
 import java.io.File;
+
+import controleur.ControlHistorique;
 import controleur.ControlRechercheComplexeAudio;
 import controleur.ControlRechercheComplexeImage;
 import controleur.ControlRechercheComplexeTexte;
@@ -22,30 +24,13 @@ public class Utilisateur {
     public static Utilisateur getInstance(){
         return UtilisateurHolder.instance;
     }
-
-
-    private boolean isFile(String entree){
-        for(int i = 0; i < entree.length(); i++){
-            if (entree.charAt(i) == '/') return true;
-        }
-        return false;
-    }
-
-    private boolean isComplex(String entree){
-        for(int i = 0; i < entree.length(); i++){
-            if (entree.charAt(i) == '+' || entree.charAt(i) == ' ' || entree.charAt(i) == '-'){
-                return true;
-            }
-        }
-        return false;
-    }
-    public ResultatRequete[] comparer(String requete, boolean multimoteur, boolean texte, boolean image, boolean audio){
+   
+    public ResultatRequete[] comparer(String requete, boolean multimoteur, boolean texte, boolean image, boolean audio, ControlHistorique ch){
         ResultatRequete[] fichiersTexte = new ResultatRequete[100];
         ResultatRequete[] fichiersImage = new ResultatRequete[100];
         ResultatRequete[] fichiersAudio = new ResultatRequete[100];
 
-        Recherche recherche;
-
+        Recherche recherche = null;
         if (texte){
             ControlRechercheComplexeTexte crct = new ControlRechercheComplexeTexte(this.cvf,multimoteur);
             recherche = crct.rechercher(requete);
@@ -58,6 +43,7 @@ public class Utilisateur {
             ControlRechercheComplexeAudio crca = new ControlRechercheComplexeAudio(this.cvf, multimoteur);
             recherche = crca.rechercher(requete);
         }
+        ch.ajoutRecherche(recherche);
         return null;
     }
 }
