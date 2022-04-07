@@ -4,21 +4,21 @@ import java.io.File;
 import java.util.Calendar;
 import java.util.List;
 import codec.MoteurSimulation;
-import controleur.ControlRechercheFile;
+import controleur.ControlRechercheFichier;
 import modele.entite.Fichier;
 
 public class ThreadActualisationFichiers extends Thread{
     private boolean condition =  true;
     private Calendar temps;
     private String dossierCourant;
-    private ControlRechercheFile crf;
+    private ControlRechercheFichier crf;
     private List<String> fichiers;
 
     public ThreadActualisationFichiers(){
         this.temps = Calendar.getInstance();
         //a modifier en fonction de ou on se situe        
         this.dossierCourant = System.getProperty("user.dir")+"/PFR2/C";
-        this.crf = new ControlRechercheFile();
+        this.crf = new ControlRechercheFichier();
         this.crf.searchDirectory(new File(this.dossierCourant));
         this.fichiers.addAll(this.crf.getResult());
         this.crf.clearResult();

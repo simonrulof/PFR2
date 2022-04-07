@@ -2,10 +2,10 @@ package controleur;
 
 import modele.thread.ThreadActualisationFichiers;
 
-public class ControlAcutalisationFichiers {
+public class ControlActualisationFichiers {
     private ThreadActualisationFichiers taf;
 
-    public ControlAcutalisationFichiers(){
+    public ControlActualisationFichiers(){
         taf = new ThreadActualisationFichiers();
         taf.start();
     }
@@ -13,7 +13,5 @@ public class ControlAcutalisationFichiers {
     public ThreadActualisationFichiers getThread(){
         return this.taf;
     }
-
-
     
 }

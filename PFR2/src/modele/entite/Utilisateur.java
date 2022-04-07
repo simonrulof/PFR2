@@ -46,40 +46,17 @@ public class Utilisateur {
 
         Recherche recherche;
 
-        if (isComplex(requete)){
-            if (texte){
-                boolean motCle = isFile(requete);
-                ControlRechercheComplexeTexte crct = new ControlRechercheComplexeTexte(this.cvf,multimoteur);
-                recherche = crct.rechercher(requete);
-            }
-            else if(image){
-                ControlRechercheComplexeImage crci = new ControlRechercheComplexeImage(this.cvf, multimoteur);
-                recherche = crci.rechercher(requete);            
-            }
-            else if(audio){
-                ControlRechercheComplexeAudio crca = new ControlRechercheComplexeAudio(this.cvf, multimoteur);
-                recherche = crca.rechercher(requete);
-            }
-        }else{
-            if (texte){
-                boolean isFile = isFile(requete);
-                if (isFile) {
-                    moteurTexte.comparerFichier(new File(requete));
-                }
-                else {
-                    String mots[] = requete.split(" ");
-                    moteurTexte.comparerFichier(mots);
-                }
-                return moteurTexte.getDerniereRecherche();
-            }
-            if (image){
-                moteurImage.comparerFichier(new File(requete));
-                return moteurImage.getDerniereRecherche();
-            }
-            if (audio){
-                moteurAudio.comparerFichier(new File(requete));
-                return moteurAudio.getDerniereRecherche();
-            }
+        if (texte){
+            ControlRechercheComplexeTexte crct = new ControlRechercheComplexeTexte(this.cvf,multimoteur);
+            recherche = crct.rechercher(requete);
+        }
+        else if(image){
+            ControlRechercheComplexeImage crci = new ControlRechercheComplexeImage(this.cvf, multimoteur);
+            recherche = crci.rechercher(requete);            
+        }
+        else if(audio){
+            ControlRechercheComplexeAudio crca = new ControlRechercheComplexeAudio(this.cvf, multimoteur);
+            recherche = crca.rechercher(requete);
         }
         return null;
     }

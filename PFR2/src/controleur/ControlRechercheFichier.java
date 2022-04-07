@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ControlRechercheFile {
+public class ControlRechercheFichier {
     //Le code utilisé ci-dessous provient d'un site
     //https://mkyong.com/java/search-directories-recursively-for-file-in-java/
     //Il a cependant été modifé pour coller aux besoins du projet

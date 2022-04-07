@@ -10,8 +10,11 @@ public enum Couleur {
         else if(this == VERT){
             return 1;
         }
-        else{
+        else if(this == BLEU){
             return 2;
+        }
+        else{
+            return -1;
         }
     }
 
